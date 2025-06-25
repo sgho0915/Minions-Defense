@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// TowerDataSO.cs
+using UnityEngine;
 
 /// <summary>
 /// ScriptableObject로 에디터에서 관리되는 타워 정적 데이터 집합
@@ -16,14 +17,3 @@ public class TowerDataSO : ScriptableObject
     public TowerLevelData[] levelData;
 }
 
-/// <summary>
-/// 타워 구분용 타입 열거형
-/// </summary>
-public enum TowerType
-{
-    Mage,
-    Cannon,
-    DogBarrack,
-    MachineGun,
-    Main
-}

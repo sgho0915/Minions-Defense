@@ -1,4 +1,5 @@
-﻿/// <summary>
+﻿// ITower.cs
+/// <summary>
 /// 타워 동작의 “계약(인터페이스)” 정의
 /// </summary>
 public interface ITower

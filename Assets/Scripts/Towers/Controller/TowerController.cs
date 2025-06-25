@@ -1,3 +1,4 @@
+// TowerController.cs
 using System.Linq;
 using System.Collections;
 using UnityEngine;
@@ -33,10 +34,10 @@ public class TowerController : MonoBehaviour, ITower
         SetLevel(1);
     }
 
-    public void SetLevel(int level, TowerLevel4Type branch = TowerLevel4Type.None)
+    public void SetLevel(int level, TowerLevel4Type lv4Branch = TowerLevel4Type.None)
     {
         _curLevel = _data.levelData
-            .First(x => x.level == level && (level < 4 || x.level4Type == branch));
+            .First(x => x.level == level && (level < 4 || x.level4Type == lv4Branch));
 
         // 업그레이드 연출 (Lv1 제외)
         if (level > 1)
@@ -91,10 +92,10 @@ public class TowerController : MonoBehaviour, ITower
 
     private void HandleAoE(Vector3 point)
     {
-        if (_curLevel.areaShape == AreaShape.None) return;
+        if (_curLevel.areaShape == TowerAreaShape.None) return;
 
         Collider[] colliders;
-        if (_curLevel.areaShape == AreaShape.Circle)
+        if (_curLevel.areaShape == TowerAreaShape.Circle)
             colliders = Physics.OverlapSphere(point, _curLevel.splashRadius, _curLevel.targetLayerMask);
         else
             return; // Cone, Line 구현 생략
