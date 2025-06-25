@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-using static UnityEngine.GUILayout;
+﻿// TowerLevelData.cs
+using UnityEngine;
 
 /// <summary>
 /// 한 레벨(Lv1~4A/4B)에 해당하는 수치·설정 정보
+/// TowerDataSO에 직렬화되는 데이터이므로 TowerLevelData도 같이 공유돼 메모리 중복 X
 /// </summary>
 
 [System.Serializable]
@@ -45,7 +46,7 @@ public class TowerLevelData
     [Tooltip("광역 반경 피해 (0 = 단일 대상)")]
     public float splashRadius;
     [Tooltip("광역 효과 모양 (Circle, Cone, Line)")]
-    public AreaShape areaShape;
+    public TowerAreaShape areaShape;
     [Tooltip("원뿔형일 때 각도 (Degree)")]
     public float coneAngle;
     [Tooltip("직선형일 때 길이")]
@@ -72,7 +73,7 @@ public class TowerLevelData
 
     [Header("타겟팅 설정")]
     [Tooltip("타겟 우선순위 (First, Last, Strongest, Weakest, Closest)")]
-    public TargetPriority targetPriority;
+    public TowerTargetPriority targetPriority;
     [Tooltip("타겟 레이어 마스크")]
     public LayerMask targetLayerMask;
     [Tooltip("타겟 태그 필터")]
@@ -103,26 +104,6 @@ public class TowerLevelData
     public AudioClip destroySoundClip;
 }
 
-/// <summary>
-/// 4단계에서 A/B 타입 구분을 위한 열거형
-/// </summary>
-public enum TowerLevel4Type
-{
-    None, A, B
-}
 
-/// <summary>
-/// 광역 효과 형태
-/// </summary>
-public enum AreaShape
-{
-    None, Circle, Cone, Line
-}
 
-/// <summary>
-/// 타겟 우선순위 옵션
-/// </summary>
-public enum TargetPriority
-{
-    First, Last, Strongest, Weakest, Closest
-}
+

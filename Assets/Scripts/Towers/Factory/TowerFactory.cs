@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// TowerFactory.cs
+using UnityEngine;
 
 /// <summary>
 /// TowerDataSO 기반으로 타워 프리팹 인스턴스 생성 (Singleton)
