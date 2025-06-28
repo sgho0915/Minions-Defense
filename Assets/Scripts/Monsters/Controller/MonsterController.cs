@@ -13,8 +13,8 @@ public class MonsterController : MonoBehaviour, IMonster
 {
     private MonsterDataSO _data;
     private MonsterLevelData _curLevel;
-    private MonsterHealthModel _healthModel;
-    private MonsterHealthView _healthView;
+    private MonsterModel _monsterModel;
+    private MonsterView _monsterView;
     private Animator _anim;
     private AudioSource _audio;
 
@@ -25,9 +25,9 @@ public class MonsterController : MonoBehaviour, IMonster
         _audio = GetComponent<AudioSource>();
 
         // Health MVC 세팅
-        _healthModel = new MonsterHealthModel(data.levelData[0].maxHp);
-        _healthView = GetComponentInChildren<MonsterHealthView>();
-        _healthView.Initialize(_healthModel);
+        _monsterModel = new MonsterModel(data.levelData[0].maxHp, data.levelData[0].moveSpeed);
+        _monsterView = GetComponentInChildren<MonsterView>();
+        _monsterView.Initialize(_monsterModel);
     }
 
     public void SetSize(MonsterSize size)
@@ -45,7 +45,7 @@ public class MonsterController : MonoBehaviour, IMonster
 
     private IEnumerator BehaviorLoop()
     {
-        while (_healthModel.CurrentHp > 0)
+        while (_monsterModel.CurrentHp > 0)
         {
             // 이동
             _anim.Play(_curLevel.moveAnim.name);
@@ -87,6 +87,13 @@ public class MonsterController : MonoBehaviour, IMonster
         if (_curLevel.hitSoundClip != null)
             _audio.PlayOneShot(_curLevel.hitSoundClip);
     }
+
+    public void Stun(float stunDuration)
+    {
+
+    }
+
+    
 
     private void Die()
     {
