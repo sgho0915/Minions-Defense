@@ -3,16 +3,16 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// MonsterHealthModel 이벤트 구독 → Slider/UI 갱신(View)
+/// MonsterView 이벤트 구독 → Slider/UI 갱신(View)
 /// </summary>
-public class MonsterHealthView : MonoBehaviour
+public class MonsterView : MonoBehaviour
 {
     [SerializeField] private Slider hpSlider;
     [SerializeField] private CanvasGroup canvas;
 
-    private MonsterHealthModel _model;
+    private MonsterModel _model;
 
-    public void Initialize(MonsterHealthModel model)
+    public void Initialize(MonsterModel model)
     {
         _model = model;
         hpSlider.maxValue = model.MaxHp;
