@@ -26,7 +26,7 @@
 
 > 스킬 시스템 전반에서 재사용되는 열거형 정의
 
-* **`SkillType.cs`**  
+* **`SkillEnums.cs`**  
   * 스킬 종류 구분(`MagicPoe`, `Spike`)  
 
 ---
@@ -80,6 +80,5 @@
 ---
 
 ### 🔹 **Prefabs**
-
-> 게임에서 사용되는 레벨별 스킬 프리팹 모음
-> 각 프리팹에는 대응 컨트롤러(`MagicPoeController`/`SpikeController`)와 이펙트용 컴포넌트가 포함
+  * 게임에서 사용되는 레벨별 스킬 프리팹 모음
+  * 각 프리팹에는 대응 컨트롤러(`MagicPoeController`/`SpikeController`)와 이펙트용 컴포넌트가 포함
