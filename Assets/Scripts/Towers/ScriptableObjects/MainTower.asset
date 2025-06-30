@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2c736afa923a814caad39365be41e2d, type: 3}
-  m_Name: TowerData
+  m_Name: MainTower
   m_EditorClassIdentifier: 
-  towerName: 
-  towerType: 0
+  towerName: "\uBA54\uC778 \uD0C0\uC6CC"
+  towerType: 4
   towerPrefab: {fileID: 0}
   levelData: []
