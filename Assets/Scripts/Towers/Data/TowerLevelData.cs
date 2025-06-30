@@ -10,6 +10,7 @@ using UnityEngine;
 public class TowerLevelData
 {
     [Header("기본 정보")]
+    public GameObject towerPrefab;      // 타워 프리팹
     public int level;                   // 레벨 번호 (1~4)
     public TowerLevel4Type level4Type;  // 4단계 분기 타입 (A, B)
 
