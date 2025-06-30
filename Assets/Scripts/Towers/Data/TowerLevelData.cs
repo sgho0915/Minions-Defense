@@ -54,8 +54,8 @@ public class TowerLevelData
 
     [Header("타겟팅 설정")]
     public TowerTargetPriority targetPriority;  // 타겟 우선순위 (First, Last, Strongest, Weakest, Closest)
-    public LayerMask targetLayerMask;           // 타겟 레이어 마스크
-    public string[] targetTags;                 // 타겟 태그 필터
+    public LayerMask targetLayerMask;           // 타겟 레이어 마스크(물리충돌, 레이캐스팅 위한 레이어 기반 필터)
+    public string[] targetTags;                 // 타겟 태그 필터(게임 로직, 조건 판단을 위한 문자열 기반 필터)
 
 
     [Header("비용 & 시간")]
