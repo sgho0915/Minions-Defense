@@ -12,39 +12,43 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class TowerController : MonoBehaviour, ITower
 {
-    private TowerDataSO _data;
-    private TowerLevelData _curLevel;
+    private TowerLevelData[] _allLevels;    // 전체 레벨 데이터 배열
+    private TowerLevelData _curLevel;       // 현재 레벨 데이터
     private AudioSource _audio;
     private Coroutine _attackRoutine;
 
-    public void Initialize(TowerDataSO data)
+    /// <summary>
+    /// 팩토리에서 초기 레벨 데이터와 전체 레벨 배열을 받아 초기화
+    /// </summary>
+    /// <param name="initialLevel">초기 레벨 데이터</param>
+    /// <param name="allLevels">전체 레벨 데이터 배열</param>
+    public void Initialize(TowerLevelData initialLevel, TowerLevelData[] allLevels)
     {
-        _data = data;
+        _allLevels = allLevels;                     // 전체 레벨 배열 저장
         _audio = GetComponent<AudioSource>();
+        _curLevel = initialLevel;                   // 초기 레벨 설정
 
         // 설치 연출
-        if (_curLevel == null)
-        {
-            if (_data.levelData[0].buildEffect != null)
-                Instantiate(_data.levelData[0].buildEffect, transform.position, Quaternion.identity);
-            if (_data.levelData[0].buildSoundClip != null)
-                _audio.PlayOneShot(_data.levelData[0].buildSoundClip);
-        }
+        if (_curLevel.buildEffect != null)
+            Instantiate(_curLevel.buildEffect, transform.position, Quaternion.identity);
+        if (_curLevel.buildSoundClip != null)
+            _audio.PlayOneShot(_curLevel.buildSoundClip);
 
-        SetLevel(1);
+        // 공격 루틴 시작
+        _attackRoutine = StartCoroutine(AttackLoop());
     }
 
+    /// <summary>
+    /// 주어진 레벨과 브랜치 타입으로 업그레이드
+    /// </summary>
     public void SetLevel(int level, TowerLevel4Type lv4Branch = TowerLevel4Type.None)
     {
-        _curLevel = _data.levelData
-            .First(x => x.level == level && (level < 4 || x.level4Type == lv4Branch));
+        _curLevel = _allLevels
+           .First(x => x.level == level && (level < 4 || x.level4Type == lv4Branch));
 
         // 업그레이드 연출 (Lv1 제외)
-        if (level > 1)
-        {
-            if (_curLevel.upgradeSoundClip != null)
-                _audio.PlayOneShot(_curLevel.upgradeSoundClip);
-        }
+        if (level > 1 && _curLevel.upgradeSoundClip != null)
+            _audio.PlayOneShot(_curLevel.upgradeSoundClip);
 
         // 공격 루틴 재시작
         if (_attackRoutine != null) StopCoroutine(_attackRoutine);
@@ -104,7 +108,7 @@ public class TowerController : MonoBehaviour, ITower
         {
             if (_curLevel.targetTags.Contains(col.tag))
             {
-                // col.GetComponent<EnemyController>().TakeDamage(_curLevel.damage);
+                //col.GetComponent<MonsterController>().TakeDamage(_curLevel.damage);
             }
         }
     }

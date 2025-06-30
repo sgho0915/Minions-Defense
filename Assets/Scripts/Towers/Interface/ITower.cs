@@ -7,7 +7,7 @@ public interface ITower
     /// <summary>
     /// ScriptableObject 데이터로 초기화
     /// </summary>
-    void Initialize(TowerDataSO towerDataSO);
+    void Initialize(TowerLevelData initialLevel, TowerLevelData[] allLevels);
 
     /// <summary>
     /// 레벨 변경(4단계 A,B 타입 분기 포함)
