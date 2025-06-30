@@ -11,7 +11,7 @@ public class TowerDataSO : ScriptableObject
     [Header("타워 식별 및 기본값")]
     public string towerName;        // 타워 이름
     public TowerType towerType;     // 타워 타입
-    public GameObject towerPrefab;  // 타워 프리팹
+    
 
     [Header("레벨별 데이터 (1~4, 4단계는 A/B 포함)")]
     public TowerLevelData[] levelData;
