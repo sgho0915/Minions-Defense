@@ -1,0 +1,221 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c736afa923a814caad39365be41e2d, type: 3}
+  m_Name: CanonTower
+  m_EditorClassIdentifier: 
+  towerName: "\uCE90\uB17C \uD0C0\uC6CC"
+  towerType: 1
+  levelData:
+  - towerPrefab: {fileID: 2562698006400567263, guid: 623a40ed6942caf47a2b5a33c59c83dd, type: 3}
+    level: 1
+    level4Type: 0
+    levelIcon: {fileID: 21300000, guid: 4dc02d104e5b70b48bfae79cc46259d7, type: 3}
+    description: "50\uC758 \uB370\uBBF8\uC9C0\uB85C 2\uCD08\uB9C8\uB2E4 \uC0AC\uAC70\uB9AC
+      5.0 \uB0B4\uC758 \uC801\uC5D0\uAC8C \uB2E8\uC77C \uACE1\uC0AC\uD3EC\uB97C \uBC1C\uC0AC\uD558\uC5EC
+      \uBC94\uC704 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    flavorText: "\uC544\uC9C1 \uD22C\uBC15\uD558\uC9C0\uB9CC \uBB35\uC9C1\uD55C \uD55C
+      \uBC1C\uC744 \uAC00\uC9C4 \uD0C0\uC6CC"
+    damage: 50
+    attackSpeed: 2
+    range: 5
+    projectilePrefab: {fileID: 1263437943489172, guid: 9e26aec6688c4604db5b8271d50b40ae, type: 3}
+    projectileSpeed: 1
+    splashRadius: 1
+    areaShape: 1
+    coneAngle: 0
+    lineLength: 0
+    critChance: 0.1
+    critMultiplier: 1.1
+    slowChance: 0
+    slowDuration: 0
+    stunChance: 0
+    stunDuration: 0
+    targetPriority: 4
+    targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    targetTags:
+    - ShortMonster
+    - LongMonster
+    upgradeCost: 50
+    sellPrice: 35
+    attackEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+    attackSoundClip: {fileID: 8300000, guid: 8cc0d24d9fb832340a27fc87d5689eb6, type: 3}
+    upgradeSoundClip: {fileID: 8300000, guid: 1a7ca09a29e80154283c9bd746c7def3, type: 3}
+    buildEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    buildSoundClip: {fileID: 8300000, guid: df5074122b4cf09419228ec8d09e632d, type: 3}
+    destroyEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    destroySoundClip: {fileID: 8300000, guid: bf10fd2d4631eee489354fd937eb8296, type: 3}
+  - towerPrefab: {fileID: 1141391816158693092, guid: e49effa2788570849adda8b0ff295a43, type: 3}
+    level: 2
+    level4Type: 0
+    levelIcon: {fileID: 21300000, guid: d6617cba384f70c45b3bf0bad63f5496, type: 3}
+    description: "\uB370\uBBF8\uC9C0\uAC00 60\uC73C\uB85C \uC99D\uAC00\uD558\uACE0,
+      1.8\uCD08\uB9C8\uB2E4 \uC0AC\uAC70\uB9AC 5.2 \uB0B4\uC758 \uC801\uC5D0\uAC8C
+      \uAC15\uD654\uB41C \uACE1\uC0AC\uD3EC\uB97C \uBC1C\uC0AC\uD558\uC5EC \uB113\uC740
+      \uBC94\uC704 \uD53C\uD574\uB97C \uC785\uD799\uB2C8\uB2E4."
+    flavorText: "\uC5EC\uC804\uD788 \uD22C\uBC15\uD558\uC9C0\uB9CC \uC870\uAE08 \uB354
+      \uBB35\uC9C1\uD55C \uD55C \uBC1C\uC744 \uAC00\uC9C4 \uD0C0\uC6CC"
+    damage: 60
+    attackSpeed: 1.8
+    range: 5.2
+    projectilePrefab: {fileID: 1298584887169390, guid: 5e1ad3b6854063e4abe3e8c1b81d727a, type: 3}
+    projectileSpeed: 1.2
+    splashRadius: 1.5
+    areaShape: 1
+    coneAngle: 0
+    lineLength: 0
+    critChance: 0.2
+    critMultiplier: 1.2
+    slowChance: 0
+    slowDuration: 0
+    stunChance: 0
+    stunDuration: 0
+    targetPriority: 4
+    targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    targetTags:
+    - ShortMonster
+    - LongMonster
+    upgradeCost: 100
+    sellPrice: 70
+    attackEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+    attackSoundClip: {fileID: 8300000, guid: 8cc0d24d9fb832340a27fc87d5689eb6, type: 3}
+    upgradeSoundClip: {fileID: 8300000, guid: 1a7ca09a29e80154283c9bd746c7def3, type: 3}
+    buildEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    buildSoundClip: {fileID: 8300000, guid: df5074122b4cf09419228ec8d09e632d, type: 3}
+    destroyEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    destroySoundClip: {fileID: 8300000, guid: bf10fd2d4631eee489354fd937eb8296, type: 3}
+  - towerPrefab: {fileID: 3252233472838395706, guid: 691f1fb3074e59d47bb922a13e984681, type: 3}
+    level: 3
+    level4Type: 0
+    levelIcon: {fileID: 21300000, guid: 3cf372932085a434ba7fb1e068b769dd, type: 3}
+    description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE0\uC704\uB825 \uACE1\uC0AC\uD3EC\uB97C
+      1.6\uCD08\uB9C8\uB2E4 \uC0AC\uAC70\uB9AC 5.5 \uB0B4\uC758 \uC801\uC5D0\uAC8C
+      \uBC1C\uC0AC\uD558\uC5EC \uB2E4\uC218\uC758 \uC801\uC5D0\uAC8C \uBE60\uB974\uACE0
+      \uD6A8\uACFC\uC801\uC778 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    flavorText: "\uC801\uB2F9\uD788 \uC408\uB294\uB370\uB3C4 \uC798 \uB9DE\uB294\uB2E4.
+      \uC774\uCBE4 \uB418\uBA74 \uC7AC\uB2A5\uC778\uAC00 \uC6B4\uC778\uAC00."
+    damage: 75
+    attackSpeed: 1.6
+    range: 5.5
+    projectilePrefab: {fileID: 1481178132486170, guid: 22e39feebf6cda84eb92e71beba20bf1, type: 3}
+    projectileSpeed: 1.4
+    splashRadius: 2
+    areaShape: 1
+    coneAngle: 0
+    lineLength: 0
+    critChance: 0.3
+    critMultiplier: 1.3
+    slowChance: 0
+    slowDuration: 0
+    stunChance: 0
+    stunDuration: 0
+    targetPriority: 4
+    targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    targetTags:
+    - ShortMonster
+    - LongMonster
+    upgradeCost: 100
+    sellPrice: 70
+    attackEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+    attackSoundClip: {fileID: 8300000, guid: 8cc0d24d9fb832340a27fc87d5689eb6, type: 3}
+    upgradeSoundClip: {fileID: 8300000, guid: 1a7ca09a29e80154283c9bd746c7def3, type: 3}
+    buildEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    buildSoundClip: {fileID: 8300000, guid: df5074122b4cf09419228ec8d09e632d, type: 3}
+    destroyEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    destroySoundClip: {fileID: 8300000, guid: bf10fd2d4631eee489354fd937eb8296, type: 3}
+  - towerPrefab: {fileID: 2648066166186033522, guid: 4948391a7bf7cf648ab205cc8a47b474, type: 3}
+    level: 4
+    level4Type: 1
+    levelIcon: {fileID: 21300000, guid: b6dd96bb14937174c8d0871ed4303f4a, type: 3}
+    description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE1\uC0AC\uD3EC\uB97C 1.6\uCD08\uB9C8\uB2E4
+      \uC0AC\uAC70\uB9AC 5.5\uAE4C\uC9C0 \uBC1C\uC0AC\uD558\uBA70, \uD3ED\uBC1C \uBC18\uACBD\uC774
+      30% \uC99D\uAC00\uD558\uC5EC \uB354 \uB113\uC740 \uC9C0\uC5ED\uC758 \uC801\uB4E4\uC5D0\uAC8C
+      \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4."
+    flavorText: "\uB300\uCDA9 \uC408\uB294\uB370 \uC65C \uB2E4 \uB9DE\uC9C0? \uD3ED\uBC1C
+      \uBC18\uACBD\uC774 \uB113\uC73C\uBA74 \uC2E4\uB825\uC740 \uD544\uC694 \uC5C6\uB2E4."
+    damage: 60
+    attackSpeed: 1.6
+    range: 5.5
+    projectilePrefab: {fileID: 1693163921747502, guid: 99725514380ecd743849801c1059b591, type: 3}
+    projectileSpeed: 1.5
+    splashRadius: 2.6
+    areaShape: 1
+    coneAngle: 0
+    lineLength: 0
+    critChance: 0.4
+    critMultiplier: 1.45
+    slowChance: 0
+    slowDuration: 0
+    stunChance: 0
+    stunDuration: 0
+    targetPriority: 4
+    targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    targetTags:
+    - ShortMonster
+    - LongMonster
+    upgradeCost: 400
+    sellPrice: 280
+    attackEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+    attackSoundClip: {fileID: 8300000, guid: 8cc0d24d9fb832340a27fc87d5689eb6, type: 3}
+    upgradeSoundClip: {fileID: 8300000, guid: 1a7ca09a29e80154283c9bd746c7def3, type: 3}
+    buildEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    buildSoundClip: {fileID: 8300000, guid: df5074122b4cf09419228ec8d09e632d, type: 3}
+    destroyEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    destroySoundClip: {fileID: 8300000, guid: bf10fd2d4631eee489354fd937eb8296, type: 3}
+  - towerPrefab: {fileID: 4176896184558140998, guid: 09cc95fd2c04d044d8506e723283910c, type: 3}
+    level: 4
+    level4Type: 2
+    levelIcon: {fileID: 21300000, guid: 8a5245810e209a94b8452984929e8928, type: 3}
+    description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE1\uC0AC\uD3EC\uB97C 1.6\uCD08\uB9C8\uB2E4
+      \uC0AC\uAC70\uB9AC 5.5\uAE4C\uC9C0 \uBC1C\uC0AC\uD558\uBA70, \uD3ED\uBC1C \uC2DC
+      30% \uD655\uB960\uB85C 2\uCD08\uAC04 \uC801\uC758 \uC774\uB3D9\uC18D\uB3C4\uB97C
+      30% \uAC10\uC18C\uC2DC\uD0A4\uB294 \uC2AC\uB85C\uC6B0 \uD6A8\uACFC\uB97C \uC90D\uB2C8\uB2E4."
+    flavorText: "\uB9DE\uC740 \uB188\uB4E4 \uC5BC\uAD74 \uC880 \uBD10, \uB2F9\uD669\uD574\uC11C
+      \uC6B0\uC655\uC88C\uC655 \uADC0\uC5FD\uB124."
+    damage: 75
+    attackSpeed: 1.6
+    range: 5.5
+    projectilePrefab: {fileID: 1593594458498784, guid: bd3d2c681bb7831439c74d8a80ed6978, type: 3}
+    projectileSpeed: 1.5
+    splashRadius: 2.2
+    areaShape: 1
+    coneAngle: 0
+    lineLength: 0
+    critChance: 0.2
+    critMultiplier: 1.2
+    slowChance: 0.3
+    slowDuration: 2
+    stunChance: 0
+    stunDuration: 0
+    targetPriority: 4
+    targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 64
+    targetTags:
+    - ShortMonster
+    - LongMonster
+    upgradeCost: 400
+    sellPrice: 280
+    attackEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
+    attackSoundClip: {fileID: 8300000, guid: 8cc0d24d9fb832340a27fc87d5689eb6, type: 3}
+    upgradeSoundClip: {fileID: 8300000, guid: 1a7ca09a29e80154283c9bd746c7def3, type: 3}
+    buildEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    buildSoundClip: {fileID: 8300000, guid: df5074122b4cf09419228ec8d09e632d, type: 3}
+    destroyEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    destroySoundClip: {fileID: 8300000, guid: bf10fd2d4631eee489354fd937eb8296, type: 3}
