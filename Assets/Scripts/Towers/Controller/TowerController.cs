@@ -17,6 +17,12 @@ public class TowerController : MonoBehaviour, ITower
     private AudioSource _audio;
     private Coroutine _attackRoutine;
 
+    [Header("설치 이펙트 포지션")]
+    public Transform buildEffectPoint;
+
+    [Header("공격 이펙트 포지션")]
+    public Transform attackEffectPoint;
+
     /// <summary>
     /// 팩토리에서 초기 레벨 데이터와 전체 레벨 배열을 받아 초기화
     /// </summary>
@@ -29,8 +35,19 @@ public class TowerController : MonoBehaviour, ITower
         _curLevel = initialLevel;                   // 초기 레벨 설정
 
         // 설치 연출
-        if (_curLevel.buildEffect != null)
-            Instantiate(_curLevel.buildEffect, transform.position, Quaternion.identity);
+        if (_curLevel.buildEffect != null && buildEffectPoint != null)
+        {
+            // buildEffectPoint의 위치·회전을 그대로 사용, 부모는 Tower
+            var ps = Instantiate(
+                _curLevel.buildEffect,
+                buildEffectPoint.position,
+                buildEffectPoint.rotation,
+                buildEffectPoint
+            );
+            // 1초 뒤에 자동 제거
+            Destroy(ps.gameObject, 1f);
+        }
+
         if (_curLevel.buildSoundClip != null)
             _audio.PlayOneShot(_curLevel.buildSoundClip);
 
@@ -75,20 +92,41 @@ public class TowerController : MonoBehaviour, ITower
             // 투사체 사용 여부
             if (_curLevel.projectilePrefab != null)
             {
-                var proj = Instantiate(_curLevel.projectilePrefab, transform.position, Quaternion.identity);
-                if (proj.TryGetComponent<Rigidbody>(out var rb))
-                    rb.linearVelocity = (target.transform.position - transform.position).normalized * _curLevel.projectileSpeed;
-                // ProjectileController 로직에서 OnHit 시 AoE, 데미지 적용
+                var projGO = Instantiate(
+                    _curLevel.projectilePrefab,
+                    attackEffectPoint != null ? attackEffectPoint.position : transform.position,
+                    attackEffectPoint != null ? attackEffectPoint.rotation : Quaternion.identity
+                );
+
+                var bp = projGO.AddComponent<BallisticProjectile>();
+                bp.Setup(
+                    target.transform.position,            // 발사 시점의 적 위치
+                    _curLevel.projectileSpeed,            // 초기 속도
+                    _curLevel.projectileImpactEffectPrefab, // 충돌 이펙트
+                    _curLevel.projectileImpactSoundClip     // 충돌 사운드
+                );
             }
+
             else
             {
                 // 즉시 이펙트 + 데미지 처리 (AoE 포함)
                 HandleAoE(transform.position);
             }
 
-            // 이펙트 및 사운드
-            if (_curLevel.attackEffectPrefab != null)
-                Instantiate(_curLevel.attackEffectPrefab, transform.position, Quaternion.identity);
+            
+            // 공격 연출
+            if (_curLevel.attackEffectPrefab != null && attackEffectPoint != null)
+            {
+                // attackEffectPoint 위치·회전을 그대로 사용, 부모는 Tower
+                var ps = Instantiate(
+                    _curLevel.attackEffectPrefab,
+                    attackEffectPoint.position,
+                    attackEffectPoint.rotation,
+                    attackEffectPoint
+                );
+                // 1초 뒤에 자동 제거
+                Destroy(ps.gameObject, 1f);
+            }
             if (_curLevel.attackSoundClip != null)
                 _audio.PlayOneShot(_curLevel.attackSoundClip);
         }
