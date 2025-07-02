@@ -64,11 +64,13 @@ public class TowerLevelData
 
 
     [Header("시각 & 음향 연출")]
-    public GameObject attackEffectPrefab;   // 공격 이펙트 Prefab (없으면 None)
-    public AudioClip attackSoundClip;       // 공격 사운드 클립
-    public AudioClip upgradeSoundClip;      // 업그레이드 사운드 클립
-    public ParticleSystem buildEffect;      // 설치 이펙트 Prefab
-    public AudioClip buildSoundClip;        // 설치 사운드 클립
-    public ParticleSystem destroyEffect;    // 파괴 이펙트 Prefab
-    public AudioClip destroySoundClip;      // 파괴 사운드 클립
+    public GameObject attackEffectPrefab;               // 공격 이펙트 Prefab (없으면 None)
+    public AudioClip attackSoundClip;                   // 공격 사운드 클립
+    public GameObject projectileImpactEffectPrefab;     // 충돌 시 이펙트
+    public AudioClip projectileImpactSoundClip;         // 충돌 시 사운드
+    public AudioClip upgradeSoundClip;                  // 업그레이드 사운드 클립
+    public ParticleSystem buildEffect;                  // 설치 이펙트 Prefab
+    public AudioClip buildSoundClip;                    // 설치 사운드 클립
+    public ParticleSystem destroyEffect;                // 파괴 이펙트 Prefab
+    public AudioClip destroySoundClip;                  // 파괴 사운드 클립
 }
