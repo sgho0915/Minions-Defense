@@ -51,9 +51,9 @@ MonoBehaviour:
     attackEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
     attackSoundClip: {fileID: 8300000, guid: 8cc0d24d9fb832340a27fc87d5689eb6, type: 3}
     upgradeSoundClip: {fileID: 8300000, guid: 1a7ca09a29e80154283c9bd746c7def3, type: 3}
-    buildEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    buildEffect: {fileID: 198603562046773920, guid: 378b2c30ef426554495292cb902cb8f4, type: 3}
     buildSoundClip: {fileID: 8300000, guid: df5074122b4cf09419228ec8d09e632d, type: 3}
-    destroyEffect: {fileID: 198279101275435388, guid: 9e03786a9517b604d8e930182607a128, type: 3}
+    destroyEffect: {fileID: 198603562046773920, guid: 378b2c30ef426554495292cb902cb8f4, type: 3}
     destroySoundClip: {fileID: 8300000, guid: bf10fd2d4631eee489354fd937eb8296, type: 3}
   - towerPrefab: {fileID: 1141391816158693092, guid: e49effa2788570849adda8b0ff295a43, type: 3}
     level: 2
