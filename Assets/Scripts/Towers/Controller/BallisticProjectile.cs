@@ -58,7 +58,7 @@ public class BallisticProjectile : MonoBehaviour
         float tanLow = (v2 - root) / (g * xz);
 
         // 예시: 낮은 궤적을 쓰고 싶으면
-        float angle = Mathf.Atan(tanHigh);
+        float angle = Mathf.Atan(tanLow);
 
         // 3) 초기 속도 벡터 계산
         Vector3 flatDir = new Vector3(toTarget.x, 0, toTarget.z).normalized;
@@ -74,20 +74,21 @@ public class BallisticProjectile : MonoBehaviour
         // 1) 충돌 이펙트 생성
         if (_impactEffect != null)
         {
-            var effectInstance = Instantiate(
-                _impactEffect,
-                collision.contacts[0].point,
-                Quaternion.identity);
+            var effectInstance = Instantiate(_impactEffect, hitPoint, Quaternion.identity);
+            var systems = effectInstance.GetComponentsInChildren<ParticleSystem>();
 
-            // Stop Action 설정: 파티클 재생이 끝나면 자동으로 오브젝트 파괴
-            // ParticleSystem.StopAction = Destroy
-            var ps = effectInstance.GetComponent<ParticleSystem>();
-            if (ps != null)
+            // 가장 긴 재생 시간을 찾기
+            float maxDuration = 0f;
+            foreach (var ps in systems)
             {
                 var main = ps.main;
-                main.loop = false;
-                main.stopAction = ParticleSystemStopAction.Destroy;
+                //float lifetime = main.duration + main.startLifetime.constantMax;
+                float lifetime = main.duration;
+                if (lifetime > maxDuration) maxDuration = lifetime;
             }
+
+            // 최대 재생 시간+약간의 여유(0.1s) 후에 파괴 예약
+            Destroy(effectInstance, maxDuration - 0.03f);
         }
 
         // 2) 충돌 사운드
