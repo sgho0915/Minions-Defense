@@ -99,12 +99,7 @@ public class TowerController : MonoBehaviour, ITower
                 );
 
                 var bp = projGO.AddComponent<BallisticProjectile>();
-                bp.Setup(
-                    target.transform.position,            // 발사 시점의 적 위치
-                    _curLevel.projectileSpeed,            // 초기 속도
-                    _curLevel.projectileImpactEffectPrefab, // 충돌 이펙트
-                    _curLevel.projectileImpactSoundClip     // 충돌 사운드
-                );
+                bp.Setup(_curLevel, target.transform.position);
             }
 
             else
