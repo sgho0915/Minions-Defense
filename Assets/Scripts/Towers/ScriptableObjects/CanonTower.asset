@@ -28,7 +28,7 @@ MonoBehaviour:
     attackSpeed: 0.6
     range: 35
     projectilePrefab: {fileID: 1263437943489172, guid: 9e26aec6688c4604db5b8271d50b40ae, type: 3}
-    projectileSpeed: 13
+    projectileSpeed: 30
     splashRadius: 1
     areaShape: 1
     coneAngle: 0
