@@ -23,7 +23,12 @@ public class MonsterView : MonoBehaviour
         model.OnDied += HideHpBar;
     }
 
-    private void UpdateHpBar(int cur, int max) => hpSlider.value = cur;
+    private void UpdateHpBar(int cur, int max)
+    {
+        hpSlider.value = cur;
+        Debug.Log($"최대체력:{max}, 현재체력:{cur}");
+    }
+
     private void HideHpBar() => canvas.alpha = 0f;
 
     private void OnDestroy()
