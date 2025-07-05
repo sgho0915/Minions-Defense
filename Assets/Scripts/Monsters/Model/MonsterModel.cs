@@ -23,7 +23,7 @@ public class MonsterModel
 
     public void TakeDamage(int dmg)
     {
-        CurrentHp = Math.Max(0, CurrentHp - dmg);
+        CurrentHp = Math.Max(0, CurrentHp - dmg);                
         OnHpChanged?.Invoke(CurrentHp, MaxHp);
         if (CurrentHp == 0) OnDied?.Invoke();
     }
