@@ -40,7 +40,7 @@ public class MonsterController : MonoBehaviour, IMonster
         if (_curLevel.spawnSoundClip != null)
             _audio.PlayOneShot(_curLevel.spawnSoundClip);
 
-        StartCoroutine(BehaviorLoop());
+        StartCoroutine(BehaviorLoop()); // 기본 로직 시작 (이동 -> 전투 -> 사망)
     }
 
     private IEnumerator BehaviorLoop()
@@ -93,7 +93,10 @@ public class MonsterController : MonoBehaviour, IMonster
 
     }
 
-    
+    public void ApplyDamage(int amount)
+    {
+        _monsterModel.TakeDamage(amount);
+    }
 
     private void Die()
     {
