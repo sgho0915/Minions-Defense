@@ -12,20 +12,21 @@ using UnityEngine;
 public class MonsterController : MonoBehaviour, IMonster
 {
     private MonsterDataSO _data;
+    private MonsterLevelData[] _allLevels;
     private MonsterLevelData _curLevel;
     private MonsterModel _monsterModel;
     private MonsterView _monsterView;
     private Animator _anim;
     private AudioSource _audio;
 
-    public void Initialize(MonsterDataSO data)
+    public void Initialize(MonsterLevelData initialLevel, MonsterLevelData[] allLevels)
     {
-        _data = data;
+        _allLevels = allLevels;                     // 전체 레벨 배열 저장
         _anim = GetComponent<Animator>();
         _audio = GetComponent<AudioSource>();
 
         // Health MVC 세팅
-        _monsterModel = new MonsterModel(data.levelData[0].maxHp, data.levelData[0].moveSpeed);
+        _monsterModel = new MonsterModel(initialLevel.maxHp, initialLevel.moveSpeed);
         _monsterView = GetComponentInChildren<MonsterView>();
         _monsterView.Initialize(_monsterModel);
     }
@@ -33,12 +34,6 @@ public class MonsterController : MonoBehaviour, IMonster
     public void SetSize(MonsterSize size)
     {
         _curLevel = _data.levelData.First(l => l.size == size);
-
-        // 스폰 애니메이션·연출
-        if (_curLevel.spawnEffectPrefab != null)
-            Instantiate(_curLevel.spawnEffectPrefab, transform.position, Quaternion.identity);
-        if (_curLevel.spawnSoundClip != null)
-            _audio.PlayOneShot(_curLevel.spawnSoundClip);
 
         StartCoroutine(BehaviorLoop()); // 기본 로직 시작 (이동 -> 전투 -> 사망)
     }
@@ -80,12 +75,6 @@ public class MonsterController : MonoBehaviour, IMonster
         {
             // 근접 데미지 처리
         }
-
-        // 타격 연출
-        if (_curLevel.hitEffectPrefab != null)
-            Instantiate(_curLevel.hitEffectPrefab, transform.position, Quaternion.identity);
-        if (_curLevel.hitSoundClip != null)
-            _audio.PlayOneShot(_curLevel.hitSoundClip);
     }
 
     public void Stun(float stunDuration)
@@ -103,10 +92,6 @@ public class MonsterController : MonoBehaviour, IMonster
         // 사망 애니메이션
         if (_curLevel.deathAnim != null)
             _anim.Play(_curLevel.deathAnim.name);
-
-        // 사망 연출
-        if (_curLevel.hitEffectPrefab != null)
-            Instantiate(_curLevel.hitEffectPrefab, transform.position, Quaternion.identity);
 
         // 보상
         int reward = GiveReward();

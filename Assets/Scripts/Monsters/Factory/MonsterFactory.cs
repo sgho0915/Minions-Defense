@@ -13,11 +13,11 @@ public class MonsterFactory
     /// <summary>
     /// MonsterDataSO.mosterPrefab을 인스턴스화 하고 초기화
     /// </summary>
-    public GameObject CreateMonster(MonsterDataSO data, MonsterSize size, Vector3 pos, Transform parent = null)
+    public GameObject CreateMonster(MonsterLevelData initialLevel, MonsterLevelData[] allLevels, MonsterSize size, Vector3 pos, Transform parent = null)
     {
-        var go = Object.Instantiate(data.monsterPrefab, pos, Quaternion.identity, parent);
+        var go = Object.Instantiate(initialLevel.monsterPrefab, pos, Quaternion.identity, parent);
         var ctrl = go.GetComponent<MonsterController>() ?? go.AddComponent<MonsterController>();
-        ctrl.Initialize(data);
+        ctrl.Initialize(initialLevel, allLevels);
         ctrl.SetSize(size);
         return go;
     }

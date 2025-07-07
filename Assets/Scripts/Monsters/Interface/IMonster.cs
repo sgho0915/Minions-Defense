@@ -4,7 +4,7 @@
 /// </summary>
 public interface IMonster
 {
-    void Initialize(MonsterDataSO data);
+    void Initialize(MonsterLevelData initialLevel, MonsterLevelData[] allLevels);
     void SetSize(MonsterSize size);
     int GiveReward();
 }
