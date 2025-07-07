@@ -12,7 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4600e2619099404489b63dcf5abcbb49, type: 3}
   m_Name: SkeletonDataSO
   m_EditorClassIdentifier: 
-  monsterName: 
+  monsterName: "\uC2A4\uCF08\uB808\uD1A4"
   monsterType: 0
-  monsterPrefab: {fileID: 0}
-  levelData: []
+  levelData:
+  - monsterPrefab: {fileID: 275801391670772396, guid: a079e307036926d4a9c73fe04b6472c7, type: 3}
+    size: 0
+    maxHp: 100
+    moveSpeed: 1.5
+    attackPower: 5
+    isRanged: 0
+    attackRange: 1
+    projectilePrefab: {fileID: 0}
+    projectileSpeed: 0
+    rewardPointsMin: 10
+    rewardPointsMax: 10
+    moveAnim: {fileID: 1827226128182048838, guid: 647255cade36de44094ec8ad48e5f39f, type: 3}
+    attackAnim: {fileID: 1827226128182048838, guid: 0016055c60291004880cbc74a54e03fe, type: 3}
+    deathAnim: {fileID: 1827226128182048838, guid: 0be900fab03121541946c4852a29fa2c, type: 3}
