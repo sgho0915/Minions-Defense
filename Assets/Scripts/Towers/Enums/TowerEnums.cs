@@ -4,7 +4,7 @@
 /// </summary>
 public enum TowerType
 {
-    Mage, Cannon, DogBarrack, MachineGun, Main
+    Mage, Cannon, MachineGun
 }
 
 /// <summary>
