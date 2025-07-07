@@ -58,7 +58,7 @@ public class WaveManager : MonoBehaviour
     {
         // MonsterFactory를 이용해 스폰
         var go = MonsterFactory.Instance
-            .CreateMonster(entry.monsterData, entry.size, spawnPoint.position, transform);
+            .CreateMonster(entry.monsterData.levelData[0], entry.monsterData.levelData, entry.size, spawnPoint.position, transform);
         // 이동경로 설정 Path 할당
         var mover = go.AddComponent<MonsterMovement>();
         mover.SetPath(path.Waypoints);
