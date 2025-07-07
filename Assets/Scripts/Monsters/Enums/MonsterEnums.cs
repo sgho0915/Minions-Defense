@@ -4,7 +4,7 @@
 /// </summary>
 public enum MonsterType 
 { 
-    Skeleton, Mole, Cactus, Spirit, Capitalist
+    Skeleton, Mole, Spirit, Capitalist
 }
 
 /// <summary>
