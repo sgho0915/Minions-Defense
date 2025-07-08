@@ -11,13 +11,15 @@ using UnityEngine;
 [RequireComponent(typeof(Animator), typeof(AudioSource))]
 public class MonsterController : MonoBehaviour, IMonster
 {
-    private MonsterDataSO _data;
     private MonsterLevelData[] _allLevels;
     private MonsterLevelData _curLevel;
     private MonsterModel _monsterModel;
     private MonsterView _monsterView;
     private Animator _anim;
     private AudioSource _audio;
+    public MonsterLevelData CurrentLevelData => _curLevel;
+
+    private Coroutine _moveRoutine;
 
     public void Initialize(MonsterLevelData initialLevel, MonsterLevelData[] allLevels)
     {
@@ -33,32 +35,34 @@ public class MonsterController : MonoBehaviour, IMonster
 
     public void SetSize(MonsterSize size)
     {
-        _curLevel = _data.levelData.First(l => l.size == size);
+        // 1) 레벨 결정
+        _curLevel = _allLevels.First(l => l.size == size);
 
-        StartCoroutine(BehaviorLoop()); // 기본 로직 시작 (이동 -> 전투 -> 사망)
+        // 2) Movement 컴포넌트 붙이고, “Waypoints + _curLevel” 를 넘김
+        var mover = gameObject.AddComponent<MonsterMovement>();
+        mover.SetPath(WaveManager.Instance.path.Waypoints, _curLevel);
+
+        // 3) 이동 끝나면 공격/사망 루프 시작
+        StartCoroutine(BehaviorLoop(mover));
     }
 
-    private IEnumerator BehaviorLoop()
+    private IEnumerator BehaviorLoop(MonsterMovement mover)
     {
+        // 이동이 모두 끝날 때까지 대기
+        yield return mover.MoveAlongPath();
+
+        // 목표(예: 타워) 공격 루프
         while (_monsterModel.CurrentHp > 0)
         {
-            // 이동
-            _anim.Play(_curLevel.moveAnim.name);
-            yield return MoveToTarget();
-
-            // 공격
-            _anim.Play(_curLevel.attackAnim.name);
+            _anim.SetTrigger("Attack");
             HandleAttack();
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(_curLevel.attackAnim.length);
         }
 
+        // 사망
+        _anim.SetTrigger("Die");
+        yield return new WaitForSeconds(_curLevel.deathAnim.length);
         Die();
-    }
-
-    private IEnumerator MoveToTarget()
-    {
-        // TODO: 실제 이동 로직
-        yield return null;
     }
 
     private void HandleAttack()
@@ -89,15 +93,8 @@ public class MonsterController : MonoBehaviour, IMonster
 
     private void Die()
     {
-        // 사망 애니메이션
-        if (_curLevel.deathAnim != null)
-            _anim.Play(_curLevel.deathAnim.name);
-
-        // 보상
-        int reward = GiveReward();
+        Destroy(gameObject);
         // GameManager.Instance.AddGold(reward);
-
-        Destroy(gameObject, 1f);
     }
 
     public int GiveReward()

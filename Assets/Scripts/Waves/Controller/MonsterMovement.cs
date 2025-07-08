@@ -14,25 +14,29 @@ public class MonsterMovement : MonoBehaviour
     private MonsterLevelData _levelData;
 
     // 이동 경로(Path)를 설정하고, 이동 코루틴을 시작
-    public void SetPath(Waypoint[] path)
+    public void SetPath(Waypoint[] path, MonsterLevelData levelData)
     {
         _path = path;
+        _levelData = levelData;
         _anim = GetComponent<Animator>();
-        StartCoroutine(MoveAlongPath());
+        //StartCoroutine(MoveAlongPath());
     }
 
     // Waypoint 배열을 순회하며 몬스터를 이동
-    private IEnumerator MoveAlongPath()
+    public IEnumerator MoveAlongPath()
     {
-        // 모든 웨이포인트를 순서대로 방문할 때까지 반복
-        while (_idx < _path.Length)
-        {
-            // 현재 목표 지점 획득
-            var target = _path[_idx].transform.position;
-            // 이동 애니메이션 재생
-            _anim.Play(_levelData.moveAnim.name);
+        _anim.SetBool("IsMoving", true);
 
-            // 목표 지점까지 일정 속도로 이동
+        for (int i = 0; i < _path.Length; i++)
+        {
+            var target = _path[i].transform.position;
+
+            // 회전 (방향 보정)
+            Vector3 dir = (target - transform.position).normalized;
+            if (dir.sqrMagnitude > 0.001f)
+                transform.rotation = Quaternion.LookRotation(dir);
+
+            // 목표 지점까지 이동
             while (Vector3.Distance(transform.position, target) > 0.1f)
             {
                 transform.position = Vector3.MoveTowards(
@@ -41,12 +45,10 @@ public class MonsterMovement : MonoBehaviour
                     _levelData.moveSpeed * Time.deltaTime);
                 yield return null;
             }
-
-            // 다음 웨이포인트로 인덱스 증가
-            _idx++;
         }
 
-        // 마지막 웨이포인트 도착 시 처리 (예: 본진 공격, 오브젝트 제거 등)
-        Destroy(gameObject);
+        // 마지막엔 Idle 이라든가 Die로 전이하고 Destroy
+        _anim.SetBool("IsMoving", false);
+        yield break;
     }
 }
