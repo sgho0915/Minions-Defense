@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class WaveManager : MonoBehaviour
 {
+    public static WaveManager Instance { get; private set; }
+
     [Header("웨이브 데이터")]
     public WaveDataSO waveDataSO;
 
@@ -17,6 +19,18 @@ public class WaveManager : MonoBehaviour
     public WayPath path;
 
     private int _currentWaveIndex = 0;
+
+    private void Awake()
+    {
+        // 만약 씬에 중복으로 붙어 있으면 하나만 살아남도록
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+        // (원한다면) DontDestroyOnLoad(gameObject);
+    }
 
     private void Start()
     {
@@ -56,11 +70,17 @@ public class WaveManager : MonoBehaviour
     // MonsterFactory를 통해 몬스터를 생성하고 이동 경로를 할당
     private void SpawnMonster(SpawnEntry entry)
     {
-        // MonsterFactory를 이용해 스폰
+        // 1) 팩토리로 몬스터만 뽑아냄
         var go = MonsterFactory.Instance
-            .CreateMonster(entry.monsterData.levelData[0], entry.monsterData.levelData, entry.size, spawnPoint.position, transform);
-        // 이동경로 설정 Path 할당
-        var mover = go.AddComponent<MonsterMovement>();
-        mover.SetPath(path.Waypoints);
+            .CreateMonster(
+                entry.monsterData.levelData[0],
+                entry.monsterData.levelData,
+                entry.size,
+                spawnPoint.position,
+                transform);
+        Debug.Log($"Spawned: {entry.monsterData.monsterName} Size:{entry.size}");
+
+        // 2) 사이즈(레벨) 적용부터 몬스터에게 맡김
+        go.GetComponent<MonsterController>().SetSize(entry.size);
     }
 }
