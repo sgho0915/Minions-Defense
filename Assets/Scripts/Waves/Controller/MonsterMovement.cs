@@ -12,14 +12,15 @@ public class MonsterMovement : MonoBehaviour
     private int _idx = 0;
     private Animator _anim;
     private MonsterLevelData _levelData;
+    private MonsterModel _monsterModel;
 
     // 이동 경로(Path)를 설정하고, 이동 코루틴을 시작
-    public void SetPath(Waypoint[] path, MonsterLevelData levelData)
+    public void SetPath(Waypoint[] path, MonsterLevelData levelData, MonsterModel model)
     {
         _path = path;
         _levelData = levelData;
         _anim = GetComponent<Animator>();
-        //StartCoroutine(MoveAlongPath());
+        _monsterModel = model;
     }
 
     // Waypoint 배열을 순회하며 몬스터를 이동
@@ -39,6 +40,13 @@ public class MonsterMovement : MonoBehaviour
             // 목표 지점까지 이동
             while (Vector3.Distance(transform.position, target) > 0.1f)
             {
+                // 사망 시 즉시 코루틴 종료
+                if (_monsterModel.CurrentHp <= 0)
+                {
+                    _anim.SetBool("IsMoving", false);
+                    yield break;
+                }
+
                 transform.position = Vector3.MoveTowards(
                     transform.position,
                     target,
@@ -49,6 +57,5 @@ public class MonsterMovement : MonoBehaviour
 
         // 마지막엔 Idle 이라든가 Die로 전이하고 Destroy
         _anim.SetBool("IsMoving", false);
-        yield break;
     }
 }
