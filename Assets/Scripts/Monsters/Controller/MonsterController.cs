@@ -54,13 +54,18 @@ public class MonsterController : MonoBehaviour, IMonster
         // mover.MoveAlongPath() 자체가 내부에서 매 프레임 사망 체크 하도록 아래에서 바꿔 줄 예정
         yield return StartCoroutine(mover.MoveAlongPath());
 
-        // 2) 이동 중에 죽으면 여기까지 내려오지 않습니다.
+        // 2) 이동 중에 죽으면 여기까지 내려오지 않음
         //    살아남았다면 공격 루프
         while (_monsterModel.CurrentHp > 0)
         {
             _anim.SetTrigger("Attack");
             HandleAttack();
-            yield return new WaitForSeconds(_curLevel.attackAnim.length);
+
+            yield return new WaitUntil(() =>
+            {
+                var info = _anim.GetCurrentAnimatorStateInfo(0);
+                return info.IsName("Attack") && info.normalizedTime >= 1;
+            });
         }
     }
 
@@ -94,8 +99,9 @@ public class MonsterController : MonoBehaviour, IMonster
     }
 
     private void OnDied()
-    {
-        Debug.Log("사망!");
+    {        
+        _monsterModel.OnDied -= OnDied;
+
         // 사망 판정 시 더 이상 공격을 받지 않도록 물리 예외 처리
         var collider = this.GetComponent<Collider>();
         if (collider != null) collider.enabled = false;
@@ -104,15 +110,19 @@ public class MonsterController : MonoBehaviour, IMonster
         StopAllCoroutines();
 
         // 사망
-        _anim.SetTrigger("Die");
+        _anim.SetTrigger("Die");        
 
         // 애니메이션 길이만큼 기다렸다가 파괴
-        StartCoroutine(DestroyAfterDelay(_curLevel.deathAnim.length));
+        StartCoroutine(DestroyAfterDelay());
     }
 
-    private IEnumerator DestroyAfterDelay(float delay)
+    private IEnumerator DestroyAfterDelay()
     {
-        yield return new WaitForSeconds(delay);
+        yield return new WaitUntil(() =>
+        {
+            var info = _anim.GetCurrentAnimatorStateInfo(0);
+            return info.IsName("Die") && info.normalizedTime >= 1f;
+        });
         Destroy(gameObject);
     }
 

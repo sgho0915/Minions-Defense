@@ -20,9 +20,4 @@ public class MonsterLevelData
     [Header("보상")]
     public int rewardPointsMin;           // 고정 보상 포인트(랜덤 미사용 시)
     public int rewardPointsMax;           // 랜덤 보상 최대값(랜덤 보상 시 사용)
-
-    [Header("애니메이션")]
-    public AnimationClip moveAnim;        // 이동 애니메이션 클립
-    public AnimationClip attackAnim;      // 공격 애니메이션 클립
-    public AnimationClip deathAnim;       // 사망 애니메이션 클립
 }
