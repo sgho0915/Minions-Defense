@@ -5293,7 +5293,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10.82
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5317,13 +5317,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4349805, y: -0, z: -0, w: 0.9004399}
-  m_LocalPosition: {x: -78.7, y: 17.22, z: -23.87}
+  m_LocalRotation: {x: 0.42918038, y: -0, z: -0, w: 0.90321887}
+  m_LocalPosition: {x: -78.7, y: 17.21, z: -23.89}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 51.568, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 50.831, y: 0, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15195,9 +15195,9 @@ GameObject:
   m_Component:
   - component: {fileID: 952576385}
   - component: {fileID: 944883279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capitalist_2
-  m_TagString: Untagged
+  m_TagString: ShortMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -26430,9 +26430,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1342919416}
   - component: {fileID: 1352514870}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capitalist_1
-  m_TagString: Untagged
+  m_TagString: ShortMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43848,9 +43848,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1839853987}
   - component: {fileID: 1832853101}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Capitalist_3
-  m_TagString: Untagged
+  m_TagString: ShortMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52561,9 +52561,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3044262818579045008}
   - component: {fileID: 8997989964476612842}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mole_2
-  m_TagString: Untagged
+  m_TagString: ShortMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -52758,6 +52758,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1014246688645160231, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1014246688645160231, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796273188352930622, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796273188352930622, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1796273188352930622, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6634875652449548137, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
       propertyPath: m_Name
       value: Skeleton_2
@@ -66570,9 +66590,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5967995946938097263}
   - component: {fileID: 302506869510538261}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mole_3
-  m_TagString: Untagged
+  m_TagString: ShortMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68291,9 +68311,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7568607294548328581}
   - component: {fileID: 7568607293571639994}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mole_1
-  m_TagString: Untagged
+  m_TagString: ShortMonster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78738,6 +78758,26 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 199154831878756777, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913119574127561209, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913119574127561209, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1913119574127561209, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165661694265296145, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2165661694265296145, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
+      propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2818738929230737498, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
