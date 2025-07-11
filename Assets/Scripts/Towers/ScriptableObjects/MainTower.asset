@@ -13,6 +13,42 @@ MonoBehaviour:
   m_Name: MainTower
   m_EditorClassIdentifier: 
   towerName: "\uBA54\uC778 \uD0C0\uC6CC"
-  towerType: 4
-  towerPrefab: {fileID: 0}
-  levelData: []
+  towerType: 3
+  levelData:
+  - towerPrefab: {fileID: 0}
+    level: 0
+    level4Type: 0
+    levelIcon: {fileID: 0}
+    description: 
+    flavorText: 
+    damage: 0
+    attackSpeed: 0
+    range: 0
+    projectilePrefab: {fileID: 0}
+    projectileSpeed: 0
+    splashRadius: 0
+    areaShape: 0
+    coneAngle: 0
+    lineLength: 0
+    critChance: 0
+    critMultiplier: 0
+    slowChance: 0
+    slowDuration: 0
+    stunChance: 0
+    stunDuration: 0
+    targetPriority: 0
+    targetLayerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    targetTags: []
+    upgradeCost: 0
+    sellPrice: 0
+    attackEffectPrefab: {fileID: 0}
+    attackSoundClip: {fileID: 0}
+    projectileImpactEffectPrefab: {fileID: 0}
+    projectileImpactSoundClip: {fileID: 0}
+    upgradeSoundClip: {fileID: 0}
+    buildEffect: {fileID: 0}
+    buildSoundClip: {fileID: 0}
+    destroyEffect: {fileID: 0}
+    destroySoundClip: {fileID: 0}
