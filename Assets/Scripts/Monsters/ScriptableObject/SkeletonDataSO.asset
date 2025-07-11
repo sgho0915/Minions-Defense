@@ -26,7 +26,25 @@ MonoBehaviour:
     projectileSpeed: 0
     rewardPointsMin: 10
     rewardPointsMax: 10
-    idleAnim: {fileID: 1827226128182048838, guid: 18a848a04ab022349934e038d669dfec, type: 3}
-    moveAnim: {fileID: 1827226128182048838, guid: 647255cade36de44094ec8ad48e5f39f, type: 3}
-    attackAnim: {fileID: 1827226128182048838, guid: 0016055c60291004880cbc74a54e03fe, type: 3}
-    deathAnim: {fileID: 1827226128182048838, guid: 0be900fab03121541946c4852a29fa2c, type: 3}
+  - monsterPrefab: {fileID: 6634875652449548137, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
+    size: 1
+    maxHp: 200
+    moveSpeed: 1.5
+    attackPower: 10
+    isRanged: 0
+    attackRange: 1
+    projectilePrefab: {fileID: 0}
+    projectileSpeed: 0
+    rewardPointsMin: 30
+    rewardPointsMax: 30
+  - monsterPrefab: {fileID: 2818738929230737498, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
+    size: 2
+    maxHp: 400
+    moveSpeed: 1.5
+    attackPower: 40
+    isRanged: 0
+    attackRange: 1
+    projectilePrefab: {fileID: 0}
+    projectileSpeed: 0
+    rewardPointsMin: 70
+    rewardPointsMax: 70
