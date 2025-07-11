@@ -22,7 +22,7 @@ public class TowerTestSpawner : MonoBehaviour
     public void SpawnMonster()
     {
         // levelData 배열의 첫 요소로 소환
-        var go = MonsterFactory.Instance.CreateMonster(monsterData.levelData[0], monsterData.levelData, MonsterSize.Small, monsterSpawnPoint.position, null);
+        var go = MonsterFactory.Instance.CreateMonster(monsterData.levelData, MonsterSize.Small, monsterSpawnPoint.position, null);
         monsterController = go.GetComponent<MonsterController>();
     }
 }

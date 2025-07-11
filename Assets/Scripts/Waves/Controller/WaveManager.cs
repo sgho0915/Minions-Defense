@@ -73,7 +73,6 @@ public class WaveManager : MonoBehaviour
         // 1) 팩토리로 몬스터만 뽑아냄
         var go = MonsterFactory.Instance
             .CreateMonster(
-                entry.monsterData.levelData[0],
                 entry.monsterData.levelData,
                 entry.size,
                 spawnPoint.position,
