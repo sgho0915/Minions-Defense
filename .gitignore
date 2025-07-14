@@ -86,3 +86,5 @@ crashlytics-build.properties
 
 /[Aa]ssets/ImportedAssets/*
 /[Aa]ssets/ImportedAssets.meta
+/[Aa]ssets/Plugins/Demigiant/*
+/[Aa]ssets/Plugins/Demigiant.meta
