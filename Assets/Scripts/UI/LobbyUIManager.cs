@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// LobbyUIManager.cs
+using System.Collections;
 using UnityEngine;
 
 /// <summary>

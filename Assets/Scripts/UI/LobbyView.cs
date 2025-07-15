@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// LobbyView.cs
+using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>

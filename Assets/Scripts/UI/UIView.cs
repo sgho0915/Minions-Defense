@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// UIView.cs
+using UnityEngine;
 using DG.Tweening;
 
 /// <summary>
