@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿// GameManager.cs
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,6 +45,14 @@ public class GameManager : MonoBehaviour
         //// 몬스터가 다 죽고 실패조건(메인타워 HP>0) 이면 클리어
         //if (mainTower.CurrentHp > 0)
         //    OnStageClear();
+    }
+
+    /// <summary>스테이지를 끝내고 획득한 별 개수를 저장</summary>
+    public void SaveStageStars(int stageIndex, int stars)
+    {
+        // 0~3 사이 값이라고 가정
+        PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
+        PlayerPrefs.Save();
     }
 
     public void OnStageFail()
