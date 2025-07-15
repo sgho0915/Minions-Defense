@@ -10,6 +10,8 @@ public class LobbyUIManager : MonoBehaviour
     [SerializeField] private UIView lobbyView;      // 메인 로비 Canvas
     [SerializeField] private UIView stageListView;  // 스테이지 목록 Canvas
 
+    
+
     private IEnumerator Start()
     {
         // 초기 상태 설정: 로비로 시작

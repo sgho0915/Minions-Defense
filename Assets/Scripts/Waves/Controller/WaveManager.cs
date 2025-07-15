@@ -38,7 +38,7 @@ public class WaveManager : MonoBehaviour
     }
 
     // 모든 웨이브를 순서대로 실행하고, 각 웨이브 사이에 지연을 둠
-    private IEnumerator RunWaves()
+    public IEnumerator RunWaves()
     {
         var waves = waveDataSO.waves;
         while (_currentWaveIndex < waves.Length)
