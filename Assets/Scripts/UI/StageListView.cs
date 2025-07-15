@@ -1,8 +1,9 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 /// <summary>
-/// ½ºÅ×ÀÌÁö ¸®½ºÆ® View ·ÎÁ÷
+/// ìŠ¤í…Œì´ì§€ ë¦¬ìŠ¤íŠ¸ View ë¡œì§
 /// </summary>
 public class StageListView : UIView
 {
@@ -20,5 +21,10 @@ public class StageListView : UIView
     private void OnClickBackToLobby()
     {
         lobbyUIManager.OnClickLobbyButton();
+    }
+
+    public void OnClickPlayStage(int stageIndex)
+    {
+        SceneManager.LoadScene($"Stage_{stageIndex}");
     }
 }
