@@ -29,7 +29,7 @@ public class StageListView : UIView
         foreach (var data in stageDatas)
         {
             // 저장된 값이 없으면 0을 디폴트로
-            //data.starGrade = PlayerPrefs.GetInt($"Stage_{data.stageIndex}_Stars", 0);
+            data.starGrade = PlayerPrefs.GetInt($"Stage_{data.stageIndex}_Stars", 0);
 
             var item = Instantiate(stageItemPrefab, stageListContent);
             item.Setup(data);
@@ -43,6 +43,7 @@ public class StageListView : UIView
 
     public void OnClickPlayStage(int stageIndex)
     {
+        GameManager.Instance.stageIndex = stageIndex;
         SceneManager.LoadScene($"Stage_{stageIndex}");
     }
 }
