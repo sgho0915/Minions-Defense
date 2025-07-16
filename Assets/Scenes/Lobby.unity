@@ -272,7 +272,7 @@ GameObject:
   m_Component:
   - component: {fileID: 20838536}
   m_Layer: 5
-  m_Name: Gold
+  m_Name: GlobalPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3255,6 +3255,53 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4028459722524686, guid: 1a51fe95cc8cc3a4ca8f62728430ca9f, type: 3}
   m_PrefabInstance: {fileID: 188613157}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &192295729
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 192295731}
+  - component: {fileID: 192295730}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &192295730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192295729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e8846d1cbece4478054a9cedac2c5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageIndex: 1
+  stagePoints: 0
+  globalPoints: 0
+--- !u!4 &192295731
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 192295729}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &199541581
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4862,7 +4909,7 @@ MonoBehaviour:
         value:
           x: 9.718584e-11
           y: 0.9786501
-          z: 7.577833e-11
+          z: 7.5778314e-11
           w: 0.20553358
     - Position:
         x: 4.712845
@@ -8036,6 +8083,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeDuration: 0.25
   btnStageList: {fileID: 1113257551}
+  txtGlobalPoints: {fileID: 1764884632}
+  txtVersion: {fileID: 1791853540}
 --- !u!225 &532593180
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -14312,7 +14361,7 @@ GameObject:
   - component: {fileID: 1011435917}
   - component: {fileID: 1011435916}
   m_Layer: 5
-  m_Name: GoldPanel
+  m_Name: GlobalPointPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26338,7 +26387,7 @@ GameObject:
   - component: {fileID: 1764884633}
   - component: {fileID: 1764884632}
   m_Layer: 5
-  m_Name: RemainGold
+  m_Name: RemainGlobalPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26383,7 +26432,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 10000
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d837fc179c0769243a7eb1a6f2606640, type: 2}
   m_sharedMaterial: {fileID: 6506100698499700325, guid: d837fc179c0769243a7eb1a6f2606640, type: 2}
@@ -26900,9 +26949,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Ver 1.0.0
-
-'
+  m_text: Ver 0.0.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 18587febcfb7c3547a811e337f2e63ab, type: 2}
   m_sharedMaterial: {fileID: 1614216474987801549, guid: 18587febcfb7c3547a811e337f2e63ab, type: 2}
@@ -33764,3 +33811,4 @@ SceneRoots:
   - {fileID: 1622472990}
   - {fileID: 1632746360}
   - {fileID: 285409084}
+  - {fileID: 192295731}
