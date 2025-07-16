@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,10 +9,10 @@ public class GameManager : MonoBehaviour
     [Header("Stage Settings")]
     public int stageIndex;
 
-    [Header("Dependencies")]
-    public WaveManager waveManager;
-    public MainTowerController mainTower;
-    public StageUIManager stageUI;
+    // Dependencies, 각 Stage 씬 롣 후 Find로 할당
+    private WaveManager waveManager;
+    private MainTowerController mainTower;
+    private StageUIManager stageUI;
 
     // 화폐
     [Header("Currency")]
@@ -21,26 +22,34 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         if (Instance != null) Destroy(gameObject);
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        // 씬 변경 시 마다 콜백 받기
+        SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
-    private void Start()
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // 1) 초기화
-        stagePoints = 100;       // 예시: 스테이지 시작할 때 100P 지급
+        // "Stage_" 로 시작하는 씬이면만 초기화
+        if (!scene.name.StartsWith("Stage_")) return;
+
+        // 씬 안의 의존성 컴포넌트들 찾아오기
+        waveManager = FindObjectOfType<WaveManager>();
+        mainTower = FindObjectOfType<MainTowerController>();
+        stageUI = FindObjectOfType<StageUIManager>();
+
+        // 초기값 세팅
+        stagePoints = 100;
         globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
 
         // UI 초기화
         stageUI.Initialize(mainTower.MaxHp, stagePoints, globalPoints);
 
-        // 2) 이벤트 구독
+        // 이벤트 구독
         mainTower.OnDied += OnStageFail;
 
-        // 3) 게임 루프 시작
+        // 본격 게임 흐름 시작
         StartCoroutine(RunStage());
     }
 
