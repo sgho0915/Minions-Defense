@@ -7,11 +7,17 @@
 
 ---
 
-## 📺 데모 영상 & 스크린샷
+## 📺 데모 영상
 
-![메인 씬](docs/assets/screenshot_main.png)![웨이브 진행](docs/assets/screenshot_wave.png)
+[![데모 영상](https://utfs.io/f/nGnSqDveMsqx869v6NfsgcqER67P9XGtSfe5dyInlUv8us1K)](https://www.youtube.com/watch?v=QpGhH3YrmQY)
 
-[▶️ 데모 영상 보기](https://youtu.be/%EC%98%88%EC%8B%9CURL)
+---
+
+## 📺 스크린샷
+
+### 웨이브 시스템
+<img width="194" height="188" alt="Image" src="https://github.com/user-attachments/assets/cdbe7d8f-edfb-4066-9139-efca8185ce0b" />
+
 
 ---
 
