@@ -5,7 +5,6 @@ public class MonsterProjectile : MonoBehaviour
 {
     private MonsterLevelData _levelData;
     Rigidbody _rb;
-    public float speed = 10f;    // 적절히 조절하세요
 
     // 외부에서 한 번만 호출
     public void Setup(MonsterLevelData levelData, Vector3 targetPoint)

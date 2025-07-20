@@ -68,7 +68,6 @@ public class MonsterController : MonoBehaviour, IMonster
             // distance와 몬스터의 공격 사정거리 비교
             if(distance <= _curLevel.attackRange)
             {
-                Debug.Log($"몬스터 공격범위안에 메인타워가 들어옴 -> distance : {distance}, monster attack range : {_curLevel.attackRange}");
                 // 사정권 내에 들어오면 이동 금지
                 mover.CanMove = false;
 
@@ -95,7 +94,6 @@ public class MonsterController : MonoBehaviour, IMonster
             }
             else 
             {
-                Debug.Log($"몬스터 공격범위밖임 -> distance : {distance}, monster attack range : {_curLevel.attackRange}");
                 // 공격 범위 밖: 이동 허용
                 mover.CanMove = true;
                 yield return null;
