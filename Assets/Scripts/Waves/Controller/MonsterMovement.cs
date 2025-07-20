@@ -8,11 +8,13 @@ using System.Collections;
 [RequireComponent(typeof(Animator))]
 public class MonsterMovement : MonoBehaviour
 {
-    private Waypoint[] _path;
-    private int _idx = 0;
-    private Animator _anim;
+    private Waypoint[] _path;    
     private MonsterLevelData _levelData;
     private MonsterModel _monsterModel;
+    private Animator _anim;
+
+    // 이동 허용 플래그
+    public bool CanMove { get; set; } = true;
 
     // 이동 경로(Path)를 설정하고, 이동 코루틴을 시작
     public void SetPath(Waypoint[] path, MonsterLevelData levelData, MonsterModel model)
@@ -47,6 +49,16 @@ public class MonsterMovement : MonoBehaviour
                     yield break;
                 }
 
+                // 이동 불가 상태라면 idle 상태 유지
+                if (!CanMove)
+                {
+                    _anim.SetBool("IsMoving", false);
+                    yield return null;
+                    continue;
+                }
+
+                // 이동 재개
+                _anim.SetBool("IsMoving", true);
                 transform.position = Vector3.MoveTowards(
                     transform.position,
                     target,

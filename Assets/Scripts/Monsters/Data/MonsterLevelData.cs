@@ -14,7 +14,7 @@ public class MonsterLevelData
     [Header("공격 설정")]
     public bool isRanged;                 // 원거리 공격 여부 (true면 투사체 사용, false면 근접 공격)
     public float attackRange;             // 공격 사정거리
-    public GameObject projectilePrefab;   // 원거리 공격 시 발사할 투사체 프리팹
+    public GameObject projectilePrefab;   // 원거리 공격 시 발사할 투사체 프리팹    
     public float projectileSpeed;         // 투사체 비행 속도 (유닛 단위/초)
 
     [Header("보상")]

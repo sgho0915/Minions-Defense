@@ -21,6 +21,9 @@ public class MonsterController : MonoBehaviour, IMonster
 
     private Coroutine _moveRoutine;
 
+    [Header("원거리 투사체 생성 위치")]
+    public Transform projectileCreatePos;
+
     public void Initialize(MonsterLevelData initialLevel, MonsterLevelData[] allLevels)
     {
         _allLevels = allLevels;                     // 전체 레벨 배열 저장
@@ -47,43 +50,69 @@ public class MonsterController : MonoBehaviour, IMonster
 
     private IEnumerator BehaviorLoop()
     {
-        // 1) 이동
+        // 메인타워 객체 찾기
+        var mainTower = FindObjectOfType<MainTowerController>();
+
+        // 1) 몬스터 이동 IEnumerator 가져오기
         var mover = gameObject.AddComponent<MonsterMovement>();
         mover.SetPath(WaveManager.Instance.path.Waypoints, _curLevel, _monsterModel);
+        StartCoroutine(mover.MoveAlongPath());
 
-        // mover.MoveAlongPath() 자체가 내부에서 매 프레임 사망 체크 하도록 아래에서 바꿔 줄 예정
-        yield return StartCoroutine(mover.MoveAlongPath());
 
-        // 2) 이동 중에 죽으면 여기까지 내려오지 않음
-        //    살아남았다면 공격 루프
-        while (_monsterModel.CurrentHp > 0)
+        // 2) 몬스터와 메인타워가 살아있는동안 로직 수행
+        while (_monsterModel.CurrentHp > 0 && mainTower != null && mainTower.CurrentHp > 0)
         {
-            _anim.SetTrigger("Attack");
-            HandleAttack();
+            // 현재 몬스터와 메인타워 간의 거리 계산
+            float distance = Vector3.Distance(this.transform.position, mainTower.transform.position);
 
-            yield return new WaitUntil(() =>
+            // distance와 몬스터의 공격 사정거리 비교
+            if(distance <= _curLevel.attackRange)
             {
-                var info = _anim.GetCurrentAnimatorStateInfo(0);
-                return info.IsName("Attack") && info.normalizedTime >= 1;
-            });
+                Debug.Log($"몬스터 공격범위안에 메인타워가 들어옴 -> distance : {distance}, monster attack range : {_curLevel.attackRange}");
+                // 사정권 내에 들어오면 이동 금지
+                mover.CanMove = false;
+
+                // 공격 로직 (애니메이션 + 대기 + 데미지)
+                _anim.SetTrigger("Attack");
+                yield return null;
+                yield return new WaitForSeconds(GetCurrentStateClipLength());
+
+                // 몬스터가 원거리 공격 타입인 경우
+                if (_curLevel.isRanged)
+                {
+                    if (_curLevel.projectilePrefab != null) {
+                        var projectile = Instantiate(_curLevel.projectilePrefab, projectileCreatePos != null ? projectileCreatePos.position : transform.position,
+                    projectileCreatePos != null ? projectileCreatePos.rotation : Quaternion.identity);
+                        projectile.AddComponent<MonsterProjectile>().Setup(_curLevel, mainTower.transform.position);
+                    }                                        
+                }
+                else
+                {
+                    mainTower.ApplyDamage(_curLevel.attackPower);
+                }
+
+                yield return new WaitForSeconds(0.1f);
+            }
+            else 
+            {
+                Debug.Log($"몬스터 공격범위밖임 -> distance : {distance}, monster attack range : {_curLevel.attackRange}");
+                // 공격 범위 밖: 이동 허용
+                mover.CanMove = true;
+                yield return null;
+            }            
         }
     }
 
-    private void HandleAttack()
+
+    private float GetCurrentStateClipLength()
     {
-        // 데미지 및 투사체
-        // 예시: 충돌 시 _healthModel.TakeDamage(...)
-        if (_curLevel.isRanged && _curLevel.projectilePrefab != null)
-        {
-            var proj = Instantiate(_curLevel.projectilePrefab, transform.position, Quaternion.identity);
-            if (proj.TryGetComponent<Rigidbody>(out var rb))
-                rb.linearVelocity = transform.forward * _curLevel.projectileSpeed;
-        }
-        else
-        {
-            // 근접 데미지 처리
-        }
+        var infos = _anim.GetCurrentAnimatorClipInfo(0);
+        if (infos != null && infos.Length > 0)
+            return infos[0].clip.length;
+        return 0.5f;
     }
+
+
 
     public void Stun(float stunDuration)
     {

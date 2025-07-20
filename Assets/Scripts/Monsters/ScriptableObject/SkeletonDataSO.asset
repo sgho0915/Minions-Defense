@@ -21,7 +21,7 @@ MonoBehaviour:
     moveSpeed: 1.5
     attackPower: 5
     isRanged: 0
-    attackRange: 25
+    attackRange: 3
     projectilePrefab: {fileID: 0}
     projectileSpeed: 0
     rewardPointsMin: 10
@@ -29,10 +29,10 @@ MonoBehaviour:
   - monsterPrefab: {fileID: 6634875652449548137, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
     size: 1
     maxHp: 200
-    moveSpeed: 1.5
+    moveSpeed: 1.03
     attackPower: 10
     isRanged: 0
-    attackRange: 25
+    attackRange: 5
     projectilePrefab: {fileID: 0}
     projectileSpeed: 0
     rewardPointsMin: 30
@@ -43,8 +43,8 @@ MonoBehaviour:
     moveSpeed: 1.5
     attackPower: 40
     isRanged: 1
-    attackRange: 30
+    attackRange: 7
     projectilePrefab: {fileID: 1263437943489172, guid: 9e26aec6688c4604db5b8271d50b40ae, type: 3}
-    projectileSpeed: 10
+    projectileSpeed: 20
     rewardPointsMin: 70
     rewardPointsMax: 70

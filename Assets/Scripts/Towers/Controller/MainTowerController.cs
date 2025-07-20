@@ -12,6 +12,11 @@ public class MainTowerController : MonoBehaviour
     [Header("View")]
     [SerializeField] private MainTowerView view;
 
+    private void Start()
+    {
+        Initialize(1000);
+    }
+
     public void Initialize(int hp)
     {
         MaxHp = hp;
