@@ -16,6 +16,14 @@ MonoBehaviour:
   - waveNumber: 1
     spawns:
     - monsterData: {fileID: 11400000, guid: be57fe36c1d46b84891c53b2c8a9d920, type: 2}
+      size: 0
+      count: 1
+      spawnInterval: 1
+    - monsterData: {fileID: 11400000, guid: be57fe36c1d46b84891c53b2c8a9d920, type: 2}
+      size: 1
+      count: 1
+      spawnInterval: 1
+    - monsterData: {fileID: 11400000, guid: be57fe36c1d46b84891c53b2c8a9d920, type: 2}
       size: 2
       count: 1
       spawnInterval: 1

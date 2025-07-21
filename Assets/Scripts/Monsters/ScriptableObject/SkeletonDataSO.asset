@@ -44,7 +44,7 @@ MonoBehaviour:
     attackPower: 40
     isRanged: 1
     attackRange: 7
-    projectilePrefab: {fileID: 1263437943489172, guid: 9e26aec6688c4604db5b8271d50b40ae, type: 3}
+    projectilePrefab: {fileID: 132410131150665497, guid: 4d74599aaee493147ad1a157be0cb3d6, type: 3}
     projectileSpeed: 20
     rewardPointsMin: 70
     rewardPointsMax: 70
