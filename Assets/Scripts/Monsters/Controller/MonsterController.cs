@@ -21,8 +21,7 @@ public class MonsterController : MonoBehaviour, IMonster
 
     private Coroutine _moveRoutine;
 
-    [Header("원거리 투사체 생성 위치")]
-    public Transform projectileCreatePos;
+    public Transform attackPos;
 
     public void Initialize(MonsterLevelData initialLevel, MonsterLevelData[] allLevels)
     {
@@ -80,8 +79,7 @@ public class MonsterController : MonoBehaviour, IMonster
                 if (_curLevel.isRanged)
                 {
                     if (_curLevel.projectilePrefab != null) {
-                        var projectile = Instantiate(_curLevel.projectilePrefab, projectileCreatePos != null ? projectileCreatePos.position : transform.position,
-                    projectileCreatePos != null ? projectileCreatePos.rotation : Quaternion.identity);
+                        var projectile = Instantiate(_curLevel.projectilePrefab, attackPos.position, attackPos.rotation);
                         projectile.AddComponent<MonsterProjectile>().Setup(_curLevel, mainTower.transform.position);
                     }                                        
                 }
