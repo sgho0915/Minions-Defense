@@ -5275,8 +5275,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.465651, y: -0.0017586407, z: 0.00011198604, w: -0.8849667}
-  m_LocalPosition: {x: 16.690212, y: 7.99728, z: -23.497494}
+  m_LocalRotation: {x: -0.34513658, y: 0.0029363872, z: -0.0017909057, w: -0.9385462}
+  m_LocalPosition: {x: 7.382168, y: 16.353521, z: -32.23986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -32549,19 +32549,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6024440493006381979, guid: 6111cca6da90d7d4db439f972e18de78, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.9185238
+      value: -0.9026884
       objectReference: {fileID: 0}
     - target: {fileID: 6024440493006381979, guid: 6111cca6da90d7d4db439f972e18de78, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.24777573
+      value: 0.25911754
       objectReference: {fileID: 0}
     - target: {fileID: 6024440493006381979, guid: 6111cca6da90d7d4db439f972e18de78, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.29746035
+      value: 0.33019418
       objectReference: {fileID: 0}
     - target: {fileID: 6024440493006381979, guid: 6111cca6da90d7d4db439f972e18de78, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.08024121
+      value: 0.09478254
       objectReference: {fileID: 0}
     - target: {fileID: 7610912469890125456, guid: 6111cca6da90d7d4db439f972e18de78, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32614,6 +32614,10 @@ PrefabInstance:
     - target: {fileID: 8246864417872455369, guid: 6111cca6da90d7d4db439f972e18de78, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9072040872699504269, guid: 6111cca6da90d7d4db439f972e18de78, type: 3}
+      propertyPath: attackRange
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
