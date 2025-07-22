@@ -5,7 +5,6 @@ public class MonsterProjectile : MonoBehaviour
 {
     private MonsterLevelData _levelData;
     Rigidbody _rb;
-    public float speed = 10f;    // 적절히 조절하세요
 
     // 외부에서 한 번만 호출
     public void Setup(MonsterLevelData levelData, Vector3 targetPoint)
@@ -13,7 +12,7 @@ public class MonsterProjectile : MonoBehaviour
         _levelData = levelData;
 
         _rb = GetComponent<Rigidbody>();
-        _rb.useGravity = true;  // 물리 중력 사용
+        _rb.useGravity = false;  // 물리 중력 사용
         _rb.linearDamping = 0f;
 
         // 1) 수평 거리와 높이 차 계산
@@ -50,6 +49,12 @@ public class MonsterProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
+        Debug.Log($"몬스터 투사체가 충돌한 오브젝트 : {col.gameObject.name}");
+
+        // 충돌체가 MainTower가 아닌경우 충돌 무시
+        if (!col.gameObject.CompareTag("MainTower"))
+            return;
+
         if (col.collider.TryGetComponent<MainTowerController>(out var tower))
             tower.ApplyDamage(_levelData.attackPower);
 

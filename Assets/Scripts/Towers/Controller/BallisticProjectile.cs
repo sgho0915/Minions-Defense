@@ -69,6 +69,10 @@ public class BallisticProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        // 투사체간 충돌을 일으킬 경우 출동 무시
+        if (collision.gameObject.CompareTag("Projectile"))
+            return;
+        
         var hitPoint = collision.contacts[0].point; // 착탄지점
 
         // 1) 충돌 이펙트 생성

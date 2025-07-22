@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - ShortMonster
-  - LongMonster
+  - MainTower
+  - Monster
+  - Projectile
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - Water
   - UI
   - Monster
-  - LongRange_Monster
-  - ShortRange_Monster
+  - MainTower
+  - Projectile
   - 
   - 
   - 

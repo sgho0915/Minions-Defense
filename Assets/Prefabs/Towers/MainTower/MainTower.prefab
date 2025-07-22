@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1631253562825702564}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 363239626029222749}
   - component: {fileID: 7975064138291296890}
   - component: {fileID: 2988067315320066740}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainAttackTower_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63,8 +63,8 @@ Transform:
   m_GameObject: {fileID: 1099326652457964129}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.77, y: -0.009999989, z: -1.43}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: 4.17, y: 1.76, z: 0.05}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6541084718842691131}
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 2498946741900006130}
   - component: {fileID: 3576149932166942244}
   - component: {fileID: 5833142449339638409}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   - component: {fileID: 3729474811973723294}
   - component: {fileID: 4366551256053424418}
   - component: {fileID: 4893444688916340723}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +335,7 @@ GameObject:
   - component: {fileID: 7238349277503178882}
   - component: {fileID: 848001647549560089}
   - component: {fileID: 1254333224811995035}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   - component: {fileID: 8246864417872455369}
   - component: {fileID: 7391045166355474406}
   - component: {fileID: 4364738698071469325}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   - component: {fileID: 3318278657225296707}
   - component: {fileID: 6304048022663478747}
   - component: {fileID: 8376480384685725648}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   - component: {fileID: 8307708844395324293}
   - component: {fileID: 6443245212788677226}
   - component: {fileID: 4154248938802615836}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,7 +657,7 @@ GameObject:
   - component: {fileID: 6961052418697854303}
   - component: {fileID: 235941674983300679}
   - component: {fileID: 4051690823198432267}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +742,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6024440493006381979}
   - component: {fileID: 7274945072095735023}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: HP_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -777,6 +777,115 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7a93da751d559a469e1f76945ec4a32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &3731019786563357501
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3252475940448018612}
+  - component: {fileID: 2652735892317132665}
+  - component: {fileID: 8432459071134691277}
+  - component: {fileID: 4161032149330701024}
+  m_Layer: 7
+  m_Name: Plane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3252475940448018612
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731019786563357501}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.027, y: -0.04, z: -1.3799}
+  m_LocalScale: {x: 0.880031, y: 1, z: 0.33722275}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7610912469890125456}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &2652735892317132665
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731019786563357501}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &8432459071134691277
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731019786563357501}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4161032149330701024
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3731019786563357501}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &4044598584679083291
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,7 +895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1848795840710014444}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -823,7 +932,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4128895666449319281}
   - component: {fileID: 2135564554399932123}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -914,7 +1023,7 @@ GameObject:
   - component: {fileID: 4112356312277361185}
   - component: {fileID: 7735547675778862348}
   - component: {fileID: 8389318567682072015}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_GateWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,7 +1109,7 @@ GameObject:
   - component: {fileID: 3375742369448219832}
   - component: {fileID: 8283160754244161839}
   - component: {fileID: 58513043733803640}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1086,7 +1195,7 @@ GameObject:
   - component: {fileID: 8820396078142890075}
   - component: {fileID: 7759292012382166415}
   - component: {fileID: 3637799135438477158}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1172,7 +1281,7 @@ GameObject:
   - component: {fileID: 7007942527151530825}
   - component: {fileID: 7261020957490163957}
   - component: {fileID: 8485687873778692083}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1256,7 +1365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6541084718842691131}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackEffectPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1289,7 +1398,7 @@ GameObject:
   - component: {fileID: 2664769338697315917}
   - component: {fileID: 1842425127358293676}
   - component: {fileID: 3763797574499232935}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1375,7 +1484,7 @@ GameObject:
   - component: {fileID: 1388248212699674484}
   - component: {fileID: 2235608724519677148}
   - component: {fileID: 8815355007102129605}
-  m_Layer: 5
+  m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1450,7 +1559,7 @@ GameObject:
   - component: {fileID: 6954760178168002795}
   - component: {fileID: 3055098294896194962}
   - component: {fileID: 3448303457163774857}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: MainAttackTower_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1466,8 +1575,8 @@ Transform:
   m_GameObject: {fileID: 5754195869630585209}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.63, y: -0.009999989, z: -1.43}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalPosition: {x: -4.11, y: 1.76, z: 0.05}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7205372712566447227}
@@ -1537,7 +1646,7 @@ GameObject:
   - component: {fileID: 5226886144784572730}
   - component: {fileID: 4771621574055070153}
   - component: {fileID: 6422881448987492554}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1624,7 +1733,7 @@ GameObject:
   - component: {fileID: 7456092821994111813}
   - component: {fileID: 3812093708671382571}
   - component: {fileID: 8532207716598914709}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_WarpGate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1732,7 +1841,7 @@ GameObject:
   - component: {fileID: 6232461954649531381}
   - component: {fileID: 3043121109399513013}
   - component: {fileID: 4152411741141353136}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1816,7 +1925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1322307319187544160}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1851,7 +1960,7 @@ GameObject:
   - component: {fileID: 6198118048932229234}
   - component: {fileID: 460968615380864466}
   - component: {fileID: 1949579026273542584}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1937,7 +2046,7 @@ GameObject:
   - component: {fileID: 3215867521553669219}
   - component: {fileID: 6211446371747507295}
   - component: {fileID: 7318394223048081168}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2025,9 +2134,10 @@ GameObject:
   - component: {fileID: 8387584983090169933}
   - component: {fileID: 1859857683226644043}
   - component: {fileID: 637816310249530736}
-  m_Layer: 0
+  - component: {fileID: 7281922579545231732}
+  m_Layer: 7
   m_Name: MainTower
-  m_TagString: Untagged
+  m_TagString: MainTower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2062,6 +2172,7 @@ Transform:
   - {fileID: 2664769338697315917}
   - {fileID: 6954760178168002795}
   - {fileID: 363239626029222749}
+  - {fileID: 3252475940448018612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9072040872699504269
@@ -2076,7 +2187,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30652b2187353f447b98c8b308396c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  initialHP: 1000
   view: {fileID: 8387584983090169933}
+  attackPoints:
+  - {fileID: 7205372712566447227}
+  - {fileID: 6541084718842691131}
+  projectilePrefab: {fileID: 132410131150665497, guid: 4db9ac01a9fa4ab468b7b740f961a8c4, type: 3}
+  attackSpeed: 25
+  attackRange: 8
+  projectileSpeed: 10
+  attackPower: 50
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  targetTags:
+  - Monster
 --- !u!114 &8387584983090169933
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2109,8 +2234,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 9.692381, y: 2.5248458, z: 4.33738}
-  m_Center: {x: 0.08326721, y: 1.2374227, z: -1.310523}
+  m_Size: {x: 9.692381, y: 2.0201473, z: 3.896544}
+  m_Center: {x: 0.08326721, y: 0.98507386, z: -1.530941}
 --- !u!225 &637816310249530736
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -2123,6 +2248,103 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!82 &7281922579545231732
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8246534489540893692}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8359435530302179748
 GameObject:
   m_ObjectHideFlags: 0
@@ -2132,7 +2354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7205372712566447227}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackEffectPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2165,7 +2387,7 @@ GameObject:
   - component: {fileID: 5667409226047610078}
   - component: {fileID: 5586236560595085159}
   - component: {fileID: 8807301556481049007}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TB_Str_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
