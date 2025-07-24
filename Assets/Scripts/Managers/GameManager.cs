@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
 
         // UI 초기화
-        stageUI.Initialize(mainTower.MaxHp, stagePoints, globalPoints);
+        stageUI.Initialize(mainTower, stagePoints);
 
         // 이벤트 구독
         mainTower.OnDied += OnStageFail;

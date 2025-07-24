@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 // WavaManager.cs
@@ -8,6 +9,8 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance { get; private set; }
+
+    public Action<int, int> OnWaveIdxChanged;
 
     [Header("웨이브 데이터")]
     public WaveDataSO waveDataSO;
@@ -19,6 +22,7 @@ public class WaveManager : MonoBehaviour
     public WayPath path;
 
     private int _currentWaveIndex = 0;
+    public int CurrentWaveIndex => _currentWaveIndex; // StageUIManager에서 읽기전용으로 참조하기 위한 캡슐화
 
     private void Awake()
     {
@@ -57,6 +61,8 @@ public class WaveManager : MonoBehaviour
     private IEnumerator SpawnWave(WaveInfo wave)
     {
         Debug.Log($"<Wave {wave.waveNumber}> 시작");
+        OnWaveIdxChanged?.Invoke(_currentWaveIndex, waveDataSO.waves.Length);
+
         foreach (var entry in wave.spawns)
         {
             for (int i = 0; i < entry.count; i++)

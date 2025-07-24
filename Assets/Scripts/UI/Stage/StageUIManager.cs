@@ -5,12 +5,17 @@ using TMPro;
 
 public class StageUIManager : MonoBehaviour
 {
-    [Header("HP Slider")]
-    public Slider hpSlider;
+    private MainTowerController mainTowerController;
+
+    [Header("HP Display")]
+    public TextMeshProUGUI txtHP;
 
     [Header("Points Display")]
     public TextMeshProUGUI txtStagePoints;
     public TextMeshProUGUI txtGlobalPoints;
+
+    [Header("Wave Display")]
+    public TextMeshProUGUI txtWave;
 
     [Header("GameOver/Clear Panel")]
     public GameObject gameOverPanel;
@@ -19,22 +24,34 @@ public class StageUIManager : MonoBehaviour
     public GameObject starPrefab;     // 별 프리팹
     public TextMeshProUGUI txtReward;
 
-    public void Initialize(int maxHp, int startStagePoints, int startGlobalPoints)
+    public void Initialize(MainTowerController mainTower, int startStagePoints)
     {
-        // HP
-        hpSlider.maxValue = maxHp;
-        hpSlider.value = maxHp;
+        mainTowerController = mainTower;
+
+        // 남은 체력 메인타워 체력크기로 초기화
+        txtHP.text = mainTower.MaxHp.ToString();
+
+        // 현재 웨이브 웨이브 SO 데이터 정보로 초기화
+        txtWave.text = $"{WaveManager.Instance.CurrentWaveIndex} / {WaveManager.Instance.waveDataSO.waves.Length}";
+
+        mainTowerController.OnHpChanged += UpdateHp;
+        WaveManager.Instance.OnWaveIdxChanged += UpdateWave;
 
         // Points
         UpdateStagePoints(startStagePoints);
-        UpdateGlobalPoints(startGlobalPoints);
+        //UpdateGlobalPoints(startGlobalPoints);
 
-        gameOverPanel.SetActive(false);
+        //gameOverPanel.SetActive(false);
     }
 
-    public void UpdateHp(int hp)
+    public void UpdateHp(int curHP, int maxHP)
     {
-        hpSlider.value = hp;
+        txtHP.text = maxHP.ToString();
+    }
+
+    public void UpdateWave(int curWave, int maxWave)
+    {
+        txtWave.text = $"{curWave} / {maxWave}";
     }
 
     public void UpdateStagePoints(int pts)
