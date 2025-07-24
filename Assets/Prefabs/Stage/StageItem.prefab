@@ -217,6 +217,8 @@ MonoBehaviour:
   - {fileID: 4783676245388229003}
   - {fileID: 6106226602441476641}
   btnPlay: {fileID: 4290724375138323284}
+  activeStarColor: {r: 1, g: 1, b: 1, a: 1}
+  inactiveStarColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.8}
 --- !u!1 &1920376678936853311
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,8 +361,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\uC2A4\uD14C\uC774\uC9C0 1"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 14471db054efb324992c352ab88c1e8e, type: 2}
-  m_sharedMaterial: {fileID: 3328325963523446475, guid: 14471db054efb324992c352ab88c1e8e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f10a529d173becf42b3106f4a6b9b105, type: 2}
+  m_sharedMaterial: {fileID: 7631591839443136364, guid: f10a529d173becf42b3106f4a6b9b105, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
