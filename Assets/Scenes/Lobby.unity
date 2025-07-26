@@ -11556,7 +11556,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 03ba6c6a0c8752b41b2168cbd0e3884e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68efee9fe4f029f4680c17c76e5e2385, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -20062,7 +20062,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -1699.4946, y: 0}
+  m_SizeDelta: {x: -2169.7446, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1334494269
 MonoBehaviour:
@@ -20680,7 +20680,7 @@ MonoBehaviour:
   m_text: "\uC2A4\uD14C\uC774\uC9C0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f10a529d173becf42b3106f4a6b9b105, type: 2}
-  m_sharedMaterial: {fileID: 6506100698499700325, guid: d837fc179c0769243a7eb1a6f2606640, type: 2}
+  m_sharedMaterial: {fileID: 7631591839443136364, guid: f10a529d173becf42b3106f4a6b9b105, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -20745,7 +20745,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1401079368
@@ -21339,7 +21339,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 03ba6c6a0c8752b41b2168cbd0e3884e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 68efee9fe4f029f4680c17c76e5e2385, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
