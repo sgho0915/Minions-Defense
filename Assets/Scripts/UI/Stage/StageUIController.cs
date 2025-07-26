@@ -11,6 +11,7 @@ public class StageUIController : MonoBehaviour
     [SerializeField] private StageResultView resultView;
     
     private MainTowerController mainTower;
+    private WaveManager waveManager;
 
     private void OnEnable()
     {
@@ -20,17 +21,18 @@ public class StageUIController : MonoBehaviour
     /// <summary>
     /// GameManager에서 호출 -> HUD 초기화 및 이벤트 연결
     /// </summary>
-    public void Initialize(MainTowerController _mainTower, int startStagePoints)
+    public void Initialize(MainTowerController _mainTower, WaveManager _waveManager, int startStagePoints)
     {
         this.mainTower = _mainTower;
+        this.waveManager = _waveManager;
 
         // 초기 HUD UI 세팅
         hudView.UpdateHp(mainTower.CurrentHp, mainTower.MaxHp);
-        hudView.UpdateWave(WaveManager.Instance.CurrentWaveIndex, WaveManager.Instance.waveDataSO.waves.Length);
+        hudView.UpdateWave(waveManager.CurrentWaveIndex, waveManager.waveDataSO.waves.Length);
         hudView.UpdateStagePoints(startStagePoints);
 
         mainTower.OnHpChanged += hudView.UpdateHp;
-        WaveManager.Instance.OnWaveIdxChanged += hudView.UpdateWave;
+        waveManager.OnWaveIdxChanged += hudView.UpdateWave;
     }
 
     /// <summary>

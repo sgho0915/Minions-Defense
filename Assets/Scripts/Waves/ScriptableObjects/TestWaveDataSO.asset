@@ -19,12 +19,11 @@ MonoBehaviour:
       size: 0
       count: 5
       spawnInterval: 1
+    delayAfterWave: 2
+  - waveNumber: 2
+    spawns:
     - monsterData: {fileID: 11400000, guid: be57fe36c1d46b84891c53b2c8a9d920, type: 2}
-      size: 1
+      size: 0
       count: 5
-      spawnInterval: 1
-    - monsterData: {fileID: 11400000, guid: be57fe36c1d46b84891c53b2c8a9d920, type: 2}
-      size: 2
-      count: 3
       spawnInterval: 1
     delayAfterWave: 2

@@ -49,8 +49,6 @@ public class MonsterProjectile : MonoBehaviour
 
     private void OnCollisionEnter(Collision col)
     {
-        Debug.Log($"몬스터 투사체가 충돌한 오브젝트 : {col.gameObject.name}");
-
         // 충돌체가 MainTower가 아닌경우 충돌 무시
         if (!col.gameObject.CompareTag("MainTower"))
             return;

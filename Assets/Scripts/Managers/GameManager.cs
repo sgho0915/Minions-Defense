@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour
         globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
 
         // UI 초기화
-        stageUI.Initialize(mainTower, stagePoints);
+        stageUI.Initialize(mainTower, waveManager, stagePoints);
 
         // 이벤트 구독
         mainTower.OnDied += HandleStageFail;
@@ -55,13 +55,19 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RunStage()
     {
-        // 잠깐 대기
+        // 초기화 보장용 1프레임 대기
         yield return null;
 
-        // 웨이브 진행
+        // 웨이브 시작
         yield return StartCoroutine(waveManager.RunWaves());
 
-        // 웨이브가 모두 끝나도 살아있다면 클리어
+        // 모든 웨이브 스폰 및 남은 몬스터 없는지 대기
+        yield return new WaitUntil(() =>
+        waveManager.CurrentWaveIndex >= waveManager.waveDataSO.waves.Length  // 모든 웨이브 소진
+        && waveManager.transform.childCount == 0                             // 스폰된 몬스터 제거 완료
+        );
+
+        // 모든 웨이브 몬스터가 처치될 때까지 타워가 살아있으면 클리어
         if (mainTower.CurrentHp > 0)
             HandleStageClear();
     }

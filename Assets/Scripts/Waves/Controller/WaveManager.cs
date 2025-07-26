@@ -21,7 +21,7 @@ public class WaveManager : MonoBehaviour
     [Header("경로(Path)")]
     public WayPath path;
 
-    private int _currentWaveIndex = 0;
+    private int _currentWaveIndex = -1;
     public int CurrentWaveIndex => _currentWaveIndex; // StageUIManager에서 읽기전용으로 참조하기 위한 캡슐화
 
     private void Awake()
@@ -36,23 +36,26 @@ public class WaveManager : MonoBehaviour
         // (원한다면) DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
-    {
-        StartCoroutine(RunWaves());
-    }
-
     // 모든 웨이브를 순서대로 실행하고, 각 웨이브 사이에 지연을 둠
     public IEnumerator RunWaves()
     {
         var waves = waveDataSO.waves;
-        while (_currentWaveIndex < waves.Length)
+        int total = waves.Length;
+        for (int i = 0; i < total; i++)
         {
-            var wave = waves[_currentWaveIndex];
-            // 현재 웨이브 스폰 실행
-            yield return StartCoroutine(SpawnWave(wave));
-            // 웨이브 완료 후 대기
-            yield return new WaitForSeconds(wave.delayAfterWave);
-            _currentWaveIndex++;
+            // 1) 내부 인덱스 갱신 ★★★
+            _currentWaveIndex = i;
+
+            // 2) 이벤트 호출 (1-based) ★★★
+            OnWaveIdxChanged?.Invoke(i + 1, total);
+
+            Debug.Log($"<Wave {waves[i].waveNumber}> 시작");
+
+            // 3) 해당 웨이브 스폰 실행
+            yield return StartCoroutine(SpawnWave(waves[i]));
+
+            // 4) 웨이브 딜레이 적용 ★★★
+            yield return new WaitForSeconds(waves[i].delayAfterWave);
         }
         Debug.Log("모든 웨이브 완료!");
     }
@@ -60,9 +63,6 @@ public class WaveManager : MonoBehaviour
     // 단일 웨이브 내의 모든 스폰 엔트리를 실행
     private IEnumerator SpawnWave(WaveInfo wave)
     {
-        Debug.Log($"<Wave {wave.waveNumber}> 시작");
-        OnWaveIdxChanged?.Invoke(_currentWaveIndex, waveDataSO.waves.Length);
-
         foreach (var entry in wave.spawns)
         {
             for (int i = 0; i < entry.count; i++)
@@ -83,7 +83,6 @@ public class WaveManager : MonoBehaviour
                 entry.size,
                 spawnPoint.position,
                 transform);
-        Debug.Log($"Spawned: {entry.monsterData.monsterName} Size:{entry.size}");
 
         // 2) 사이즈(레벨) 적용부터 몬스터에게 맡김
         go.GetComponent<MonsterController>().SetSize(entry.size);
