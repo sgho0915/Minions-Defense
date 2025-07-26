@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     // Dependencies, 각 Stage 씬 롣 후 Find로 할당
     private WaveManager waveManager;
     private MainTowerController mainTower;
-    private StageUIManager stageUI;
+    private StageUIController stageUI;
 
     // 화폐
     [Header("Currency")]
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
         // 씬 안의 의존성 컴포넌트들 찾아오기
         waveManager = FindObjectOfType<WaveManager>();
         mainTower = FindObjectOfType<MainTowerController>();
-        stageUI = FindObjectOfType<StageUIManager>();
+        stageUI = FindObjectOfType<StageUIController>();
 
         // 초기값 세팅
         stagePoints = 100;
@@ -47,7 +47,7 @@ public class GameManager : MonoBehaviour
         stageUI.Initialize(mainTower, stagePoints);
 
         // 이벤트 구독
-        mainTower.OnDied += OnStageFail;
+        mainTower.OnDied += HandleStageFail;
 
         // 본격 게임 흐름 시작
         StartCoroutine(RunStage());
@@ -63,22 +63,32 @@ public class GameManager : MonoBehaviour
 
         // 웨이브가 모두 끝나도 살아있다면 클리어
         if (mainTower.CurrentHp > 0)
-            OnStageClear();
+            HandleStageClear();
     }
 
-    private void OnStageFail()
+    private void HandleStageFail()
     {
         StopAllCoroutines();
-        stageUI.ShowGameOver(false);
+
+        bool[] failCriteria = new bool[3] { false, false, false };
+        stageUI.ShowResult(false, failCriteria);
     }
 
-    private void OnStageClear()
+    private void HandleStageClear()
     {
         StopAllCoroutines();
 
         // 성능에 따라 별 계산 (예시: 남은 HP 비율)
         float hpRatio = (float)mainTower.CurrentHp / mainTower.MaxHp;
         int stars = hpRatio > .75f ? 3 : hpRatio > .5f ? 2 : 1;
+
+        // 각 평가 기준 충족 여부 예시 (실제 로직에 맞춰 수정)
+        bool[] criteriaMet = new bool[3]
+        {
+            stars >= 1, // 기준1: 최소 1성 달성
+            stars >= 2, // 기준2: 최소 2성 달성
+            stars >= 3  // 기준3: 3성 달성
+        };
 
         // 스테이지 포인트를 글로벌 포인트로 전환 (예: stagePoints * stars)
         int reward = stagePoints * stars;
@@ -87,7 +97,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
         PlayerPrefs.Save();
 
-        stageUI.ShowGameOver(true, stars, reward);
+        stageUI.ShowResult(true, criteriaMet);
     }
 
     // 타워 건설 등에서 호출
@@ -95,7 +105,7 @@ public class GameManager : MonoBehaviour
     {
         if (stagePoints < cost) return false;
         stagePoints -= cost;
-        stageUI.UpdateStagePoints(stagePoints);
+        //stageUI.hudView.UpdateStagePoints(stagePoints);
         return true;
     }
 }
