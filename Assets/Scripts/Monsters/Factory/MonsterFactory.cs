@@ -24,8 +24,8 @@ public class MonsterFactory
         var initialLevel = allLevels.First(l => l.size == size);
 
         var go = Object.Instantiate(initialLevel.monsterPrefab, pos, Quaternion.identity, parent);
-        var ctrl = go.GetComponent<MonsterController>() ?? go.AddComponent<MonsterController>();
-        ctrl.Initialize(initialLevel, allLevels);
+        var monsterController = go.GetComponent<MonsterController>() ?? go.AddComponent<MonsterController>();
+        monsterController.Initialize(initialLevel, allLevels);
         return go;
     }
 }
