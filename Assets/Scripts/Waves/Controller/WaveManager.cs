@@ -24,6 +24,8 @@ public class WaveManager : MonoBehaviour
     private int _currentWaveIndex = -1;
     public int CurrentWaveIndex => _currentWaveIndex; // StageUIManager에서 읽기전용으로 참조하기 위한 캡슐화
 
+    private bool _forceNextWave = false;    // 강제 다음 웨이브 시작 플래그
+
     private void Awake()
     {
         // 만약 씬에 중복으로 붙어 있으면 하나만 살아남도록
@@ -33,7 +35,12 @@ public class WaveManager : MonoBehaviour
             return;
         }
         Instance = this;
-        // (원한다면) DontDestroyOnLoad(gameObject);
+    }
+
+    // StageUIController에서 호출 -> delayAfterWave 무시하고 즉시 다음 웨이브 시작
+    public void ForceStartNextWave()
+    {
+        _forceNextWave = true;
     }
 
     // 모든 웨이브를 순서대로 실행하고, 각 웨이브 사이에 지연을 둠
@@ -43,19 +50,24 @@ public class WaveManager : MonoBehaviour
         int total = waves.Length;
         for (int i = 0; i < total; i++)
         {
-            // 1) 내부 인덱스 갱신 ★★★
             _currentWaveIndex = i;
-
-            // 2) 이벤트 호출 (1-based) ★★★
             OnWaveIdxChanged?.Invoke(i + 1, total);
 
             Debug.Log($"<Wave {waves[i].waveNumber}> 시작");
 
-            // 3) 해당 웨이브 스폰 실행
+            // 웨이브 스폰 실행
             yield return StartCoroutine(SpawnWave(waves[i]));
 
-            // 4) 웨이브 딜레이 적용 ★★★
-            yield return new WaitForSeconds(waves[i].delayAfterWave);
+            // 웨이브 딜레이
+            float timer = 0f;
+            _forceNextWave = false; // 매 웨이브마다 리셋
+            while (timer < waves[i].delayAfterWave && !_forceNextWave)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            // 강제 다음 웨이브 시작, 시간 초과 관계없이 다음 웨이브 시작
         }
         Debug.Log("모든 웨이브 완료!");
     }

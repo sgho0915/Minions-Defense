@@ -63,7 +63,7 @@ public class GameManager : MonoBehaviour
 
         // 모든 웨이브 스폰 및 남은 몬스터 없는지 대기
         yield return new WaitUntil(() =>
-        waveManager.CurrentWaveIndex >= waveManager.waveDataSO.waves.Length  // 모든 웨이브 소진
+        waveManager.CurrentWaveIndex >= waveManager.waveDataSO.waves.Length - 1  // 모든 웨이브 소진
         && waveManager.transform.childCount == 0                             // 스폰된 몬스터 제거 완료
         );
 
@@ -103,6 +103,7 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
         PlayerPrefs.Save();
 
+        
         stageUI.ShowResult(true, criteriaMet);
     }
 
