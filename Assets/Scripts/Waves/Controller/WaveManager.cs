@@ -10,7 +10,8 @@ public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance { get; private set; }
 
-    public Action<int, int> OnWaveIdxChanged;
+    public Action<int, int> OnWaveIdxChanged;   // 웨이브 변경 상태 이벤트
+    public Action<int> OnWaveSpawnCompleted;    // 웨이브 스폰 완료 이벤트
 
     [Header("웨이브 데이터")]
     public WaveDataSO waveDataSO;
@@ -57,6 +58,8 @@ public class WaveManager : MonoBehaviour
 
             // 웨이브 스폰 실행
             yield return StartCoroutine(SpawnWave(waves[i]));
+
+            OnWaveSpawnCompleted.Invoke(i + 1);
 
             // 웨이브 딜레이
             float timer = 0f;

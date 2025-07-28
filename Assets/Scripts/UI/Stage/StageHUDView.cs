@@ -17,6 +17,7 @@ public class StageHUDView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI txtCurrentWave;
 
     [Header("Display Remain Time Until Next Wave Start")]
+    [SerializeField] private GameObject forceStartPanel;
     [SerializeField] private Button btnForceStartWave;    
     [SerializeField] private TextMeshProUGUI txtCanvasNextWave;
 
@@ -69,8 +70,10 @@ public class StageHUDView : MonoBehaviour
     public void SetNextWaveTimeUIInteractable(bool interactable, bool islastWave)
     {
         btnForceStartWave.interactable = interactable;
+        forceStartPanel.SetActive(interactable);
 
         if (islastWave) {
+            forceStartPanel.SetActive(!islastWave);
             btnForceStartWave.gameObject.SetActive(!islastWave);
             txtCanvasNextWave.gameObject.SetActive(!islastWave);
         }

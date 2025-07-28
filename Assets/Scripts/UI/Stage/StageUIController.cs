@@ -25,7 +25,8 @@ public class StageUIController : MonoBehaviour
     private void OnDisable()
     {
         hudView.OnForceStartWaveButtonClicked -= HandleForceStartWave; 
-        waveManager.OnWaveIdxChanged -= HandleWaveChanged;        
+        waveManager.OnWaveIdxChanged -= HandleWaveChanged;
+        waveManager.OnWaveSpawnCompleted -= HandleWaveSpawncompleted;
     }
 
     /// <summary>
@@ -44,6 +45,7 @@ public class StageUIController : MonoBehaviour
         mainTower.OnHpChanged += hudView.UpdateHp;
         waveManager.OnWaveIdxChanged += hudView.UpdateWave;
         waveManager.OnWaveIdxChanged += HandleWaveChanged;
+        waveManager.OnWaveSpawnCompleted += HandleWaveSpawncompleted;
     }
 
     /// <summary>
@@ -76,14 +78,22 @@ public class StageUIController : MonoBehaviour
         if(curWave == maxWave) 
             hudView.SetNextWaveTimeUIInteractable(false, true);
         else
-            hudView.SetNextWaveTimeUIInteractable(true, false);
+            hudView.SetNextWaveTimeUIInteractable(false, false);
 
         // 이전 웨이브에 대한 남은 시간 코루틴 중단
         if (_nextWaveTimerRoutine != null)
             StopCoroutine(_nextWaveTimerRoutine);
+    }
 
-        // 새 웨이브에 대한 delayAfterWave 값으로 코루틴 새로 시작
+    private void HandleWaveSpawncompleted(int curWave)
+    {
+        if (waveManager.waveDataSO.waves.Length <= curWave) return; // 마지막 웨이브면 수행 X
+
+        hudView.SetNextWaveTimeUIInteractable(true, false);
+
         float delay = waveManager.waveDataSO.waves[curWave - 1].delayAfterWave;
+        if (_nextWaveTimerRoutine != null)
+            StopCoroutine(_nextWaveTimerRoutine);
         _nextWaveTimerRoutine = StartCoroutine(NextWaveCountdown(delay));
     }
 
