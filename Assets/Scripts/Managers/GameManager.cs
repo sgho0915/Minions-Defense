@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     // Dependencies, 각 Stage 씬 롣 후 Find로 할당
     private WaveManager waveManager;
     private MainTowerController mainTower;
-    private StageUIManager stageUI;
+    private StageUIController stageUI;
 
     // 화폐
     [Header("Currency")]
@@ -37,17 +37,17 @@ public class GameManager : MonoBehaviour
         // 씬 안의 의존성 컴포넌트들 찾아오기
         waveManager = FindObjectOfType<WaveManager>();
         mainTower = FindObjectOfType<MainTowerController>();
-        stageUI = FindObjectOfType<StageUIManager>();
+        stageUI = FindObjectOfType<StageUIController>();
 
         // 초기값 세팅
         stagePoints = 100;
         globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
 
         // UI 초기화
-        stageUI.Initialize(mainTower.MaxHp, stagePoints, globalPoints);
+        stageUI.Initialize(mainTower, waveManager, stagePoints);
 
         // 이벤트 구독
-        mainTower.OnDied += OnStageFail;
+        mainTower.OnDied += HandleStageFail;
 
         // 본격 게임 흐름 시작
         StartCoroutine(RunStage());
@@ -55,30 +55,46 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator RunStage()
     {
-        // 잠깐 대기
+        // 초기화 보장용 1프레임 대기
         yield return null;
 
-        // 웨이브 진행
+        // 웨이브 시작
         yield return StartCoroutine(waveManager.RunWaves());
 
-        // 웨이브가 모두 끝나도 살아있다면 클리어
+        // 모든 웨이브 스폰 및 남은 몬스터 없는지 대기
+        yield return new WaitUntil(() =>
+        waveManager.CurrentWaveIndex >= waveManager.waveDataSO.waves.Length - 1  // 모든 웨이브 소진
+        && waveManager.transform.childCount == 0                             // 스폰된 몬스터 제거 완료
+        );
+
+        // 모든 웨이브 몬스터가 처치될 때까지 타워가 살아있으면 클리어
         if (mainTower.CurrentHp > 0)
-            OnStageClear();
+            HandleStageClear();
     }
 
-    private void OnStageFail()
+    private void HandleStageFail()
     {
         StopAllCoroutines();
-        stageUI.ShowGameOver(false);
+
+        bool[] failCriteria = new bool[3] { false, false, false };
+        stageUI.ShowResult(false, failCriteria);
     }
 
-    private void OnStageClear()
+    private void HandleStageClear()
     {
         StopAllCoroutines();
 
         // 성능에 따라 별 계산 (예시: 남은 HP 비율)
         float hpRatio = (float)mainTower.CurrentHp / mainTower.MaxHp;
         int stars = hpRatio > .75f ? 3 : hpRatio > .5f ? 2 : 1;
+
+        // 각 평가 기준 충족 여부 예시 (실제 로직에 맞춰 수정)
+        bool[] criteriaMet = new bool[3]
+        {
+            stars >= 1, // 기준1: 최소 1성 달성
+            stars >= 2, // 기준2: 최소 2성 달성
+            stars >= 3  // 기준3: 3성 달성
+        };
 
         // 스테이지 포인트를 글로벌 포인트로 전환 (예: stagePoints * stars)
         int reward = stagePoints * stars;
@@ -87,7 +103,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
         PlayerPrefs.Save();
 
-        stageUI.ShowGameOver(true, stars, reward);
+        
+        stageUI.ShowResult(true, criteriaMet);
     }
 
     // 타워 건설 등에서 호출
@@ -95,7 +112,7 @@ public class GameManager : MonoBehaviour
     {
         if (stagePoints < cost) return false;
         stagePoints -= cost;
-        stageUI.UpdateStagePoints(stagePoints);
+        //stageUI.hudView.UpdateStagePoints(stagePoints);
         return true;
     }
 }

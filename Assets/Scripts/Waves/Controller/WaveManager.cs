@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 // WavaManager.cs
@@ -9,6 +10,9 @@ public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance { get; private set; }
 
+    public Action<int, int> OnWaveIdxChanged;   // 웨이브 변경 상태 이벤트
+    public Action<int> OnWaveSpawnCompleted;    // 웨이브 스폰 완료 이벤트
+
     [Header("웨이브 데이터")]
     public WaveDataSO waveDataSO;
 
@@ -18,7 +22,10 @@ public class WaveManager : MonoBehaviour
     [Header("경로(Path)")]
     public WayPath path;
 
-    private int _currentWaveIndex = 0;
+    private int _currentWaveIndex = -1;
+    public int CurrentWaveIndex => _currentWaveIndex; // StageUIManager에서 읽기전용으로 참조하기 위한 캡슐화
+
+    private bool _forceNextWave = false;    // 강제 다음 웨이브 시작 플래그
 
     private void Awake()
     {
@@ -29,26 +36,41 @@ public class WaveManager : MonoBehaviour
             return;
         }
         Instance = this;
-        // (원한다면) DontDestroyOnLoad(gameObject);
     }
 
-    private void Start()
+    // StageUIController에서 호출 -> delayAfterWave 무시하고 즉시 다음 웨이브 시작
+    public void ForceStartNextWave()
     {
-        StartCoroutine(RunWaves());
+        _forceNextWave = true;
     }
 
     // 모든 웨이브를 순서대로 실행하고, 각 웨이브 사이에 지연을 둠
     public IEnumerator RunWaves()
     {
         var waves = waveDataSO.waves;
-        while (_currentWaveIndex < waves.Length)
+        int total = waves.Length;
+        for (int i = 0; i < total; i++)
         {
-            var wave = waves[_currentWaveIndex];
-            // 현재 웨이브 스폰 실행
-            yield return StartCoroutine(SpawnWave(wave));
-            // 웨이브 완료 후 대기
-            yield return new WaitForSeconds(wave.delayAfterWave);
-            _currentWaveIndex++;
+            _currentWaveIndex = i;
+            OnWaveIdxChanged?.Invoke(i + 1, total);
+
+            Debug.Log($"<Wave {waves[i].waveNumber}> 시작");
+
+            // 웨이브 스폰 실행
+            yield return StartCoroutine(SpawnWave(waves[i]));
+
+            OnWaveSpawnCompleted.Invoke(i + 1);
+
+            // 웨이브 딜레이
+            float timer = 0f;
+            _forceNextWave = false; // 매 웨이브마다 리셋
+            while (timer < waves[i].delayAfterWave && !_forceNextWave)
+            {
+                timer += Time.deltaTime;
+                yield return null;
+            }
+
+            // 강제 다음 웨이브 시작, 시간 초과 관계없이 다음 웨이브 시작
         }
         Debug.Log("모든 웨이브 완료!");
     }
@@ -56,7 +78,6 @@ public class WaveManager : MonoBehaviour
     // 단일 웨이브 내의 모든 스폰 엔트리를 실행
     private IEnumerator SpawnWave(WaveInfo wave)
     {
-        Debug.Log($"<Wave {wave.waveNumber}> 시작");
         foreach (var entry in wave.spawns)
         {
             for (int i = 0; i < entry.count; i++)
@@ -77,7 +98,6 @@ public class WaveManager : MonoBehaviour
                 entry.size,
                 spawnPoint.position,
                 transform);
-        Debug.Log($"Spawned: {entry.monsterData.monsterName} Size:{entry.size}");
 
         // 2) 사이즈(레벨) 적용부터 몬스터에게 맡김
         go.GetComponent<MonsterController>().SetSize(entry.size);

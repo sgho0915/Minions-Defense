@@ -35,11 +35,11 @@ public class MainTowerController : MonoBehaviour
     private void Awake()
     {
         _audio = GetComponent<AudioSource>();
+        Initialize(initialHP);
     }
 
     private void Start()
     {
-        Initialize(initialHP);
         StartCoroutine(AttackLoop());
     }
 
