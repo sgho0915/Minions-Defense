@@ -33,6 +33,7 @@ public class TowerSelectionController : MonoBehaviour
     /// <param name="dataSO"></param>
     private void HandleTowerSelected(TowerDataSO dataSO)
     {
+        Debug.Log($"{dataSO.towerName} : 버튼 클릭됨");
         infoView.ShowLv1Info(dataSO);
     }
 }

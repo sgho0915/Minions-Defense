@@ -1,6 +1,8 @@
 ﻿// TowerListView.cs
 using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// 타워 선택 리스트 표시, 선택 시 이벤트 방출 View
@@ -8,9 +10,23 @@ using UnityEngine;
 public class TowerListView : MonoBehaviour
 {
     public event Action<TowerDataSO> OnTowerSelected;
+    public event Action OnForceStartWaveButtonClicked;
+
+    [Header("Display Remain Time Until Next Wave Start")]
+    [SerializeField] private Button btnForceStartWave;
+    [SerializeField] private TextMeshProUGUI txtCanvasNextWave;
 
     [SerializeField] private Transform contentParent;
     [SerializeField] private TowerListItem itemPrefab;
+
+    private void Awake()
+    {
+        // 클릭이 들어오면 다음 웨이브를 강제로 시작하도록 StageUiController로 이벤트만 날려줌
+        btnForceStartWave.onClick.AddListener(() => {
+            Debug.Log("[TowerListView] ForceStartWave 버튼 클릭!");
+            OnForceStartWaveButtonClicked?.Invoke();
+        });
+    }
 
     /// <summary>
     /// 에디터에 할당된 TowerDataSo 배열로 리스트를 채움
@@ -23,5 +39,27 @@ public class TowerListView : MonoBehaviour
             var item = Instantiate(itemPrefab, contentParent);
             item.Setup(data, () => OnTowerSelected?.Invoke(data));
         }
+    }
+
+    /// <summary>
+    /// “강제 웨이브 시작” 버튼을 활성/비활성화
+    /// </summary>
+    public void SetNextWaveTimeUIInteractable(bool interactable, bool islastWave)
+    {
+        btnForceStartWave.interactable = interactable;
+
+        if (islastWave)
+        {
+            btnForceStartWave.gameObject.SetActive(!islastWave);
+            txtCanvasNextWave.gameObject.SetActive(!islastWave);
+        }
+    }
+
+    /// <summary>
+    /// 남은 초 단위로 표시
+    /// </summary>
+    public void UpdateNextWaveTimer(float remainSeconds)
+    {
+        txtCanvasNextWave.text = $"{remainSeconds:F1}s";
     }
 }

@@ -26,6 +26,6 @@ public class TowerListItem : MonoBehaviour
         txtName.text = data.towerName;
         txtCost.text = data.levelData[0].upgradeCost.ToString();
 
-        button.onClick.AddListener(() =>  onClick());
+        button.onClick.AddListener(() => { Debug.Log($"[ListItem] {data.towerName} 버튼 클릭!"); onClick(); });
     }
 }

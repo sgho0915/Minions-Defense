@@ -12,7 +12,8 @@ public class TowerInfoView : MonoBehaviour
     [SerializeField] private Image imgIcon;
     [SerializeField] private TMP_Text txtName;
     [SerializeField] private TMP_Text txtDescription;
-    [SerializeField] private TMP_Text txtCost;
+    [SerializeField] private TMP_Text txtBuyPrice;
+    [SerializeField] private TMP_Text txtSellPrice;
     [SerializeField] private Button btnBuy;
     [SerializeField] private Button btnSell;
     [SerializeField] private Button btnUpgrade;
@@ -29,7 +30,8 @@ public class TowerInfoView : MonoBehaviour
         txtName.text = dataSO.towerName;
         imgIcon.sprite = lv1Data.levelIcon;
         txtDescription.text = lv1Data.description;
-        txtCost.text = lv1Data.upgradeCost.ToString();
+        txtBuyPrice.text = lv1Data.upgradeCost.ToString();
+        txtSellPrice.text = lv1Data.sellPrice.ToString();
     }
 
     public void Hide()
