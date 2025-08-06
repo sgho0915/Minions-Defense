@@ -17,6 +17,12 @@ public class TowerInfoView : MonoBehaviour
     [SerializeField] private Button btnBuy;
     [SerializeField] private Button btnSell;
     [SerializeField] private Button btnUpgrade;
+    [SerializeField] private Button btnClose;
+
+    private void Awake()
+    {
+        btnClose.onClick.AddListener(() => Hide());
+    }
 
     /// <summary>
     /// 리스트에서 선택했을 경우 Lv1 타워 데이터를 기준으로 UI에 표시
