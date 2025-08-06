@@ -10,6 +10,7 @@ public class StageUIController : MonoBehaviour
     [Header("View 참조 요소")]
     [SerializeField] private StageHUDView hudView;
     [SerializeField] private StageResultView resultView;
+    [SerializeField] private TowerListView towerListView;
     
     private MainTowerController mainTower;
     private WaveManager waveManager;
@@ -19,12 +20,12 @@ public class StageUIController : MonoBehaviour
     private void OnEnable()
     {
         resultView.Hide();
-        hudView.OnForceStartWaveButtonClicked += HandleForceStartWave;
+        towerListView.OnForceStartWaveButtonClicked += HandleForceStartWave;
     }
 
     private void OnDisable()
     {
-        hudView.OnForceStartWaveButtonClicked -= HandleForceStartWave; 
+        towerListView.OnForceStartWaveButtonClicked -= HandleForceStartWave; 
         waveManager.OnWaveIdxChanged -= HandleWaveChanged;
         waveManager.OnWaveSpawnCompleted -= HandleWaveSpawncompleted;
     }
@@ -66,19 +67,19 @@ public class StageUIController : MonoBehaviour
         // 카운트다운 코루틴 중단 & 0 표시
         if (_nextWaveTimerRoutine != null)
             StopCoroutine(_nextWaveTimerRoutine);
-        hudView.UpdateNextWaveTimer(0f);
+        towerListView.UpdateNextWaveTimer(0f);
 
         // 버튼 비활성화
-        hudView.SetNextWaveTimeUIInteractable(false, false);
+        towerListView.SetNextWaveTimeUIInteractable(false, false);
     }
 
     private void HandleWaveChanged(int curWave, int maxWave)
     {
         // 웨이브 시작할 때마다 버튼 재활성화
-        if(curWave == maxWave) 
-            hudView.SetNextWaveTimeUIInteractable(false, true);
+        if(curWave == maxWave)
+            towerListView.SetNextWaveTimeUIInteractable(false, true);
         else
-            hudView.SetNextWaveTimeUIInteractable(false, false);
+            towerListView.SetNextWaveTimeUIInteractable(false, false);
 
         // 이전 웨이브에 대한 남은 시간 코루틴 중단
         if (_nextWaveTimerRoutine != null)
@@ -89,7 +90,7 @@ public class StageUIController : MonoBehaviour
     {
         if (waveManager.waveDataSO.waves.Length <= curWave) return; // 마지막 웨이브면 수행 X
 
-        hudView.SetNextWaveTimeUIInteractable(true, false);
+        towerListView.SetNextWaveTimeUIInteractable(true, false);
 
         float delay = waveManager.waveDataSO.waves[curWave - 1].delayAfterWave;
         if (_nextWaveTimerRoutine != null)
@@ -105,13 +106,13 @@ public class StageUIController : MonoBehaviour
         while (elapsed < delay)
         {
             float remain = delay - elapsed;
-            hudView.UpdateNextWaveTimer(remain);
+            towerListView.UpdateNextWaveTimer(remain);
 
             elapsed += Time.deltaTime;
             yield return null;
         }
 
         // 0초가 되면 뷰에도 0 표시
-        hudView.UpdateNextWaveTimer(0f);
+        towerListView.UpdateNextWaveTimer(0f);
     }
 }
