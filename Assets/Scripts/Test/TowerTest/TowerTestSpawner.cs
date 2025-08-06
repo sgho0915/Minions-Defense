@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using UnityEngine;
-using static UnityEditor.PlayerSettings;
+﻿using UnityEngine;
 
 public class TowerTestSpawner : MonoBehaviour
 {
