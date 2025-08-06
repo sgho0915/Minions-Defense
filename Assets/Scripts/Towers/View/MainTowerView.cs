@@ -28,7 +28,6 @@ public class MainTowerView : MonoBehaviour
     private void UpdateHpBar(int curHp, int max)
     {
         hpSlider.value = curHp;
-        Debug.Log($"메인타워 최대체력:{max}, 현재체력:{curHp}");
     }
 
     private void HideHpBar()
