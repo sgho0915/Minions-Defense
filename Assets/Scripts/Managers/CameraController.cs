@@ -3,6 +3,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Unity.Cinemachine;
+using UnityEditor;
+
 #if UNITY_IOS || UNITY_ANDROID
 using UnityEngine.InputSystem.EnhancedTouch;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
@@ -14,6 +16,16 @@ using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 /// </summary>
 public class CameraController : MonoBehaviour
 {
+#if UNITY_EDITOR
+    [Header("Gizmo(Debug)")]                                           
+    [SerializeField] private bool drawBoundsGizmo = true;               // 경계 사각형 표시 on/off
+    [SerializeField] private Color boundsColor = new(0f, 0.8f, 1f, 0.8f); // 선 색상/투명도
+    [SerializeField] private float gizmoY = 0f;                         // 사각형을 그릴 높이(Y)
+    [SerializeField] private bool useTargetY = true;                    // 카메라 타겟의 Y를 사용할지
+    [Tooltip("지정 시 [Fit Bounds From Collider] 메뉴로 콜라이더의 XZ 크기를 min/max로 자동 설정합니다.")]
+    [SerializeField] private Collider stageCollider;                    // 스테이지 콜라이더(선택)
+#endif
+
     [Header("Camera Target & Component")]
     [SerializeField] private Transform cameraTarget; // Cinemachine이 따라갈 대상
     [SerializeField] private CinemachineCamera cinemachineCamera;
@@ -39,12 +51,12 @@ public class CameraController : MonoBehaviour
 
     private float prevPinchDist;
 
-    private CinemachinePositionComposer composer; // ★★★ 수정됨
+    private CinemachinePositionComposer composer; 
 
     private void OnEnable()
     {
 #if UNITY_IOS || UNITY_ANDROID
-        EnhancedTouchSupport.Enable(); // ★★★ Awake() 말고 OnEnable에서
+        EnhancedTouchSupport.Enable();
 #endif
     }
 
@@ -67,7 +79,6 @@ public class CameraController : MonoBehaviour
         zoomAction.performed += ctx =>
         {
             float scroll = ctx.ReadValue<float>();
-            Debug.Log($"Scroll performed: {scroll}"); // ★★★ 로그는 이벤트에서 찍자
 
             if (composer != null)
             {
@@ -87,11 +98,9 @@ public class CameraController : MonoBehaviour
     private void Update()
     {
         HandlePan();
-        //HandleZoom();
 #if UNITY_IOS || UNITY_ANDROID
         HandlePinchZoom();
 
-        // ★★★ 손가락이 2개 미만일 때 prevPinchDist 초기화
         if (Touch.activeTouches.Count < 2)
         {
             prevPinchDist = 0f;
@@ -199,4 +208,65 @@ public class CameraController : MonoBehaviour
         panAction.Disable();
         zoomAction.Disable();
     }
+
+#if UNITY_EDITOR
+    /// <summary>
+    /// 씬 뷰에서 카메라 이동 한계(min/max)를 직사각형으로 표시
+    /// </summary>
+    private void OnDrawGizmosSelected()                              
+    {
+        if (!drawBoundsGizmo) return;
+
+        // 그릴 높이 결정
+        float y = useTargetY && cameraTarget != null ? cameraTarget.position.y : gizmoY;
+
+        float minX = minBounds.x;
+        float maxX = maxBounds.x;
+        float minZ = minBounds.y;
+        float maxZ = maxBounds.y;
+
+        Vector3 c = new((minX + maxX) * 0.5f, y, (minZ + maxZ) * 0.5f);
+        Vector3 size = new(Mathf.Abs(maxX - minX), 0.01f, Mathf.Abs(maxZ - minZ));
+
+        Gizmos.color = boundsColor;
+        Gizmos.DrawWireCube(c, size);                                  
+
+        // 코너점/축 라인 약간 보강(가시성)
+        Vector3 a = new(minX, y, minZ);
+        Vector3 b = new(maxX, y, minZ);
+        Vector3 d = new(minX, y, maxZ);
+        Vector3 e = new(maxX, y, maxZ);
+        Gizmos.DrawLine(a, b);
+        Gizmos.DrawLine(b, e);
+        Gizmos.DrawLine(e, d);
+        Gizmos.DrawLine(d, a);
+
+#if UNITY_EDITOR
+        // 라벨로 범위 표시
+        Handles.Label(c + Vector3.up * 0.1f,
+            $"Bounds X:[{minX:F2} ~ {maxX:F2}]  Z:[{minZ:F2} ~ {maxZ:F2}]");
+#endif
+    }
+
+    /// <summary>
+    /// 지정한 스테이지 콜라이더의 월드 바운드를 읽어 min/max를 자동 세팅 (수동 실행)
+    /// </summary>
+    [ContextMenu("Fit Bounds From Collider")]                          
+    private void FitBoundsFromCollider()
+    {
+        if (stageCollider == null)
+        {
+            Debug.LogWarning("Stage Collider가 비어있습니다.");
+            return;
+        }
+
+        Bounds b = stageCollider.bounds;
+        // XZ 평면 기준으로 세팅
+        minBounds = new Vector2(b.min.x, b.min.z);                     
+        maxBounds = new Vector2(b.max.x, b.max.z);                     
+        // 기즈모 Y는 콜라이더 중앙 높이로 맞춰주면 보기 좋음
+        gizmoY = b.center.y;
+        Debug.Log($"[Bounds Fitted] X:[{minBounds.x:F2}~{maxBounds.x:F2}] Z:[{minBounds.y:F2}~{maxBounds.y:F2}]");
+    }
+#endif
 }
