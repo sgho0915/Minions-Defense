@@ -22,7 +22,7 @@ public class WaveManager : MonoBehaviour
     [Header("경로(Path)")]
     public WayPath path;
 
-    private int _currentWaveIndex = -1;
+    private int _currentWaveIndex = 0;
     public int CurrentWaveIndex => _currentWaveIndex; // StageUIManager에서 읽기전용으로 참조하기 위한 캡슐화
 
     private bool _forceNextWave = false;    // 강제 다음 웨이브 시작 플래그
@@ -72,7 +72,7 @@ public class WaveManager : MonoBehaviour
 
             // 강제 다음 웨이브 시작, 시간 초과 관계없이 다음 웨이브 시작
         }
-        Debug.Log("모든 웨이브 완료!");
+        Debug.Log("모든 웨이브 스폰 완료!");
     }
 
     // 단일 웨이브 내의 모든 스폰 엔트리를 실행
