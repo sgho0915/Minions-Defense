@@ -17,9 +17,6 @@ public class StageItemView : MonoBehaviour
 
     private int _stageIndex;
 
-    /// <summary>
-    /// 외부에서 이 한 메서드만 호출해서 세팅하세요.
-    /// </summary>
     public void Setup(StageData data)
     {
         _stageIndex = data.stageIndex;

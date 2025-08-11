@@ -17,9 +17,9 @@ TagManager:
   - Monster
   - MainTower
   - Projectile
-  - 
-  - 
-  - 
+  - Buildable
+  - BuildBlocked
+  - GroundBlock
   - 
   - 
   - 

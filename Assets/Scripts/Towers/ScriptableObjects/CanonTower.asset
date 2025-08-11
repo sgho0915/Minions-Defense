@@ -26,7 +26,7 @@ MonoBehaviour:
       \uBC1C\uC744 \uAC00\uC9C4 \uD0C0\uC6CC"
     damage: 50
     attackSpeed: 0.6
-    range: 35
+    range: 25
     projectilePrefab: {fileID: 1263437943489172, guid: 9e26aec6688c4604db5b8271d50b40ae, type: 3}
     projectileSpeed: 30
     splashRadius: 1
