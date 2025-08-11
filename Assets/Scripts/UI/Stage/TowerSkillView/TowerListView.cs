@@ -23,8 +23,15 @@ public class TowerListView : MonoBehaviour
     {
         // 클릭이 들어오면 다음 웨이브를 강제로 시작하도록 StageUiController로 이벤트만 날려줌
         btnForceStartWave.onClick.AddListener(() => {
-            Debug.Log("[TowerListView] ForceStartWave 버튼 클릭!");
-            OnForceStartWaveButtonClicked?.Invoke();
+            if (!GameManager.Instance.isWaveStarted)
+            {
+                GameManager.Instance.isWaveStarted = true;
+                StartCoroutine(GameManager.Instance.RunStage());
+            }
+            else
+            {
+                OnForceStartWaveButtonClicked?.Invoke();
+            }
         });
     }
 
