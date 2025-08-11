@@ -1,4 +1,5 @@
 ﻿// TowerInfoView.cs
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,9 +20,13 @@ public class TowerInfoView : MonoBehaviour
     [SerializeField] private Button btnUpgrade;
     [SerializeField] private Button btnClose;
 
+    public event Action<TowerDataSO> OnBuyClicked;  // 타워 구매 : 컨트롤러에 타워 배치모드 전환 알림
+    private TowerDataSO _currentTowerData;
+
     private void Awake()
     {
         btnClose.onClick.AddListener(() => Hide());
+        btnBuy.onClick.AddListener(() => { if (_currentTowerData != null) OnBuyClicked?.Invoke(_currentTowerData); });
     }
 
     /// <summary>
@@ -30,6 +35,8 @@ public class TowerInfoView : MonoBehaviour
     /// <param name="dataSO"></param>
     public void ShowLv1Info(TowerDataSO dataSO)
     {
+        _currentTowerData = dataSO;
+
         var lv1Data = dataSO.levelData[0];
 
         root.SetActive(true);
@@ -40,8 +47,5 @@ public class TowerInfoView : MonoBehaviour
         txtSellPrice.text = lv1Data.sellPrice.ToString();
     }
 
-    public void Hide()
-    {
-        root.SetActive(false);
-    }
+    public void Hide() => root.SetActive(false);
 }
