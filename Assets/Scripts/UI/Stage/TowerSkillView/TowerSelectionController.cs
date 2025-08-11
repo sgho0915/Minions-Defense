@@ -1,5 +1,4 @@
 ﻿// TowerSelectionController.cs
-using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -14,6 +13,7 @@ public class TowerSelectionController : MonoBehaviour
     private void Awake()
     {
         listView.OnTowerSelected += HandleTowerSelected;
+        infoView.OnBuyClicked += HandleTowerBuy;
     }
 
     private void Start()
@@ -25,14 +25,22 @@ public class TowerSelectionController : MonoBehaviour
     private void OnDestroy()
     {
         listView.OnTowerSelected -= HandleTowerSelected;
+        infoView.OnBuyClicked -= HandleTowerBuy;
     }
 
     /// <summary>
     /// 리스트에서 타워를 선택 시 상세정보 TowerInfoView에 반영
     /// </summary>
-    /// <param name="dataSO"></param>
-    private void HandleTowerSelected(TowerDataSO dataSO)
+    /// <param name="towerDataSO"></param>
+    private void HandleTowerSelected(TowerDataSO towerDataSO)
     {
-        infoView.ShowLv1Info(dataSO);
+        infoView.ShowLv1Info(towerDataSO);
+    }
+
+    private void HandleTowerBuy(TowerDataSO towerDataSO)
+    {
+        // 레벨1 기준으로 배치 시작
+        TowerPlacementController.Instance.BeginPlacement(towerDataSO, towerDataSO.levelData[0]);
+        infoView.Hide();
     }
 }
