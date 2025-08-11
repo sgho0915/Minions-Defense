@@ -28,6 +28,7 @@ public class StageUIController : MonoBehaviour
         towerListView.OnForceStartWaveButtonClicked -= HandleForceStartWave; 
         waveManager.OnWaveIdxChanged -= HandleWaveChanged;
         waveManager.OnWaveSpawnCompleted -= HandleWaveSpawncompleted;
+        GameManager.Instance.OnStagePointsChanged -= hudView.UpdateStagePoints;
     }
 
     /// <summary>
@@ -47,6 +48,7 @@ public class StageUIController : MonoBehaviour
         waveManager.OnWaveIdxChanged += hudView.UpdateWave;
         waveManager.OnWaveIdxChanged += HandleWaveChanged;
         waveManager.OnWaveSpawnCompleted += HandleWaveSpawncompleted;
+        GameManager.Instance.OnStagePointsChanged += hudView.UpdateStagePoints;
     }
 
     /// <summary>
