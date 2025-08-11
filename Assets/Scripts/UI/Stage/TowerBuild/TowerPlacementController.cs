@@ -82,7 +82,7 @@ public class TowerPlacementController : MonoBehaviour
 
         previewRoot = Instantiate(level.towerPrefab);
 
-        // ★ 프리뷰는 레이캐스트에 안 걸리게 (자기 자신 히트 방지)
+        // 프리뷰는 레이캐스트에 안 걸리게 (자기 자신 hit 방지)
         previewRoot.layer = LayerMask.NameToLayer("Ignore Raycast");
         foreach (var c in previewRoot.GetComponentsInChildren<Collider>(true))
             c.enabled = false;
@@ -97,7 +97,7 @@ public class TowerPlacementController : MonoBehaviour
         isPlacing = true;
         SetPreviewColor(invalidColor);
         rangeIndicator.SetColor(invalidColor);
-        smoothVel = Vector3.zero; // 타워 배치가능 영역 스무딩 버퍼 초기화
+        smoothVel = Vector3.zero; // 타워 배치가능 영역 초기화
 
         if (cameraController != null) cameraController.SetUserPan(false);
     }
