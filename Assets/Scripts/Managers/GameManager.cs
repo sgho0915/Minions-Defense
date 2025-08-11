@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -6,8 +7,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
+    public event Action<int> OnStagePointsChanged;
+
     [Header("Stage Settings")]
     public int stageIndex;
+    public bool isWaveStarted = false;
 
     // Dependencies, 각 Stage 씬 롣 후 Find로 할당
     private WaveManager waveManager;
@@ -24,6 +28,12 @@ public class GameManager : MonoBehaviour
         if (Instance != null) Destroy(gameObject);
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        //  프레임 제한 해제
+        Application.targetFrameRate = -1;
+
+        //  절전 모드에서 최대 성능 유지
+        QualitySettings.vSyncCount = 0; // VSync 비활성화
 
         // 씬 변경 시 마다 콜백 받기
         SceneManager.sceneLoaded += OnSceneLoaded;
@@ -49,11 +59,10 @@ public class GameManager : MonoBehaviour
         // 이벤트 구독
         mainTower.OnDied += HandleStageFail;
 
-        // 본격 게임 흐름 시작
-        StartCoroutine(RunStage());
+        
     }
 
-    private IEnumerator RunStage()
+    public IEnumerator RunStage()
     {
         // 초기화 보장용 1프레임 대기
         yield return null;
@@ -113,6 +122,7 @@ public class GameManager : MonoBehaviour
         if (stagePoints < cost) return false;
         stagePoints -= cost;
         //stageUI.hudView.UpdateStagePoints(stagePoints);
+        OnStagePointsChanged?.Invoke(stagePoints);
         return true;
     }
 }
