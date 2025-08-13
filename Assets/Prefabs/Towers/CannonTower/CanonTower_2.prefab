@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2204973865542881933}
   - component: {fileID: 4807951512324228756}
   - component: {fileID: 1623886250493832150}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TB_CanonTower_Lvl2_Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,9 +99,9 @@ GameObject:
   - component: {fileID: 4040528733059725997}
   - component: {fileID: 8669306188871553223}
   - component: {fileID: 5967121315013442590}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: CanonTower_2
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -284,3 +284,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e413217ae8032f64385c38be8c6aae7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackEffectPoint: {fileID: 0}

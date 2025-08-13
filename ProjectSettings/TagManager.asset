@@ -7,6 +7,7 @@ TagManager:
   - MainTower
   - Monster
   - Projectile
+  - Tower
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Buildable
   - BuildBlocked
   - GroundBlock
-  - 
+  - Tower
   - 
   - 
   - 
