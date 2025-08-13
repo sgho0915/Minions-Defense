@@ -12,6 +12,7 @@ public class WaveManager : MonoBehaviour
 
     public Action<int, int> OnWaveIdxChanged;   // 웨이브 변경 상태 이벤트
     public Action<int> OnWaveSpawnCompleted;    // 웨이브 스폰 완료 이벤트
+    public event Action<MonsterController> OnMonsterSpawned;    // 몬스터 스폰 알림 이벤트
 
     [Header("웨이브 데이터")]
     public WaveDataSO waveDataSO;
@@ -101,5 +102,9 @@ public class WaveManager : MonoBehaviour
 
         // 2) 사이즈(레벨) 적용부터 몬스터에게 맡김
         go.GetComponent<MonsterController>().SetSize(entry.size);
+
+        // 3) 몬스터 스폰 알림 이벤트 방출
+        MonsterController mc = go.GetComponent<MonsterController>();
+        OnMonsterSpawned?.Invoke(mc);
     }
 }
