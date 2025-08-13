@@ -26,9 +26,9 @@ MonoBehaviour:
       \uBC1C\uC744 \uAC00\uC9C4 \uD0C0\uC6CC"
     damage: 50
     attackSpeed: 0.6
-    range: 25
-    projectilePrefab: {fileID: 1263437943489172, guid: 9e26aec6688c4604db5b8271d50b40ae, type: 3}
-    projectileSpeed: 30
+    range: 5
+    projectilePrefab: {fileID: 132410131150665497, guid: 4db9ac01a9fa4ab468b7b740f961a8c4, type: 3}
+    projectileSpeed: 10
     splashRadius: 1
     areaShape: 1
     coneAngle: 0
@@ -44,19 +44,18 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 64
     targetTags:
-    - ShortMonster
-    - LongMonster
+    - Monster
     upgradeCost: 50
     sellPrice: 35
-    attackEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
-    attackSoundClip: {fileID: 8300000, guid: 77a90f8fc974aa8499264b50948f1d2e, type: 3}
-    projectileImpactEffectPrefab: {fileID: 1337198075554910, guid: 25c7aa9ad705fe143a4d71c1c8deb7d4, type: 3}
-    projectileImpactSoundClip: {fileID: 8300000, guid: 8cc0d24d9fb832340a27fc87d5689eb6, type: 3}
-    upgradeSoundClip: {fileID: 8300000, guid: 1a7ca09a29e80154283c9bd746c7def3, type: 3}
-    buildEffect: {fileID: 198603562046773920, guid: 378b2c30ef426554495292cb902cb8f4, type: 3}
-    buildSoundClip: {fileID: 8300000, guid: df5074122b4cf09419228ec8d09e632d, type: 3}
-    destroyEffect: {fileID: 198603562046773920, guid: 378b2c30ef426554495292cb902cb8f4, type: 3}
-    destroySoundClip: {fileID: 8300000, guid: bf10fd2d4631eee489354fd937eb8296, type: 3}
+    attackEffectPrefab: {fileID: 0}
+    attackSoundClip: {fileID: 0}
+    projectileImpactEffectPrefab: {fileID: 0}
+    projectileImpactSoundClip: {fileID: 0}
+    upgradeSoundClip: {fileID: 0}
+    buildEffect: {fileID: 0}
+    buildSoundClip: {fileID: 0}
+    destroyEffect: {fileID: 0}
+    destroySoundClip: {fileID: 0}
   - towerPrefab: {fileID: 1141391816158693092, guid: e49effa2788570849adda8b0ff295a43, type: 3}
     level: 2
     level4Type: 0
