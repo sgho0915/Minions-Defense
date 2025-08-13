@@ -148,6 +148,7 @@ public class TowerPlacementController : MonoBehaviour
 
         // 사거리 라인렌더러 세팅
         rangeIndicator = previewRoot.GetComponent<RangeIndicator>() ?? previewRoot.AddComponent<RangeIndicator>();
+        rangeIndicator.Attach(previewRoot.transform);
         rangeIndicator.SetRadius(level.range);
 
         // 초기 상태
