@@ -16,16 +16,33 @@ public class TowerFactory
     /// <param name="levelData">타워 레벨별 데이터</param>
     /// <param name="createPosition">생성 위치</param>
     /// <param name="parent">부모 Transform</param>
-    public GameObject CreateTower(TowerLevelData initialLevel, TowerLevelData[] allLevels, Vector3 createPosition, Transform parent)
+    public TowerController CreateTower(TowerDataSO so, TowerLevelData initial, Vector3 pos, Transform parent)
     {
-        // Factory에서 기본 화전값으로 반환받은 인스턴스화된 타워 게임 오브젝트
-        var towerRoot = Object.Instantiate(initialLevel.towerPrefab, createPosition, Quaternion.identity, parent);
+        var go = Object.Instantiate(initial.towerPrefab, pos, Quaternion.identity, parent);
+        var ctrl = go.GetComponent<TowerController>() ?? go.AddComponent<TowerController>();
+        ctrl.Initialize(so, initial, so.levelData);   // DataSO 포함 초기화
 
-        // 컨트롤러가 없으면 붙여주고, 초기화는 컨트롤러 책임으로 위임
-        var controller = towerRoot.GetComponent<TowerController>() ?? towerRoot.AddComponent<TowerController>();
+        // 배치된 타워의 콜라이더 레이어를 Tower로 지정
+        int towerLayer = LayerMask.NameToLayer("Tower");
+        if (towerLayer != -1)
+        {
+            go.layer = towerLayer;
+            foreach (var col in go.GetComponentsInChildren<Collider>(true))
+                col.gameObject.layer = towerLayer;
+        }
 
-        // 레벨별 데이터(TowerLevelData)를 직접 넘겨 초기화
-        controller.Initialize(initialLevel, allLevels);
-        return towerRoot;
+        return ctrl;
     }
+
+    //public TowerController CreateTower(TowerLevelData initialLevel, TowerLevelData[] allLevels, Vector3 createPos, Transform parent)
+    //{
+    //    // 타워 프리팹 생성
+    //    var go = Object.Instantiate(initialLevel.towerPrefab, createPos, Quaternion.identity, parent);
+    //    // TowerController 할당
+    //    var controller = go.GetComponent<TowerController>() ?? go.AddComponent<TowerController>();
+
+    //    // 레벨별 데이터(TowerLevelData)를 직접 넘겨 초기화
+    //    controller.Initialize(initialLevel, allLevels);
+    //    return controller;
+    //}
 }

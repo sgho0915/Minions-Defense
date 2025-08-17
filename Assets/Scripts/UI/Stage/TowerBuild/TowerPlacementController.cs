@@ -74,6 +74,9 @@ public class TowerPlacementController : MonoBehaviour
     int price;
     bool isPlacing, isValid;
 
+    public bool IsPlacing => isPlacing; // 외부 읽기 전용 캡슐화
+    public static float LastPlacementTime { get; private set; }
+
     /// <summary>
     /// 싱글턴 초기화 + 카메라/MPB 캐시
     /// </summary>
@@ -400,7 +403,8 @@ public class TowerPlacementController : MonoBehaviour
         if (!isValid) return;   // 설치 불가 위치
         if (!GameManager.Instance.TrySpendStagePoints(price)) return;   // 비용 부족
 
-        TowerFactory.Instance.CreateTower(lv, dataSO.levelData, previewRoot.transform.position, null);
+        TowerFactory.Instance.CreateTower(dataSO, lv, previewRoot.transform.position, null);
+        LastPlacementTime = Time.unscaledTime;  // 타워 설치 직후 선택 방지위한 시간 지정
         CancelPlacement();
     }
 

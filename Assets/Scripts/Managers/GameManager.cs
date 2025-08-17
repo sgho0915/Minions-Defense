@@ -13,12 +13,10 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public bool isWaveStarted = false;
 
-    // Dependencies, 각 Stage 씬 롣 후 Find로 할당
     private WaveManager waveManager;
     private MainTowerController mainTower;
     private StageUIController stageUI;
 
-    // 화폐
     [Header("Currency")]
     public int stagePoints;      // 스테이지 내에서만 쓰는 포인트
     public int globalPoints;     // 계정 단위 영구 포인트
@@ -142,7 +140,7 @@ public class GameManager : MonoBehaviour
         OnStagePointsChanged?.Invoke(stagePoints);
     }
 
-    // 타워 건설 등에서 호출
+    // 타워 건설, 강화 등에서 호출
     public bool TrySpendStagePoints(int cost)
     {
         if (stagePoints < cost) return false;

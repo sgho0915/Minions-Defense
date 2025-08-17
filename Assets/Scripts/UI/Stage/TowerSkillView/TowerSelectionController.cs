@@ -34,7 +34,7 @@ public class TowerSelectionController : MonoBehaviour
     /// <param name="towerDataSO"></param>
     private void HandleTowerSelected(TowerDataSO towerDataSO)
     {
-        infoView.ShowLv1Info(towerDataSO);
+        infoView.ShowTowerBuyView(towerDataSO);
     }
 
     private void HandleTowerBuy(TowerDataSO towerDataSO)
