@@ -1,8 +1,12 @@
 ﻿// TowerWorldSelectionController.cs
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// 월드의 타워를 선택하고, 강화/판매 UI를 표시/연동하는 컨트롤러
+/// 입력 감지/선택/UI연동만 담당
 public class TowerWorldSelectionController : MonoBehaviour
 {
     [SerializeField] private Camera cam;               // 비우면 자동으로 Camera.main
@@ -34,43 +38,67 @@ public class TowerWorldSelectionController : MonoBehaviour
     void Update()
     {
         if (cam == null) return;
+        if (TowerPlacementController.Instance != null && TowerPlacementController.Instance.IsPlacing) return;
+        if (Time.unscaledTime - TowerPlacementController.LastPlacementTime < 0.2f) return;
 
-        // 설치 모드 중엔 선택 금지
-        if (TowerPlacementController.Instance != null && TowerPlacementController.Instance.IsPlacing)
-            return;
-
-        // 설치 직후 0.2초 정도 설치 타워에 대한 선택 방지 시간 부여
-        if (Time.unscaledTime - TowerPlacementController.LastPlacementTime < 0.2f)
-            return;
-
-        // UI 위면 무시
-        if (EventSystem.current != null && EventSystem.current.IsPointerOverGameObject())
-            return;
-
-        // 클릭/탭 릴리즈 감지
-        bool released = false;
-        Vector2 pos = default;
-
-        var ts = Touchscreen.current;
-        if (ts != null)
-        {
-            var t = ts.primaryTouch;
-            if (t.press.wasReleasedThisFrame) { released = true; pos = t.position.ReadValue(); }
-        }
-        else if (Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            released = true; pos = Mouse.current.position.ReadValue();
-        }
-
+        //  마우스/터치 릴리즈 이벤트 동시 체크, 실제 발생한 입력만 채택
+        Vector2 pointerPos;
+        bool released = TryGetPointerRelease(out pointerPos);
         if (!released) return;
 
+        // UI 위면 무시: 포인터 위치 기반 RaycastAll
+        if (IsPointerOverUI(pointerPos)) return;
+
         // 레이캐스트로 타워 선택
-        var ray = cam.ScreenPointToRay(pos);
-        if (Physics.Raycast(ray, out var hit, 1000f, towerMask, QueryTriggerInteraction.Ignore))
+        var ray = cam.ScreenPointToRay(pointerPos);
+        if (Physics.Raycast(ray, out var hit, 1000f, towerMask, QueryTriggerInteraction.Collide))
         {
             var ctrl = hit.collider.GetComponentInParent<TowerController>();
             if (ctrl != null) SelectTower(ctrl);
         }
+    }
+
+    /// <summary>마우스 좌클릭 릴리즈 또는 터치 릴리즈가 발생했는지 검사하고 좌표를 반환</summary>
+    private bool TryGetPointerRelease(out Vector2 pos) 
+    {
+        pos = default;
+
+        var mouse = Mouse.current;
+        var touch = Touchscreen.current;
+
+        bool mouseReleased = mouse != null && mouse.leftButton.wasReleasedThisFrame; 
+        bool touchReleased = false;
+
+        if (touch != null)
+        {
+            var t = touch.primaryTouch;
+            // 실제 터치 릴리즈만 인정 (디바이스 존재만으로는 true 금지)
+            touchReleased = t.press.wasReleasedThisFrame;
+        }
+
+        if (mouseReleased)
+        {
+            pos = mouse.position.ReadValue();
+            return true;
+        }
+        if (touchReleased)
+        {
+            pos = touch.primaryTouch.position.ReadValue();
+            return true;
+        }
+        return false;
+    }
+
+    /// <summary>포인터 화면좌표 기준으로 UI가 가로막는지 검사</summary>
+    private bool IsPointerOverUI(Vector2 screenPos)
+    {
+        if (EventSystem.current == null) return false;
+
+        var data = new PointerEventData(EventSystem.current) { position = screenPos };
+        var results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(data, results);
+
+        return results.Count > 0;
     }
 
     void SelectTower(TowerController ctrl)
