@@ -247,7 +247,9 @@ public class TowerPlacementController : MonoBehaviour
         //   - Blocked 반경 겹침이 없는가?
         Vector3 p = previewRoot.transform.position;
         bool onBuildable = Physics.Raycast(p + Vector3.up * 0.5f, Vector3.down, out _, 2f, buildableMask.value);
-        bool noOverlap = !Physics.CheckSphere(p + Vector3.up * 0.2f, footprintRadius, blockedMask.value);
+        //bool noOverlap = !Physics.CheckSphere(p + Vector3.up * 0.2f, footprintRadius, blockedMask.value);
+        var overlaps = Physics.OverlapSphere(p + Vector3.up * 0.2f, footprintRadius, blockedMask.value, QueryTriggerInteraction.Collide);
+        bool noOverlap = overlaps == null || overlaps.Length == 0;
         isValid = onBuildable && noOverlap;
 
         // 5) MPB로 프리뷰 색만 갱신(머티리얼 인스턴스 증가 방지)
