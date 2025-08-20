@@ -142,7 +142,7 @@ MonoBehaviour:
     destroySoundClip: {fileID: 0}
   - towerPrefab: {fileID: 2648066166186033522, guid: 4948391a7bf7cf648ab205cc8a47b474, type: 3}
     level: 4
-    level4Type: 1
+    level4Type: 0
     levelIcon: {fileID: 21300000, guid: b6dd96bb14937174c8d0871ed4303f4a, type: 3}
     description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE1\uC0AC\uD3EC\uB97C 1.6\uCD08\uB9C8\uB2E4
       \uC0AC\uAC70\uB9AC 5.5\uAE4C\uC9C0 \uBC1C\uC0AC\uD558\uBA70, \uD3ED\uBC1C \uBC18\uACBD\uC774
@@ -183,8 +183,8 @@ MonoBehaviour:
     destroyEffect: {fileID: 0}
     destroySoundClip: {fileID: 0}
   - towerPrefab: {fileID: 4176896184558140998, guid: 09cc95fd2c04d044d8506e723283910c, type: 3}
-    level: 4
-    level4Type: 2
+    level: 5
+    level4Type: 0
     levelIcon: {fileID: 21300000, guid: 8a5245810e209a94b8452984929e8928, type: 3}
     description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE1\uC0AC\uD3EC\uB97C 1.6\uCD08\uB9C8\uB2E4
       \uC0AC\uAC70\uB9AC 5.5\uAE4C\uC9C0 \uBC1C\uC0AC\uD558\uBA70, \uD3ED\uBC1C \uC2DC
