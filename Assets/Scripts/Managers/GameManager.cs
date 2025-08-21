@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
         //  절전 모드에서 최대 성능 유지
         QualitySettings.vSyncCount = 0; // VSync 비활성화
 
+        globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
+
         // 씬 변경 시 마다 콜백 받기
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -48,8 +50,8 @@ public class GameManager : MonoBehaviour
         stageUI = FindObjectOfType<StageUIController>();
 
         // 초기값 세팅
-        stagePoints = 100;
-        globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
+        stagePoints = 300;
+        
 
         // UI 초기화
         stageUI.Initialize(mainTower, waveManager, stagePoints);
