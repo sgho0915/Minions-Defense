@@ -57,8 +57,7 @@ public class StageUIController : MonoBehaviour
     /// <param name="clear">클리어 여부</param>
     /// <param name="criteriaMet">평가기준 충족 여부 배열</param>
     public void ShowResult(bool clear, bool[] criteriaMet)
-    {
-        Debug.Log($"[UIController] ShowResult called: clear={clear}"); 
+    {        
         resultView.ShowResult(clear, criteriaMet);
     }
 

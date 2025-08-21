@@ -4595,7 +4595,7 @@ MonoBehaviour:
   stageListContent: {fileID: 1334494268}
   stageDatas:
   - stageIndex: 1
-    stageName: "Stage 1 - \uD29C\uD1A0\uB9AC\uC5BC"
+    stageName: Stage 1
     stageThumbnail: {fileID: 21300000, guid: cc39ad6652bef4b47990d0cb36129d9d, type: 3}
     starGrade: 2
 --- !u!225 &309102268
