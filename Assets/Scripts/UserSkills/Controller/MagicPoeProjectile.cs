@@ -21,12 +21,6 @@ public class MagicPoeProjectile : MonoBehaviour
     {
         if (!other.CompareTag("Monster")) return;
 
-        // 넉백
-        if (other.attachedRigidbody != null)
-            other.attachedRigidbody.AddForce(
-                (other.transform.position - transform.position).normalized
-                * _lvl.knockbackForce, ForceMode.Impulse);
-
         // 스턴
         var ec = other.GetComponent<MonsterController>();
         ec?.Stun(_lvl.stunDuration);
@@ -36,21 +30,10 @@ public class MagicPoeProjectile : MonoBehaviour
         monsterModel?.TakeDamage(_lvl.baseDamage);
 
         // 이펙트·사운드
-        if (_lvl.hitEffectPrefab != null)
-            Instantiate(_lvl.hitEffectPrefab, transform.position, Quaternion.identity);
-        if (_lvl.hitSoundClip != null)
-            AudioSource.PlayClipAtPoint(_lvl.hitSoundClip, transform.position);
-
-        // 체인 연쇄 로직(3단계)
-        if (_lvl.chainRadius > 0)
-        {
-            Collider[] hits = Physics.OverlapSphere(transform.position, _lvl.chainRadius, 1 << LayerMask.NameToLayer("Monster"));
-            foreach (var c in hits)
-            {
-                if (c.transform != other.transform)
-                    c.GetComponent<MonsterModel>()?.TakeDamage(_lvl.baseDamage);
-            }
-        }
+        if (_lvl.attackEffectPrefab != null)
+            Instantiate(_lvl.attackEffectPrefab, transform.position, Quaternion.identity);
+        if (_lvl.attackSoundClip != null)
+            AudioSource.PlayClipAtPoint(_lvl.attackSoundClip, transform.position);
 
         Destroy(gameObject);
     }

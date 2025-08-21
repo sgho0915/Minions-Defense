@@ -1,4 +1,4 @@
-﻿// TowerListView.cs
+﻿// TowerSkillListView.cs
 using System;
 using TMPro;
 using UnityEngine;
@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 타워 선택 리스트 표시, 선택 시 이벤트 방출 View
 /// </summary>
-public class TowerListView : MonoBehaviour
+public class TowerSkillListView : MonoBehaviour
 {
     public event Action<TowerDataSO> OnTowerSelected;
     public event Action OnForceStartWaveButtonClicked;

@@ -10,7 +10,7 @@ public class StageUIController : MonoBehaviour
     [Header("View 참조 요소")]
     [SerializeField] private StageHUDView hudView;
     [SerializeField] private StageResultView resultView;
-    [SerializeField] private TowerListView towerListView;
+    [SerializeField] private TowerSkillListView towerListView;
     
     private MainTowerController mainTower;
     private WaveManager waveManager;

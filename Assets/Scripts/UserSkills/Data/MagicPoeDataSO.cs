@@ -9,7 +9,6 @@ public class MagicPoeDataSO : ScriptableObject
 {
     [Header("기본 정보")]
     public string skillName;
-    public Sprite icon;
     [Header("레벨별 설정 (1~3)")]
     public MagicPoeLevelData[] levels;
 }

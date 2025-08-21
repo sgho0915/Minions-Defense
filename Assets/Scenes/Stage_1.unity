@@ -945,7 +945,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 312.1478, y: -32.5}
+  m_AnchoredPosition: {x: 312.18268, y: -32.5}
   m_SizeDelta: {x: 35, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &83112396
@@ -5965,7 +5965,7 @@ GameObject:
   - component: {fileID: 416325219}
   - component: {fileID: 416325221}
   m_Layer: 5
-  m_Name: TowerList
+  m_Name: TowerSkillList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8508,8 +8508,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 111.98789, y: 0}
-  m_SizeDelta: {x: 223.97578, y: 0}
+  m_AnchoredPosition: {x: 111.99766, y: -0}
+  m_SizeDelta: {x: 223.99532, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &570858948
 MonoBehaviour:
@@ -16842,8 +16842,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 308.34866, y: 0}
-  m_SizeDelta: {x: 138.74577, y: 0}
+  m_AnchoredPosition: {x: 308.37796, y: -0}
+  m_SizeDelta: {x: 138.7653, y: 0}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1148109108
 MonoBehaviour:
@@ -17922,7 +17922,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 312.1478, y: -32.5}
+  m_AnchoredPosition: {x: 312.18268, y: -32.5}
   m_SizeDelta: {x: 35, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1230829262
@@ -30781,7 +30781,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 223.27992, y: -37.5}
+  m_AnchoredPosition: {x: 223.30565, y: -37.5}
   m_SizeDelta: {x: 35, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2140097446

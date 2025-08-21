@@ -8,7 +8,13 @@ using UnityEngine;
 public class MagicPoeLevelData
 {
     [Header("공통")]
-    public CommonSkillLevelData commonSkillData;
+    public int level;                   // 스킬 레벨 (1~3)    
+    public int upgradeCost;             // 강화 비용    
+    public int executeCost;             // 스킬 시전 비용    
+    public GameObject modelPrefab;      // 모델 Prefab (투사체 또는 트랩)    
+    public float cooldown;              // 쿨다운(초)
+    public Sprite skillIcon;            // 스킬 아이콘
+    public string skillDesc;            // 스킬 설명
 
     [Header("포댕이 유닛 설정")]
     [Tooltip("이동 속도 (유닛/초)")]
@@ -17,20 +23,14 @@ public class MagicPoeLevelData
     public float collideRadius;
     [Tooltip("기본 데미지")]
     public int baseDamage;
-    [Tooltip("넉백 힘 (Impulse)")]
-    public float knockbackForce;
     [Tooltip("스턴 지속 시간 (초)")]
     public float stunDuration;
-    [Tooltip("연쇄 범위 (3단계 전용)")]
-    public float chainRadius;
 
     [Header("연출")]
     [Tooltip("이동 애니메이션 클립")]
     public AnimationClip moveAnim;
-    [Tooltip("피격 애니메이션 클립")]
-    public AnimationClip attackAnim;
-    [Tooltip("피격 이펙트 Prefab")]
-    public GameObject hitEffectPrefab;
-    [Tooltip("피격 사운드 클립")]
-    public AudioClip hitSoundClip;
+    [Tooltip("공격 이펙트 Prefab")]
+    public GameObject attackEffectPrefab;
+    [Tooltip("공격 사운드 클립")]
+    public AudioClip attackSoundClip;
 }

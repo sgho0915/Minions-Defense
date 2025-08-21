@@ -33,16 +33,4 @@ public class TowerFactory
 
         return ctrl;
     }
-
-    //public TowerController CreateTower(TowerLevelData initialLevel, TowerLevelData[] allLevels, Vector3 createPos, Transform parent)
-    //{
-    //    // 타워 프리팹 생성
-    //    var go = Object.Instantiate(initialLevel.towerPrefab, createPos, Quaternion.identity, parent);
-    //    // TowerController 할당
-    //    var controller = go.GetComponent<TowerController>() ?? go.AddComponent<TowerController>();
-
-    //    // 레벨별 데이터(TowerLevelData)를 직접 넘겨 초기화
-    //    controller.Initialize(initialLevel, allLevels);
-    //    return controller;
-    //}
 }

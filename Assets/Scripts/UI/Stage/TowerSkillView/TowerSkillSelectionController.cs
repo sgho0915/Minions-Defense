@@ -1,12 +1,12 @@
-﻿// TowerSelectionController.cs
+﻿// TowerSkillSelectionController.cs
 using UnityEngine;
 
 /// <summary>
 /// TowerListView와 TowerInfoView를 연결하는 Controller
 /// </summary>
-public class TowerSelectionController : MonoBehaviour
+public class TowerSkillSelectionController : MonoBehaviour
 {
-    [SerializeField] TowerListView listView;
+    [SerializeField] TowerSkillListView listView;
     [SerializeField] TowerInfoView infoView;
     [SerializeField] TowerDataSO[] allTowers;
 

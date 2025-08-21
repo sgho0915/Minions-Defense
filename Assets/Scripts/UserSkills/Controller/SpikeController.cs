@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class SpikeController : BaseSkillController<SpikeLevelData>
 {
-    public override void CastSkill(Vector3 targetPosition)
+    public override void ExecuteSkill(Vector3 targetPosition)
     {
         if (!IsReady()) return;
 
