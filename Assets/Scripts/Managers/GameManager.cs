@@ -13,12 +13,10 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public bool isWaveStarted = false;
 
-    // Dependencies, 각 Stage 씬 롣 후 Find로 할당
     private WaveManager waveManager;
     private MainTowerController mainTower;
     private StageUIController stageUI;
 
-    // 화폐
     [Header("Currency")]
     public int stagePoints;      // 스테이지 내에서만 쓰는 포인트
     public int globalPoints;     // 계정 단위 영구 포인트
@@ -35,6 +33,8 @@ public class GameManager : MonoBehaviour
         //  절전 모드에서 최대 성능 유지
         QualitySettings.vSyncCount = 0; // VSync 비활성화
 
+        globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
+
         // 씬 변경 시 마다 콜백 받기
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -50,16 +50,22 @@ public class GameManager : MonoBehaviour
         stageUI = FindObjectOfType<StageUIController>();
 
         // 초기값 세팅
-        stagePoints = 100;
-        globalPoints = PlayerPrefs.GetInt("GlobalPoints", 0);
+        stagePoints = 300;
+        
 
         // UI 초기화
         stageUI.Initialize(mainTower, waveManager, stagePoints);
 
         // 이벤트 구독
         mainTower.OnDied += HandleStageFail;
-
+        waveManager.OnMonsterSpawned += HandleMonsterSpawned;
         
+    }
+
+    private void OnDisable()
+    {
+        if (waveManager != null)
+            waveManager.OnMonsterSpawned -= HandleMonsterSpawned;
     }
 
     public IEnumerator RunStage()
@@ -116,12 +122,31 @@ public class GameManager : MonoBehaviour
         stageUI.ShowResult(true, criteriaMet);
     }
 
-    // 타워 건설 등에서 호출
+    public void HandleMonsterSpawned(MonsterController mc)
+    {
+        mc.OnGiveReward += TryGiveStagePoints;
+        mc.OnGiveReward += OnUnsubscribed;
+
+        // 스스로 구독해제
+        void OnUnsubscribed(int amount)
+        {
+            mc.OnGiveReward -= TryGiveStagePoints;
+            mc.OnGiveReward -= OnUnsubscribed;  // 최후에는 구독해제 이벤트도 구독해제
+        }
+    }
+
+    // 몬스터 처치, 타워 재판매로 인한 스테이지 포인트 보상
+    public void TryGiveStagePoints(int amount)
+    {
+        stagePoints += amount;
+        OnStagePointsChanged?.Invoke(stagePoints);
+    }
+
+    // 타워 건설, 강화 등에서 호출
     public bool TrySpendStagePoints(int cost)
     {
         if (stagePoints < cost) return false;
         stagePoints -= cost;
-        //stageUI.hudView.UpdateStagePoints(stagePoints);
         OnStagePointsChanged?.Invoke(stagePoints);
         return true;
     }

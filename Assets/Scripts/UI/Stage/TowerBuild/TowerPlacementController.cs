@@ -74,6 +74,9 @@ public class TowerPlacementController : MonoBehaviour
     int price;
     bool isPlacing, isValid;
 
+    public bool IsPlacing => isPlacing; // 외부 읽기 전용 캡슐화
+    public static float LastPlacementTime { get; private set; }
+
     /// <summary>
     /// 싱글턴 초기화 + 카메라/MPB 캐시
     /// </summary>
@@ -148,6 +151,7 @@ public class TowerPlacementController : MonoBehaviour
 
         // 사거리 라인렌더러 세팅
         rangeIndicator = previewRoot.GetComponent<RangeIndicator>() ?? previewRoot.AddComponent<RangeIndicator>();
+        rangeIndicator.Attach(previewRoot.transform);
         rangeIndicator.SetRadius(level.range);
 
         // 초기 상태
@@ -243,7 +247,9 @@ public class TowerPlacementController : MonoBehaviour
         //   - Blocked 반경 겹침이 없는가?
         Vector3 p = previewRoot.transform.position;
         bool onBuildable = Physics.Raycast(p + Vector3.up * 0.5f, Vector3.down, out _, 2f, buildableMask.value);
-        bool noOverlap = !Physics.CheckSphere(p + Vector3.up * 0.2f, footprintRadius, blockedMask.value);
+        //bool noOverlap = !Physics.CheckSphere(p + Vector3.up * 0.2f, footprintRadius, blockedMask.value);
+        var overlaps = Physics.OverlapSphere(p + Vector3.up * 0.2f, footprintRadius, blockedMask.value, QueryTriggerInteraction.Collide);
+        bool noOverlap = overlaps == null || overlaps.Length == 0;
         isValid = onBuildable && noOverlap;
 
         // 5) MPB로 프리뷰 색만 갱신(머티리얼 인스턴스 증가 방지)
@@ -399,7 +405,8 @@ public class TowerPlacementController : MonoBehaviour
         if (!isValid) return;   // 설치 불가 위치
         if (!GameManager.Instance.TrySpendStagePoints(price)) return;   // 비용 부족
 
-        TowerFactory.Instance.CreateTower(lv, dataSO.levelData, previewRoot.transform.position, null);
+        TowerFactory.Instance.CreateTower(dataSO, lv, previewRoot.transform.position, null);
+        LastPlacementTime = Time.unscaledTime;  // 타워 설치 직후 선택 방지위한 시간 지정
         CancelPlacement();
     }
 

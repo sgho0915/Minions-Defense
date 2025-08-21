@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Collections;
 using UnityEngine;
+using System;
 
 /// <summary>
 /// IMonster 구현체이자 MVC의 Controller 역할
@@ -24,7 +25,7 @@ public class MonsterController : MonoBehaviour, IMonster
     private Coroutine _moveRoutine;
     private bool _isDead = false;
 
-
+    public event Action<int> OnGiveReward;
     public Transform attackPos;
 
     public void Initialize(MonsterLevelData initialLevel, MonsterLevelData[] allLevels)
@@ -124,8 +125,13 @@ public class MonsterController : MonoBehaviour, IMonster
     {
         // 이미 사망 판정 났으면 이후 로직 무시
         if (_isDead) return;
+        _isDead = true;
 
         _monsterModel.OnDied -= OnDied;
+
+        // 몬스터 처치 관련 스테이지 포인트 보상 이벤트 발행
+        int reward = GiveReward();
+        OnGiveReward?.Invoke(reward);
 
         // 사망 판정 시 더 이상 공격을 받지 않도록 몬스터의 모든 오브젝트 물리 예외 처리
         foreach (var col in GetComponentsInChildren<Collider>())
@@ -147,14 +153,14 @@ public class MonsterController : MonoBehaviour, IMonster
                    .animationClips
                    .FirstOrDefault(c => c.name == "Die");
         float delay = (dieClip != null) ? dieClip.length : 1f;
-
+                
         Destroy(gameObject, delay + 0.1f);
     }
 
     public int GiveReward()
     {
         return (_curLevel.rewardPointsMax > _curLevel.rewardPointsMin)
-            ? Random.Range(_curLevel.rewardPointsMin, _curLevel.rewardPointsMax + 1)
+            ? UnityEngine.Random.Range(_curLevel.rewardPointsMin, _curLevel.rewardPointsMax + 1)
             : _curLevel.rewardPointsMin;
     }
 }

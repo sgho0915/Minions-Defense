@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4997686148031394644}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: AttackEffectPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,9 +44,10 @@ GameObject:
   - component: {fileID: 4849171130272911312}
   - component: {fileID: 5621208240081955878}
   - component: {fileID: 4070031029101969144}
-  m_Layer: 0
+  - component: {fileID: 6080457447204453499}
+  m_Layer: 12
   m_Name: CanonTower_1
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -97,6 +98,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -118,6 +121,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -231,8 +235,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e413217ae8032f64385c38be8c6aae7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildEffectPoint: {fileID: 7248967601518721313}
   attackEffectPoint: {fileID: 4997686148031394644}
+--- !u!65 &6080457447204453499
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2562698006400567263}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 7.0313954, y: 6.2604933, z: 7.031395}
+  m_Center: {x: 0.00000029802322, y: 3.1302466, z: 0.00000029802322}
 --- !u!1 &6807409352018457561
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7248967601518721313}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BuildEffectPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -275,7 +299,7 @@ GameObject:
   - component: {fileID: 47992908243695832}
   - component: {fileID: 6577737515271762483}
   - component: {fileID: 2557135637023303007}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: TB_CanonTower_Lvl1_Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,6 +349,8 @@ MeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -346,6 +372,7 @@ MeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
