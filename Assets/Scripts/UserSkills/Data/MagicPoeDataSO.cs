@@ -2,13 +2,19 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "MagicPoeData", menuName = "TowerDefenseAssets/Skill/MagicPoeDataSO")]
-/// <summary>
-/// 마법의 포댕이 스킬 전체 레벨 데이터를 보관하는 SO
-/// </summary>
-public class MagicPoeDataSO : ScriptableObject
+public class MagicPoeDataSO : SkillDataSO // SkillDataSO 상속
 {
-    [Header("기본 정보")]
-    public string skillName;
     [Header("레벨별 설정 (1~3)")]
     public MagicPoeLevelData[] levels;
+
+    /// <summary>
+    /// 마법의 포댕이 스킬 컨트롤러를 생성하고 초기화
+    /// </summary>
+    public override ISkill CreateSkill(Transform owner)
+    {
+        GameObject go = new GameObject(skillName + "_Controller");
+        var controller = go.AddComponent<MagicPoeController>();
+        controller.Initialize(this, owner); // 'this'를 넘겨서 자신을 초기화
+        return controller;
+    }
 }
