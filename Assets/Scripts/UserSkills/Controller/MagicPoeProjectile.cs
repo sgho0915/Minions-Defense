@@ -27,7 +27,7 @@ public class MagicPoeProjectile : MonoBehaviour
 
         // 데미지
         var monsterModel = other.GetComponent<MonsterModel>();
-        monsterModel?.TakeDamage(_lvl.baseDamage);
+        monsterModel?.TakeDamage(_lvl.damagePerTick);
 
         // 이펙트·사운드
         if (_lvl.attackEffectPrefab != null)
