@@ -11,14 +11,35 @@ public class SkillListItem : MonoBehaviour
 {
     [SerializeField] private Image imgIcon;
     [SerializeField] private TMP_Text txtName;
-    [SerializeField] private TMP_Text txtDesc;
     [SerializeField] private TMP_Text txtCost;
-    [SerializeField] private Button btnExecute;
-    [SerializeField] private Button btnUpgrade;
+    [SerializeField] private Button button;
+    [SerializeField] private Image imgCooldownOverlay;
 
-    public void Setup(MagicPoeDataSO data, Action onExecuteClick, Action onUpgradeClick)
+    private ISkill _skill;
+
+    // 어떤 스킬을 표시하고, 클릭했을 때 어떤 행동을 할지 외부에서 주입
+    public void Setup(ISkill skill, Action<ISkill> onClick)
     {
-        btnExecute.onClick.AddListener(() => onExecuteClick());
-        btnUpgrade.onClick.AddListener(() => onUpgradeClick());
+        _skill = skill;
+        var data = skill.CurrentLevelData;
+        var skillSO = (skill as MonoBehaviour)?.GetComponent<MagicPoeController>()?
+            .GetType().GetField("_data", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
+            .GetValue(skill) as SkillDataSO;
+
+        txtName.text = skillSO.skillName;
+        imgIcon.sprite = data.skillIcon;
+        txtCost.text = data.executeCost.ToString();
+
+        button.onClick.AddListener(() => onClick(skill));
+    }
+
+    // 매 프레임 쿨다운 상태를 체크하여 UI에 반영
+    private void Update()
+    {
+        if (_skill != null && imgCooldownOverlay != null)
+        {
+            imgCooldownOverlay.gameObject.SetActive(!_skill.IsReady());
+            button.interactable = _skill.IsReady();
+        }
     }
 }
