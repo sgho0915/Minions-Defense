@@ -10,14 +10,27 @@ using UnityEngine.UI;
 public class TowerSkillListView : MonoBehaviour
 {
     public event Action<TowerDataSO> OnTowerSelected;
+    public event Action<ISkill> OnSkillSelected;
     public event Action OnForceStartWaveButtonClicked;
 
     [Header("Display Remain Time Until Next Wave Start")]
     [SerializeField] private Button btnForceStartWave;
     [SerializeField] private TextMeshProUGUI txtCanvasNextWave;
 
-    [SerializeField] private Transform contentParent;
-    [SerializeField] private TowerListItem itemPrefab;
+    [Header("Tower Skill View 전환")]
+    [SerializeField] private Button btnChangeTowerSkillView;
+
+
+    [Header("Tower 스크롤뷰 Content, 버튼 아이템")]
+    [SerializeField] private Transform towerContentParent;
+    [SerializeField] private TowerListItem towerItemPrefab;
+
+    [Header("Skill 스크롤뷰 Content, 버튼 아이템")]
+    [SerializeField] private Transform skillContentParent;
+    [SerializeField] private SkillListItem skillItemPrefab;
+
+    private bool _isShowingTowers = true;
+
 
     private void Awake()
     {
@@ -33,18 +46,46 @@ public class TowerSkillListView : MonoBehaviour
                 OnForceStartWaveButtonClicked?.Invoke();
             }
         });
+
+        btnChangeTowerSkillView.onClick.AddListener(ToggleView);
+    }
+
+    private void Start()
+    {
+        towerContentParent.gameObject.SetActive(true);
+        skillContentParent.gameObject.SetActive(false);
+    }
+
+    private void ToggleView()
+    {
+        _isShowingTowers = !_isShowingTowers;
+        towerContentParent.gameObject.SetActive(_isShowingTowers);
+        skillContentParent.gameObject.SetActive(!_isShowingTowers);
     }
 
     /// <summary>
     /// 에디터에 할당된 TowerDataSo 배열로 리스트를 채움
     /// </summary>
     /// <param name="towerDataArray"></param>
-    public void Populate(TowerDataSO[] towerDataArray)
+    public void PopulateTowers(TowerDataSO[] towerDataArray)
     {
         foreach (var data in towerDataArray)
         {
-            var item = Instantiate(itemPrefab, contentParent);
+            var item = Instantiate(towerItemPrefab, towerContentParent);
             item.Setup(data, () => OnTowerSelected?.Invoke(data));
+        }
+    }
+
+    /// <summary>
+    /// 스킬 목록을 채움
+    /// </summary>
+    /// <param name="skills"></param>
+    public void PopulateSkills(System.Collections.Generic.List<ISkill> skills)
+    {
+        foreach (var skill in skills)
+        {
+            var item = Instantiate(skillItemPrefab, skillContentParent);
+            item.Setup(skill, (selectedSkill) => OnSkillSelected?.Invoke(selectedSkill));
         }
     }
 
