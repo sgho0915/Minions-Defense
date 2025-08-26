@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de205b728e9c794798e019e748bdc8f, type: 3}
+  m_Name: MagicPoe
+  m_EditorClassIdentifier: Assembly-CSharp::MagicPoeDataSO
+  skillName: "\uB9C8\uBC95\uC758 \uD3EC\uB315\uC774"
+  levels:
+  - level: 1
+    upgradeCost: 100
+    executeCost: 100
+    modelPrefab: {fileID: 3633731554175160911, guid: d39a4a75f97f75741b272c8473e44d06, type: 3}
+    cooldown: 10
+    skillIcon: {fileID: 21300000, guid: e834a9f2ecbeee84f85ed5a2ef27887a, type: 3}
+    skillDesc: "\uB9C8\uBC95\uC758 \uD3EC\uB315\uC774 1\uB2E8\uACC4 \uC124\uBA85"
+    moveSpeed: 2
+    maxDamageOutput: 100
+    auraRadius: 2
+    damageTickRate: 1
+    damagePerTick: 15
+    stunDuration: 1
+    auraEffectPrefab: {fileID: 6255401877423121132, guid: 730e548f8fda1ab4d9d55eb3f91033a9, type: 3}
+    attackEffectPrefab: {fileID: 6754771895784527841, guid: 60dc7f202fd5146409b95a839ce5aa81, type: 3}
+    attackSoundClip: {fileID: 0}
+  - level: 0
+    upgradeCost: 0
+    executeCost: 0
+    modelPrefab: {fileID: 0}
+    cooldown: 0
+    skillIcon: {fileID: 0}
+    skillDesc: 
+    moveSpeed: 0
+    maxDamageOutput: 0
+    auraRadius: 0
+    damageTickRate: 0
+    damagePerTick: 0
+    stunDuration: 0
+    auraEffectPrefab: {fileID: 0}
+    attackEffectPrefab: {fileID: 0}
+    attackSoundClip: {fileID: 0}
+  - level: 0
+    upgradeCost: 0
+    executeCost: 0
+    modelPrefab: {fileID: 0}
+    cooldown: 0
+    skillIcon: {fileID: 0}
+    skillDesc: 
+    moveSpeed: 0
+    maxDamageOutput: 0
+    auraRadius: 0
+    damageTickRate: 0
+    damagePerTick: 0
+    stunDuration: 0
+    auraEffectPrefab: {fileID: 0}
+    attackEffectPrefab: {fileID: 0}
+    attackSoundClip: {fileID: 0}
