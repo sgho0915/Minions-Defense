@@ -23,6 +23,7 @@ public class MonsterController : MonoBehaviour, IMonster
     private AudioSource _audio;
     private Coroutine _behaviourRoutine;
     private Coroutine _moveRoutine;
+    private Coroutine _stunRoutine;
     private bool _isDead = false;
 
     public event Action<int> OnGiveReward;
@@ -109,7 +110,30 @@ public class MonsterController : MonoBehaviour, IMonster
 
     public void Stun(float stunDuration)
     {
+        // 이미 다른 스턴 코루틴이 실행 중이면 중지하고 새로 시작
+        if(_stunRoutine != null)
+        {
+            StopCoroutine(_stunRoutine);
+        }
+        _stunRoutine = StartCoroutine(StunRoutine(stunDuration));
+    }
 
+    // 스턴효과 적용 코루틴
+    private IEnumerator StunRoutine(float duration)
+    {
+        if(_monsterMovement != null)
+        {
+            _monsterMovement.CanMove = false;
+        }
+
+        yield return new WaitForSeconds(duration);
+
+        // 스턴 풀렸을 때 몬스터가 죽지 않았으면 이동 재개
+        if (this != null && _monsterMovement != null)
+        {
+            _monsterMovement.CanMove = true;
+        }
+        _stunRoutine = null;
     }
 
     // 몬스터가 받은 데미지를 MonsterModel에게 전달
