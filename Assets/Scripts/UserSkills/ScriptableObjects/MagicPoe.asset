@@ -22,13 +22,13 @@ MonoBehaviour:
     skillIcon: {fileID: 21300000, guid: e834a9f2ecbeee84f85ed5a2ef27887a, type: 3}
     skillDesc: "\uB9C8\uBC95\uC758 \uD3EC\uB315\uC774 1\uB2E8\uACC4 \uC124\uBA85"
     moveSpeed: 2
-    maxDamageOutput: 100
+    maxDamageOutput: 250
     auraRadius: 2
     damageTickRate: 1
     damagePerTick: 15
     stunDuration: 1
-    auraEffectPrefab: {fileID: 6255401877423121132, guid: 730e548f8fda1ab4d9d55eb3f91033a9, type: 3}
-    attackEffectPrefab: {fileID: 6754771895784527841, guid: 60dc7f202fd5146409b95a839ce5aa81, type: 3}
+    auraEffectPrefab: {fileID: 8460747081077448648, guid: c40a87dc8c21ba24eb778e0b21bb6758, type: 3}
+    attackEffectPrefab: {fileID: 2074539229924275316, guid: 8d4517e80a2322f42aeb686346038376, type: 3}
     attackSoundClip: {fileID: 0}
   - level: 0
     upgradeCost: 0
