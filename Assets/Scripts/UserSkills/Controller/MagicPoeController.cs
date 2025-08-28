@@ -16,6 +16,10 @@ public class MagicPoeController : MonoBehaviour, ISkill
     public SkillLevelData CurrentLevelData => _data.levels.FirstOrDefault(l => l.level == _currentLevel);
     private MagicPoeLevelData CurrentPoeLevelData => CurrentLevelData as MagicPoeLevelData;
 
+    // 다음 레벨 스킬 레벨 데이터 가져오기
+    public SkillLevelData NextLevelData => _data.levels.FirstOrDefault(l => l.level == _currentLevel + 1);
+    private MagicPoeLevelData NextPoeLevelData => NextLevelData as MagicPoeLevelData;
+
 
     public void Initialize(SkillDataSO dataSo, Transform owner)
     {

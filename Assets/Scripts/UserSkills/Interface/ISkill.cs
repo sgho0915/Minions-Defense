@@ -20,4 +20,6 @@ public interface ISkill
 
     // UI 업데이트를 위한 프로퍼티
     SkillLevelData CurrentLevelData { get; }
+
+    SkillLevelData NextLevelData { get; }
 }

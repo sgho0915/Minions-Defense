@@ -12,9 +12,19 @@ public class SkillInfoView : MonoBehaviour
     [SerializeField] private TMP_Text txtName;
     [SerializeField] private TMP_Text txtDescription;
     [SerializeField] private TMP_Text txtLevel;
+    [SerializeField] private TMP_Text txtUpgradeCost;
     [SerializeField] private TMP_Text txtExecuteCost;
-    [SerializeField] private TMP_Text txtCooldown;
     [SerializeField] private TMP_Text txtDamage;
+    [SerializeField] private TMP_Text txtCooldown;
+    [SerializeField] private TMP_Text txtRange;
+    [SerializeField] private TMP_Text txtMaxDamage;
+
+    [SerializeField] private TMP_Text txtNextLevel;
+    [SerializeField] private TMP_Text txtNextDamage;
+    [SerializeField] private TMP_Text txtNextCooldown;
+    [SerializeField] private TMP_Text txtNextRange;
+    [SerializeField] private TMP_Text txtNextMaxDamage;
+
     [SerializeField] private Button btnExecute;
     [SerializeField] private Button btnUpgrade;
     [SerializeField] private Button btnClose;
@@ -54,25 +64,40 @@ public class SkillInfoView : MonoBehaviour
             return;
         }
 
-        var data = _currentSkill.CurrentLevelData;
-        var skillSO = (skill as MonoBehaviour)?.GetComponent<MagicPoeController>()?
+        var levelData = _currentSkill.CurrentLevelData;
+        var nextLevelData = _currentSkill.NextLevelData;
+
+        var skillDataSO = (skill as MonoBehaviour)?.GetComponent<MagicPoeController>()?
             .GetType().GetField("_data", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
             .GetValue(skill) as SkillDataSO;
 
-
         root.SetActive(true);
 
-        txtName.text = skillSO.skillName;
-        imgIcon.sprite = data.skillIcon;
-        txtDescription.text = data.skillDesc;
-        txtLevel.text = $"레벨 {data.level}";
-        txtExecuteCost.text = $"비용: {data.executeCost}";
-        txtCooldown.text = $"쿨다운: {data.cooldown:F1}초";
+        txtName.text = skillDataSO.skillName;
+        imgIcon.sprite = levelData.skillIcon;
+        txtDescription.text = levelData.skillDesc;
+        txtExecuteCost.text = levelData.executeCost.ToString();
 
-        // 스킬 타입에 따라 다른 정보 표시 (예시)
-        if (data is MagicPoeLevelData poeData)
+        txtLevel.text = $"레벨 {levelData.level}";
+        txtCooldown.text = $"{levelData.cooldown}초";
+
+        txtNextLevel.text = $"레벨 {nextLevelData.level}";        
+        txtNextCooldown.text = $"{nextLevelData.cooldown}초";
+
+        // 스킬 타입에 따라 다른 정보 표시
+        if (levelData is MagicPoeLevelData poeData)
         {
-            txtDamage.text = $"틱당 피해량: {poeData.damagePerTick}";
+            txtDamage.text = poeData.damagePerTick.ToString();
+            txtRange.text = poeData.auraRadius.ToString("F1");
+            txtMaxDamage.text = poeData.maxDamageOutput.ToString();
+            txtUpgradeCost.text = poeData.upgradeCost.ToString();
+
+            if(nextLevelData is MagicPoeLevelData nextPoeData)
+            {
+                txtNextDamage.text = nextPoeData.damagePerTick.ToString();
+                txtNextRange.text = nextPoeData.auraRadius.ToString("F1");
+                txtNextMaxDamage.text = nextPoeData.maxDamageOutput.ToString();
+            }
         }
         // else if (data is SpikeLevelData spikeData) { ... }
     }
