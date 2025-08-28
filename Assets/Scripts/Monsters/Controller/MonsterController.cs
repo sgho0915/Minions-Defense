@@ -25,6 +25,7 @@ public class MonsterController : MonoBehaviour, IMonster
     private Coroutine _moveRoutine;
     private Coroutine _stunRoutine;
     private bool _isDead = false;
+    private bool _isStunned = false;
 
     public event Action<int> OnGiveReward;
     public Transform attackPos;
@@ -65,6 +66,12 @@ public class MonsterController : MonoBehaviour, IMonster
         // 몬스터와 메인타워가 살아있는동안 로직 수행
         while (_monsterModel.CurrentHp > 0 && mainTower != null && mainTower.CurrentHp > 0)
         {
+            if (_isStunned)
+            {
+                yield return null;
+                continue;
+            }
+
             // 현재 몬스터와 메인타워 간의 거리 계산
             float distance = Vector3.Distance(this.transform.position, mainTower.transform.position);
 
@@ -110,8 +117,8 @@ public class MonsterController : MonoBehaviour, IMonster
 
     public void Stun(float stunDuration)
     {
-        // 이미 다른 스턴 코루틴이 실행 중이면 중지하고 새로 시작
-        if(_stunRoutine != null)
+        // 포댕이 스킬 범위 있는동안 이미 스턴을 당하고 있는 상태면 스턴 스킵
+        if (_isStunned)
         {
             StopCoroutine(_stunRoutine);
         }
@@ -121,6 +128,7 @@ public class MonsterController : MonoBehaviour, IMonster
     // 스턴효과 적용 코루틴
     private IEnumerator StunRoutine(float duration)
     {
+        _isStunned = true;
         if(_monsterMovement != null)
         {
             _monsterMovement.CanMove = false;
@@ -128,10 +136,12 @@ public class MonsterController : MonoBehaviour, IMonster
 
         yield return new WaitForSeconds(duration);
 
+        _isStunned = false;
+
         // 스턴 풀렸을 때 몬스터가 죽지 않았으면 이동 재개
         if (this != null && _monsterMovement != null)
         {
-            _monsterMovement.CanMove = true;
+            //_monsterMovement.CanMove = true;
         }
         _stunRoutine = null;
     }
