@@ -25,7 +25,7 @@ MonoBehaviour:
       \uAE30\uC808\uC2DC\uD0A4\uACE0 \uCD08\uB2F9 15\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
       \uCD1D 250\uC758 \uD53C\uD574\uB97C \uC785\uD788\uBA74 \uC804\uC7A5\uC5D0\uC11C
       \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
-    moveSpeed: 1.5
+    moveSpeed: 1
     maxDamageOutput: 250
     auraRadius: 2
     damageTickRate: 1
@@ -45,7 +45,7 @@ MonoBehaviour:
       \uAE30\uC808\uC2DC\uD0A4\uACE0 \uCD08\uB2F9 30\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
       \uCD1D 350\uC758 \uD53C\uD574\uB97C \uC785\uD788\uBA74 \uC804\uC7A5\uC5D0\uC11C
       \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
-    moveSpeed: 2
+    moveSpeed: 1
     maxDamageOutput: 350
     auraRadius: 2
     damageTickRate: 1
@@ -65,10 +65,10 @@ MonoBehaviour:
       \uAE30\uC808\uC2DC\uD0A4\uACE0 \uCD08\uB2F9 55\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
       \uCD1D 500\uC758 \uD53C\uD574\uB97C \uC785\uD788\uBA74 \uC804\uC7A5\uC5D0\uC11C
       \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
-    moveSpeed: 1.5
+    moveSpeed: 1
     maxDamageOutput: 500
     auraRadius: 2
-    damageTickRate: 1
+    damageTickRate: 2
     damagePerTick: 55
     stunDuration: 3
     auraEffectPrefab: {fileID: 8460747081077448648, guid: b2b0d289c4089e9438ca18517819cb35, type: 3}
