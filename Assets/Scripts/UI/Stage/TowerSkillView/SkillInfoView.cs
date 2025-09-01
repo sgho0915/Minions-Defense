@@ -33,6 +33,7 @@ public class SkillInfoView : MonoBehaviour
     public event Action<ISkill> OnUpgradeClicked;
 
     private ISkill _currentSkill;
+    private bool _isMaxlevel;
 
     private void Awake()
     {
@@ -52,6 +53,7 @@ public class SkillInfoView : MonoBehaviour
         {
             bool canAfford = GameManager.Instance.stagePoints >= _currentSkill.CurrentLevelData.executeCost;
             btnExecute.interactable = _currentSkill.IsReady() && canAfford;
+            btnUpgrade.interactable = canAfford && !_isMaxlevel;
         }
     }
 
@@ -64,42 +66,102 @@ public class SkillInfoView : MonoBehaviour
             return;
         }
 
-        var levelData = _currentSkill.CurrentLevelData;
+        var _currentLevelData = _currentSkill.CurrentLevelData;
         var nextLevelData = _currentSkill.NextLevelData;
-
-        var skillDataSO = (skill as MonoBehaviour)?.GetComponent<MagicPoeController>()?
-            .GetType().GetField("_data", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)
-            .GetValue(skill) as SkillDataSO;
+        var _currentSkillDataSO = _currentSkill.CurrentSkillDataSO;
 
         root.SetActive(true);
 
-        txtName.text = skillDataSO.skillName;
-        imgIcon.sprite = levelData.skillIcon;
-        txtDescription.text = levelData.skillDesc;
-        txtExecuteCost.text = levelData.executeCost.ToString();
+        txtName.text = _currentSkillDataSO.skillName;
+        imgIcon.sprite = _currentLevelData.skillIcon;
+        txtDescription.text = _currentLevelData.skillDesc;
+        txtExecuteCost.text = _currentLevelData.executeCost.ToString();
 
-        txtLevel.text = $"레벨 {levelData.level}";
-        txtCooldown.text = $"{levelData.cooldown}초";
+        txtLevel.text = $"레벨 {_currentLevelData.level}";
+        txtCooldown.text = $"{_currentLevelData.cooldown}초";
 
-        txtNextLevel.text = $"레벨 {nextLevelData.level}";        
-        txtNextCooldown.text = $"{nextLevelData.cooldown}초";
+        
 
         // 스킬 타입에 따라 다른 정보 표시
-        if (levelData is MagicPoeLevelData poeData)
+        if (_currentLevelData is MagicPoeLevelData poeData)
         {
             txtDamage.text = poeData.damagePerTick.ToString();
             txtRange.text = poeData.auraRadius.ToString("F1");
             txtMaxDamage.text = poeData.maxDamageOutput.ToString();
             txtUpgradeCost.text = poeData.upgradeCost.ToString();
 
-            if(nextLevelData is MagicPoeLevelData nextPoeData)
+            if(nextLevelData != null && nextLevelData is MagicPoeLevelData nextPoeData)
             {
+                txtNextLevel.text = $"레벨 {nextLevelData.level}";
+                txtNextCooldown.text = $"{nextLevelData.cooldown}초";
+
                 txtNextDamage.text = nextPoeData.damagePerTick.ToString();
                 txtNextRange.text = nextPoeData.auraRadius.ToString("F1");
                 txtNextMaxDamage.text = nextPoeData.maxDamageOutput.ToString();
+                _isMaxlevel = false;
+            }
+            else
+            {
+                txtNextLevel.text = "-";
+                txtNextCooldown.text = "-";
+                txtNextDamage.text = "-";
+                txtNextRange.text = "-";
+                txtNextMaxDamage.text = "-";
+                txtUpgradeCost.text = "MAX";
+                _isMaxlevel = true;
             }
         }
         // else if (data is SpikeLevelData spikeData) { ... }
+    }
+
+    public void ShowUpgradeView()
+    {        
+        if (_currentSkill == null)
+        {
+            Debug.LogError("[SkillinfoView] ISkill is null");
+            return;
+        }
+
+        var curDataSO = _currentSkill.CurrentSkillDataSO;
+
+        
+
+        if (curDataSO is MagicPoeDataSO magicPoeDataSO)
+        {
+            var curLevelDataSO = magicPoeDataSO.levels[_currentSkill.CurrentLevel - 1];
+            var nextLevelDataSO = (_currentSkill.CurrentLevel < magicPoeDataSO.levels.Length)
+                ? magicPoeDataSO.levels[_currentSkill.CurrentLevel]
+                : null;
+
+            imgIcon.sprite = curLevelDataSO.skillIcon;
+            txtDescription.text = curLevelDataSO.skillDesc;
+            txtExecuteCost.text = curLevelDataSO.executeCost.ToString();
+
+            txtLevel.text = $"레벨 {curLevelDataSO.level}";
+            txtCooldown.text = $"{curLevelDataSO.cooldown}초";
+            txtDamage.text = curLevelDataSO.damagePerTick.ToString();
+            txtRange.text = curLevelDataSO.auraRadius.ToString("F1");
+            txtMaxDamage.text = curLevelDataSO.maxDamageOutput.ToString();
+            txtUpgradeCost.text = curLevelDataSO.upgradeCost.ToString();
+
+            if (nextLevelDataSO != null)
+            {
+                txtNextLevel.text = $"레벨 {nextLevelDataSO.level}";
+                txtNextCooldown.text = $"{nextLevelDataSO.cooldown}초";
+                txtNextDamage.text = nextLevelDataSO.damagePerTick.ToString();
+                txtNextRange.text = nextLevelDataSO.auraRadius.ToString("F1");
+                txtNextMaxDamage.text = nextLevelDataSO.maxDamageOutput.ToString();
+            }
+            else
+            {
+                txtNextLevel.text = "-";
+                txtNextCooldown.text = "-";
+                txtNextDamage.text = "-";
+                txtNextRange.text = "-";
+                txtNextMaxDamage.text = "-";
+                txtUpgradeCost.text = "-";
+            }
+        }
     }
 
     public void Hide()

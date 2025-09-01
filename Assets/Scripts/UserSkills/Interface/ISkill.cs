@@ -18,8 +18,12 @@ public interface ISkill
     /// <summary>쿨다운 가능 여부</summary>
     bool IsReady();
 
-    // UI 업데이트를 위한 프로퍼티
-    SkillLevelData CurrentLevelData { get; }
+    /// <summary>남은 쿨타임</summary>
+    float GetCooldownTime();
 
+    // UI 업데이트를 위한 프로퍼티
+    int CurrentLevel { get; }
+    SkillDataSO CurrentSkillDataSO { get; }
+    SkillLevelData CurrentLevelData { get; }
     SkillLevelData NextLevelData { get; }
 }

@@ -12,6 +12,8 @@ public class MagicPoeController : MonoBehaviour, ISkill
     private int _currentLevel = 1;      // 현재 스킬 레벨
     private float _lastExecutionTime;    // 마지막 스킬 시전 시간
 
+    public int CurrentLevel => _currentLevel;
+    public SkillDataSO CurrentSkillDataSO => _data;
     // 현재 스킬의 레벨 데이터를 가져오기 위한 프로퍼티
     public SkillLevelData CurrentLevelData => _data.levels.FirstOrDefault(l => l.level == _currentLevel);
     private MagicPoeLevelData CurrentPoeLevelData => CurrentLevelData as MagicPoeLevelData;
@@ -42,6 +44,11 @@ public class MagicPoeController : MonoBehaviour, ISkill
     {
         if (CurrentLevelData == null) return false;
         return Time.time >= _lastExecutionTime + CurrentPoeLevelData.cooldown;
+    }
+
+    public float GetCooldownTime()
+    {
+        return (_lastExecutionTime + CurrentPoeLevelData.cooldown) - Time.time;
     }
 
     public void ExecuteSkill(Vector3 targetPosition)

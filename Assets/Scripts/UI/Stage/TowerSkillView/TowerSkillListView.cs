@@ -1,5 +1,6 @@
 ﻿// TowerSkillListView.cs
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,16 +11,12 @@ using UnityEngine.UI;
 public class TowerSkillListView : MonoBehaviour
 {
     public event Action<TowerDataSO> OnTowerSelected;
-    public event Action<ISkill> OnSkillSelected;
+    public event Action<ISkill> OnSkillSelected;    
     public event Action OnForceStartWaveButtonClicked;
 
     [Header("Display Remain Time Until Next Wave Start")]
     [SerializeField] private Button btnForceStartWave;
     [SerializeField] private TextMeshProUGUI txtCanvasNextWave;
-
-    [Header("Tower Skill View 전환")]
-    [SerializeField] private Button btnChangeTowerSkillView;
-
 
     [Header("Tower 스크롤뷰 Content, 버튼 아이템")]
     [SerializeField] private Transform towerContentParent;
@@ -29,7 +26,8 @@ public class TowerSkillListView : MonoBehaviour
     [SerializeField] private Transform skillContentParent;
     [SerializeField] private SkillListItem skillItemPrefab;
 
-    private bool _isShowingTowers = true;
+    // 생성된 스킬 아이템 관리
+    private Dictionary<ISkill, SkillListItem> _skillItems = new Dictionary<ISkill, SkillListItem>();
 
 
     private void Awake()
@@ -46,21 +44,6 @@ public class TowerSkillListView : MonoBehaviour
                 OnForceStartWaveButtonClicked?.Invoke();
             }
         });
-
-        btnChangeTowerSkillView.onClick.AddListener(ToggleView);
-    }
-
-    private void Start()
-    {
-        towerContentParent.gameObject.SetActive(true);
-        skillContentParent.gameObject.SetActive(false);
-    }
-
-    private void ToggleView()
-    {
-        _isShowingTowers = !_isShowingTowers;
-        towerContentParent.gameObject.SetActive(_isShowingTowers);
-        skillContentParent.gameObject.SetActive(!_isShowingTowers);
     }
 
     /// <summary>
@@ -72,7 +55,7 @@ public class TowerSkillListView : MonoBehaviour
         foreach (var data in towerDataArray)
         {
             var item = Instantiate(towerItemPrefab, towerContentParent);
-            item.Setup(data, () => OnTowerSelected?.Invoke(data));
+            item.Setup(data, () => { OnTowerSelected?.Invoke(data); Debug.Log("타워 선택됨"); });
         }
     }
 
@@ -86,7 +69,14 @@ public class TowerSkillListView : MonoBehaviour
         {
             var item = Instantiate(skillItemPrefab, skillContentParent);
             item.Setup(skill, (selectedSkill) => OnSkillSelected?.Invoke(selectedSkill));
+            _skillItems.Add(skill, item);
         }
+    }
+
+    public void RefreshSkillItemView(ISkill updatedSkill)
+    {
+        if (_skillItems.TryGetValue(updatedSkill, out SkillListItem item))
+            item.UpdateView();
     }
 
     /// <summary>
@@ -98,7 +88,7 @@ public class TowerSkillListView : MonoBehaviour
 
         if (islastWave)
         {
-            btnForceStartWave.gameObject.SetActive(!islastWave);
+            //btnForceStartWave.gameObject.SetActive(!islastWave);
             txtCanvasNextWave.gameObject.SetActive(!islastWave);
         }
     }

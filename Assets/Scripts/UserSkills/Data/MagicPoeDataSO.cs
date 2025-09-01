@@ -13,6 +13,7 @@ public class MagicPoeDataSO : SkillDataSO // SkillDataSO 상속
     public override ISkill CreateSkill(Transform owner)
     {
         GameObject go = new GameObject(skillName + "_Controller");
+        go.transform.SetParent(owner.transform, false);
         var controller = go.AddComponent<MagicPoeController>();
         controller.Initialize(this, owner); // 'this'를 넘겨서 자신을 초기화
         return controller;

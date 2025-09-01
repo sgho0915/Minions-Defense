@@ -15,6 +15,8 @@ public class TowerSkillSelectionController : MonoBehaviour
     [SerializeField] TowerDataSO[] allTowers;
     [SerializeField] SkillDataSO[] allSkills;
 
+    [SerializeField] Transform skillControllersParent;
+
     private System.Collections.Generic.List<ISkill> _activeSkills = new();  // 생성된 스킬 컨트롤러 인스턴스 저장
 
     private void Awake()
@@ -35,7 +37,7 @@ public class TowerSkillSelectionController : MonoBehaviour
 
         foreach (var skillSO in allSkills)
         {
-            ISkill skillInstance = skillSO.CreateSkill(this.transform);
+            ISkill skillInstance = skillSO.CreateSkill(skillControllersParent);
             _activeSkills.Add(skillInstance);
         }
         listView.PopulateSkills(_activeSkills);
@@ -92,7 +94,35 @@ public class TowerSkillSelectionController : MonoBehaviour
     }
 
     private void HandleSkillUpgrade(ISkill skill)
-    {
-        // 다음레벨 데이터 확인, 비용차감, skill.setlevel 호출 등 강화 로직
+    {        
+        // 현재 스킬 다음 레벨 데이터 불러오기
+        var skillDataSO = skill.CurrentSkillDataSO;
+        var skillLevelData = skill.CurrentLevelData;
+
+        // GameManager에 스테이지 포인트 차감 요청
+        int cost = skillLevelData.upgradeCost;
+        if (GameManager.Instance.TrySpendStagePoints(cost))
+        {
+            // 다음 레벨 스킬 데이터로 SkillInfoView, 하단 스킬 아이콘 업데이트 명령
+            if (skillLevelData is MagicPoeLevelData nextPoeLevelData)
+            {
+                // 스킬 Controller 레벨 업
+                var controller = (skill as MonoBehaviour)?.GetComponent<MagicPoeController>();
+                controller.SetLevel(skillLevelData.level + 1);
+
+                // SkillInfoView UI 업데이트
+                //skillInfoView.ShowUpgradeView();
+                skillInfoView.Show(skill);
+
+                // 스킬 아이콘 업데이트
+                listView.RefreshSkillItemView(skill);
+
+                Debug.Log($"{skillDataSO.skillName} : 레벨{controller.CurrentLevelData.level} 업그레이드 완료");
+            }
+        }
+        else
+        {
+            Debug.Log("스테이지 포인트 부족");
+        }
     }
 }
