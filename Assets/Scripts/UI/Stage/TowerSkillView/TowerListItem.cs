@@ -10,8 +10,6 @@ using UnityEngine.UI;
 public class TowerListItem : MonoBehaviour
 {
     [SerializeField] private Image imgIcon;
-    [SerializeField] private TMP_Text txtName;
-    [SerializeField] private TMP_Text txtCost;
     [SerializeField] private Button button;
 
     /// <summary>
@@ -23,8 +21,6 @@ public class TowerListItem : MonoBehaviour
     {
         // 레벨1에 해당하는 아이콘, 이름만 표시
         imgIcon.sprite = data.levelData[0].levelIcon;
-        txtName.text = data.towerName;
-        txtCost.text = data.levelData[0].upgradeCost.ToString();
 
         button.onClick.AddListener(() => onClick());
     }

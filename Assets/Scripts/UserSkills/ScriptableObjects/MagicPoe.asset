@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5de205b728e9c794798e019e748bdc8f, type: 3}
+  m_Name: MagicPoe
+  m_EditorClassIdentifier: Assembly-CSharp::MagicPoeDataSO
+  skillName: "\uB9C8\uBC95\uC758 \uD3EC\uB315\uC774"
+  levels:
+  - level: 1
+    upgradeCost: 200
+    executeCost: 100
+    modelPrefab: {fileID: 3633731554175160911, guid: d39a4a75f97f75741b272c8473e44d06, type: 3}
+    cooldown: 30
+    skillIcon: {fileID: 21300000, guid: e834a9f2ecbeee84f85ed5a2ef27887a, type: 3}
+    skillDesc: "\uB9C8\uBC95\uC758 \uACE0\uC591\uC774 \uD3EC\uB315\uC774\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4.
+      \uD3EC\uB315\uC774\uB294 \uC8FC\uBCC0 \uBAA8\uB4E0 \uC801\uC744 1\uCD08\uAC04
+      \uAE30\uC808\uC2DC\uD0A4\uACE0 \uCD08\uB2F9 15\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+      \uCD1D 250\uC758 \uD53C\uD574\uB97C \uC785\uD788\uBA74 \uC804\uC7A5\uC5D0\uC11C
+      \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
+    moveSpeed: 1
+    maxDamageOutput: 250
+    auraRadius: 2
+    damageTickRate: 1
+    damagePerTick: 15
+    stunDuration: 1
+    auraEffectPrefab: {fileID: 8460747081077448648, guid: c40a87dc8c21ba24eb778e0b21bb6758, type: 3}
+    attackEffectPrefab: {fileID: 2074539229924275316, guid: 8d4517e80a2322f42aeb686346038376, type: 3}
+    attackSoundClip: {fileID: 0}
+  - level: 2
+    upgradeCost: 300
+    executeCost: 200
+    modelPrefab: {fileID: 7115933620886061626, guid: 64335304fbf14f2448d4352a461c6e7d, type: 3}
+    cooldown: 25
+    skillIcon: {fileID: 21300000, guid: 341dafe418340b0489ea33ed4bfff6d8, type: 3}
+    skillDesc: "\uB9C8\uBC95\uC758 \uACE0\uC591\uC774 \uD3EC\uB315\uC774\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4.
+      \uD3EC\uB315\uC774\uB294 \uC8FC\uBCC0 \uBAA8\uB4E0 \uC801\uC744 2.5\uCD08\uAC04
+      \uAE30\uC808\uC2DC\uD0A4\uACE0 \uCD08\uB2F9 30\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+      \uCD1D 350\uC758 \uD53C\uD574\uB97C \uC785\uD788\uBA74 \uC804\uC7A5\uC5D0\uC11C
+      \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
+    moveSpeed: 1
+    maxDamageOutput: 350
+    auraRadius: 2
+    damageTickRate: 1
+    damagePerTick: 30
+    stunDuration: 2.5
+    auraEffectPrefab: {fileID: 8460747081077448648, guid: c40a87dc8c21ba24eb778e0b21bb6758, type: 3}
+    attackEffectPrefab: {fileID: 4650703487308424826, guid: fa8e0e401548c6449b05893045b22f65, type: 3}
+    attackSoundClip: {fileID: 0}
+  - level: 3
+    upgradeCost: 400
+    executeCost: 300
+    modelPrefab: {fileID: 8252126046786225998, guid: b6ab4c8647042844ba18dafa0cbc4271, type: 3}
+    cooldown: 20
+    skillIcon: {fileID: 21300000, guid: 7950e30040be2754f9c487ef9302bb86, type: 3}
+    skillDesc: "\uB9C8\uBC95\uC758 \uACE0\uC591\uC774 \uD3EC\uB315\uC774\uB97C \uC18C\uD658\uD569\uB2C8\uB2E4.
+      \uD3EC\uB315\uC774\uB294 \uC8FC\uBCC0 \uBAA8\uB4E0 \uC801\uC744 3\uCD08\uAC04
+      \uAE30\uC808\uC2DC\uD0A4\uACE0 \uCD08\uB2F9 55\uC758 \uD53C\uD574\uB97C \uC90D\uB2C8\uB2E4.
+      \uCD1D 500\uC758 \uD53C\uD574\uB97C \uC785\uD788\uBA74 \uC804\uC7A5\uC5D0\uC11C
+      \uC0AC\uB77C\uC9D1\uB2C8\uB2E4."
+    moveSpeed: 1
+    maxDamageOutput: 500
+    auraRadius: 2
+    damageTickRate: 2
+    damagePerTick: 55
+    stunDuration: 3
+    auraEffectPrefab: {fileID: 8460747081077448648, guid: b2b0d289c4089e9438ca18517819cb35, type: 3}
+    attackEffectPrefab: {fileID: 9039253221143201164, guid: 8f5d99a401f829a4ca997ae77eabda2e, type: 3}
+    attackSoundClip: {fileID: 0}

@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - Projectile
   - Tower
+  - Skill
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - BuildBlocked
   - GroundBlock
   - Tower
-  - 
+  - Skill
   - 
   - 
   - 

@@ -1,5 +1,6 @@
-﻿// TowerListView.cs
+﻿// TowerSkillListView.cs
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,17 +8,27 @@ using UnityEngine.UI;
 /// <summary>
 /// 타워 선택 리스트 표시, 선택 시 이벤트 방출 View
 /// </summary>
-public class TowerListView : MonoBehaviour
+public class TowerSkillListView : MonoBehaviour
 {
     public event Action<TowerDataSO> OnTowerSelected;
+    public event Action<ISkill> OnSkillSelected;    
     public event Action OnForceStartWaveButtonClicked;
 
     [Header("Display Remain Time Until Next Wave Start")]
     [SerializeField] private Button btnForceStartWave;
     [SerializeField] private TextMeshProUGUI txtCanvasNextWave;
 
-    [SerializeField] private Transform contentParent;
-    [SerializeField] private TowerListItem itemPrefab;
+    [Header("Tower 스크롤뷰 Content, 버튼 아이템")]
+    [SerializeField] private Transform towerContentParent;
+    [SerializeField] private TowerListItem towerItemPrefab;
+
+    [Header("Skill 스크롤뷰 Content, 버튼 아이템")]
+    [SerializeField] private Transform skillContentParent;
+    [SerializeField] private SkillListItem skillItemPrefab;
+
+    // 생성된 스킬 아이템 관리
+    private Dictionary<ISkill, SkillListItem> _skillItems = new Dictionary<ISkill, SkillListItem>();
+
 
     private void Awake()
     {
@@ -39,13 +50,33 @@ public class TowerListView : MonoBehaviour
     /// 에디터에 할당된 TowerDataSo 배열로 리스트를 채움
     /// </summary>
     /// <param name="towerDataArray"></param>
-    public void Populate(TowerDataSO[] towerDataArray)
+    public void PopulateTowers(TowerDataSO[] towerDataArray)
     {
         foreach (var data in towerDataArray)
         {
-            var item = Instantiate(itemPrefab, contentParent);
-            item.Setup(data, () => OnTowerSelected?.Invoke(data));
+            var item = Instantiate(towerItemPrefab, towerContentParent);
+            item.Setup(data, () => { OnTowerSelected?.Invoke(data); Debug.Log("타워 선택됨"); });
         }
+    }
+
+    /// <summary>
+    /// 스킬 목록을 채움
+    /// </summary>
+    /// <param name="skills"></param>
+    public void PopulateSkills(System.Collections.Generic.List<ISkill> skills)
+    {
+        foreach (var skill in skills)
+        {
+            var item = Instantiate(skillItemPrefab, skillContentParent);
+            item.Setup(skill, (selectedSkill) => OnSkillSelected?.Invoke(selectedSkill));
+            _skillItems.Add(skill, item);
+        }
+    }
+
+    public void RefreshSkillItemView(ISkill updatedSkill)
+    {
+        if (_skillItems.TryGetValue(updatedSkill, out SkillListItem item))
+            item.UpdateView();
     }
 
     /// <summary>
@@ -57,7 +88,7 @@ public class TowerListView : MonoBehaviour
 
         if (islastWave)
         {
-            btnForceStartWave.gameObject.SetActive(!islastWave);
+            //btnForceStartWave.gameObject.SetActive(!islastWave);
             txtCanvasNextWave.gameObject.SetActive(!islastWave);
         }
     }

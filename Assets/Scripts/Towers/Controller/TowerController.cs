@@ -61,10 +61,10 @@ public class TowerController : MonoBehaviour, ITower
     /// <summary>
     /// 주어진 레벨과 브랜치 타입으로 업그레이드
     /// </summary>
-    public void SetLevel(int level, TowerLevel4Type lv4Branch = TowerLevel4Type.None)
+    public void SetLevel(int level)
     {
         _curLevel = _allLevels
-           .First(x => x.level == level && (level < 4 || x.level4Type == lv4Branch));
+           .First(x => x.level == level && (level < 4));
 
         // 업그레이드 연출 (Lv1 제외)
         if (level > 1 && _curLevel.upgradeSoundClip != null)

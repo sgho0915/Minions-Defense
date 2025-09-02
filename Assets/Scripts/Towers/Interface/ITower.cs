@@ -13,8 +13,7 @@ public interface ITower
     /// 레벨 변경(4단계 A,B 타입 분기 포함)
     /// </summary>
     /// <param name="level"></param>
-    /// <param name="lv4Branch"></param>
-    void SetLevel(int level, TowerLevel4Type lv4Branch = TowerLevel4Type.None);
+    void SetLevel(int level);
 
     /// <summary>
     /// 타워 판매 처리 후 반환 금액
