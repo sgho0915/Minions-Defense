@@ -1,9 +1,16 @@
-# 🎮 Minions-Defense
+# 🎮 Minions Defense
 
 ![Unity](https://img.shields.io/badge/Unity-6000.1.7f1-blue)
 
+
 **Unity 기반의 타워디펜스 개인 포트폴리오 예제**입니다.  
 적 웨이브, 타워 업그레이드, 이벤트 채널 기반 UI 관리 등 게임 개발의 주요 요소를 담았습니다.
+
+---
+
+## 🎮 데모 플레이
+
+[데모 플레이] (https://sgho0915.github.io/Minions-Defense/WebBuildTest/)
 
 ---
 
