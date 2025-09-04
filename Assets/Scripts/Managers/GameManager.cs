@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         //  프레임 제한 해제
-        Application.targetFrameRate = -1;
+        Application.targetFrameRate = 120;
 
         //  절전 모드에서 최대 성능 유지
         QualitySettings.vSyncCount = 0; // VSync 비활성화
