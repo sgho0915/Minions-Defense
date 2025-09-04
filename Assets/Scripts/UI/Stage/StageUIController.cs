@@ -56,9 +56,9 @@ public class StageUIController : MonoBehaviour
     /// </summary>
     /// <param name="clear">클리어 여부</param>
     /// <param name="criteriaMet">평가기준 충족 여부 배열</param>
-    public void ShowResult(bool clear, bool[] criteriaMet)
+    public void ShowResult(bool clear, bool[] criteriaMet, int reward)
     {        
-        resultView.ShowResult(clear, criteriaMet);
+        resultView.ShowResult(clear, criteriaMet, reward);
     }
 
     private void HandleForceStartWave()

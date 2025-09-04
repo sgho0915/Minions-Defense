@@ -92,7 +92,9 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
 
         bool[] failCriteria = new bool[3] { false, false, false };
-        stageUI.ShowResult(false, failCriteria);
+        int reward = Mathf.RoundToInt(stagePoints * 0.3f); // 게임오버시에는 몬스터 처치 보상의 30%만 반올림 적용해 글로벌 포인트 보상
+
+        stageUI.ShowResult(false, failCriteria, reward);
     }
 
     private void HandleStageClear()
@@ -112,14 +114,14 @@ public class GameManager : MonoBehaviour
         };
 
         // 스테이지 포인트를 글로벌 포인트로 전환 (예: stagePoints * stars)
-        int reward = stagePoints * stars;
+        int reward = Mathf.RoundToInt(stagePoints * stars * 0.5f); // 클리어 시 몬스터 처치 보상 * 별 등급의 50% 만큼 보상
         globalPoints += reward;
         PlayerPrefs.SetInt("GlobalPoints", globalPoints);
         PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
         PlayerPrefs.Save();
 
         
-        stageUI.ShowResult(true, criteriaMet);
+        stageUI.ShowResult(true, criteriaMet, reward);
     }
 
     public void HandleMonsterSpawned(MonsterController mc)
