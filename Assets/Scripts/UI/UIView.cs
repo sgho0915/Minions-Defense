@@ -37,7 +37,7 @@ public abstract class UIView : MonoBehaviour
         {
             canvasGroup.interactable = true;
             canvasGroup.blocksRaycasts = true;
-        });
+        }).SetUpdate(true);
     }
 
     /// <summary>
@@ -50,6 +50,6 @@ public abstract class UIView : MonoBehaviour
             canvasGroup.interactable = false;
             canvasGroup.blocksRaycasts = false;
             gameObject.SetActive(false);
-        });
+        }).SetUpdate(true);
     }
 }

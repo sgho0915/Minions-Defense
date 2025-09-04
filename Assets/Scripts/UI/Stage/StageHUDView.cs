@@ -19,6 +19,10 @@ public class StageHUDView : MonoBehaviour
     [Header("Points Display")]
     [SerializeField] private TextMeshProUGUI txtStagePoints;
 
+    [Header("Pause Button")]
+    [SerializeField] private Button btnPause;
+    public event Action OnPauseClicked;
+
     /// <summary>
     /// HP 바 텍스트 갱신
     /// </summary>
@@ -43,5 +47,9 @@ public class StageHUDView : MonoBehaviour
         txtStagePoints.text = pts.ToString();
     }
 
-    
+    public void StagePause()
+    {
+        btnPause.onClick.RemoveAllListeners();
+        btnPause.onClick.AddListener(() => OnPauseClicked?.Invoke());
+    }
 }

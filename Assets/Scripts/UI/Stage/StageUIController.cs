@@ -4,13 +4,17 @@ using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
 using System.Collections;
+using System;
 
 public class StageUIController : MonoBehaviour
 {
+    
+
     [Header("View 참조 요소")]
     [SerializeField] private StageHUDView hudView;
     [SerializeField] private StageResultView resultView;
     [SerializeField] private TowerSkillListView towerListView;
+    [SerializeField] private StagePauseView pauseView;
     
     private MainTowerController mainTower;
     private WaveManager waveManager;
@@ -25,6 +29,7 @@ public class StageUIController : MonoBehaviour
 
     private void OnDisable()
     {
+        hudView.OnPauseClicked -= HandleShowPauseView;
         towerListView.OnForceStartWaveButtonClicked -= HandleForceStartWave; 
         waveManager.OnWaveIdxChanged -= HandleWaveChanged;
         waveManager.OnWaveSpawnCompleted -= HandleWaveSpawncompleted;
@@ -43,7 +48,9 @@ public class StageUIController : MonoBehaviour
         hudView.UpdateHp(mainTower.CurrentHp, mainTower.MaxHp);
         hudView.UpdateWave(waveManager.CurrentWaveIndex, waveManager.waveDataSO.waves.Length);
         hudView.UpdateStagePoints(startStagePoints);
+        hudView.StagePause();
 
+        hudView.OnPauseClicked += HandleShowPauseView;
         mainTower.OnHpChanged += hudView.UpdateHp;
         waveManager.OnWaveIdxChanged += hudView.UpdateWave;
         waveManager.OnWaveIdxChanged += HandleWaveChanged;
@@ -59,6 +66,11 @@ public class StageUIController : MonoBehaviour
     public void ShowResult(bool clear, bool[] criteriaMet, int reward)
     {        
         resultView.ShowResult(clear, criteriaMet, reward);
+    }
+
+    public void HandleShowPauseView()
+    {
+        pauseView.Show();
     }
 
     private void HandleForceStartWave()
