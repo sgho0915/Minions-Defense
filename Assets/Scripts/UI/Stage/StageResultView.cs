@@ -12,7 +12,7 @@ using DG.Tweening;
 /// - 클리어/실패 배경 블러 색상 변경
 /// - 버튼 표시 제어
 /// </summary>
-public class StageResultView : MonoBehaviour
+public class StageResultView : UIView
 {
     [Header("Root Panel")]
     [SerializeField] private GameObject rootPanel;
@@ -34,8 +34,10 @@ public class StageResultView : MonoBehaviour
     [SerializeField] private Button btnRetry;  
     [SerializeField] private Button btnBack;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         btnRetry.onClick.RemoveAllListeners();
         btnBack.onClick.RemoveAllListeners();
 
@@ -50,6 +52,9 @@ public class StageResultView : MonoBehaviour
     /// <param name="criteriaMet">평가기준 충족 여부 배열(길이 3)</param>
     public void ShowResult(bool clear, bool[] criteriaMet, int reward)
     {
+        Time.timeScale = 0;
+        base.Show();
+
         rootPanel.SetActive(true);
         backgroundImage.color = clear ? successColor : failColor;
         backgroundImageSource.BlurConfig.Strength = 0;  // 블러 값 0으로 초기화
@@ -75,9 +80,12 @@ public class StageResultView : MonoBehaviour
     /// <summary>
     /// 결과 패널 닫기
     /// </summary>
-    public void Hide()
+    public override void Hide()
     {
-        rootPanel.SetActive(false);
+        base.Hide(() =>
+        {
+            rootPanel.SetActive(false);
+        });       
     }
 
     public void BackToHome()

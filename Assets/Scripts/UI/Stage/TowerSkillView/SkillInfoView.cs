@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillInfoView : MonoBehaviour
+public class SkillInfoView : UIView
 {
     [Header("UI 요소")]
     [SerializeField] private GameObject root;
@@ -35,8 +35,10 @@ public class SkillInfoView : MonoBehaviour
     private ISkill _currentSkill;
     private bool _isMaxlevel;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         btnClose.onClick.AddListener(Hide);
         btnExecute.onClick.AddListener(() => {
             if (_currentSkill != null) OnExecuteClicked?.Invoke(_currentSkill);
@@ -59,6 +61,8 @@ public class SkillInfoView : MonoBehaviour
 
     public void Show(ISkill skill)
     {
+        base.Show();
+
         _currentSkill = skill;
         if (_currentSkill == null)
         {
@@ -164,9 +168,10 @@ public class SkillInfoView : MonoBehaviour
         }
     }
 
-    public void Hide()
+    public override void Hide()
     {
-        _currentSkill = null;
-        root.SetActive(false);
+        base.Hide(() => {
+            _currentSkill = null;
+        });
     }
 }

@@ -7,7 +7,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 선택된 타워 아이템의 데이터를 표시하는 View
 /// </summary>
-public class TowerInfoView : MonoBehaviour
+public class TowerInfoView : UIView
 {
     [Header("타워 구매 View")]
     [SerializeField] private GameObject root;          // 뷰 루트 오브젝트
@@ -53,8 +53,9 @@ public class TowerInfoView : MonoBehaviour
 
     private TowerDataSO _currentTowerData;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
 
         btnClose.onClick.AddListener(() => Hide());
         btnCloseUpgrade.onClick.AddListener(() => Hide());
@@ -71,6 +72,9 @@ public class TowerInfoView : MonoBehaviour
     /// <param name="dataSO"></param>
     public void ShowTowerBuyView(TowerDataSO dataSO)
     {
+        base.Show();
+        rootUpgrade.SetActive(false);
+
         _currentTowerData = dataSO;
 
         var lv1Data = dataSO.levelData[0];
@@ -94,6 +98,9 @@ public class TowerInfoView : MonoBehaviour
     /// </summary>
     public void ShowTowerUpgradeView(TowerDataSO towerSO, int currentLevelIdx)
     {
+        base.Show();
+        root.SetActive(false);
+
         if (towerSO == null)
         {
             Debug.LogError("[TowerInfoView] TowerDataSO is null. Make sure factory passes DataSO on Initialize.");
@@ -150,9 +157,11 @@ public class TowerInfoView : MonoBehaviour
     /// <summary>
     /// View 숨기기
     /// </summary>
-    public void Hide()
+    public override void Hide()
     {
-        root.SetActive(false);
-        rootUpgrade.SetActive(false);
+        base.Hide(() => {
+            root.SetActive(false);
+            rootUpgrade.SetActive(false);
+        });
     }
 }

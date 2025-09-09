@@ -42,8 +42,8 @@ public class TowerSkillSelectionController : MonoBehaviour
         }
         listView.PopulateSkills(_activeSkills);
 
-        towerInfoView.Hide();
-        skillInfoView.Hide();
+        //towerInfoView.Hide();
+        //skillInfoView.Hide();
     }
 
     private void OnDestroy()
@@ -62,8 +62,8 @@ public class TowerSkillSelectionController : MonoBehaviour
     /// <param name="towerDataSO"></param>
     private void HandleTowerSelected(TowerDataSO towerDataSO)
     {
+        if(skillInfoView.gameObject.activeSelf) skillInfoView.Hide();
         towerInfoView.ShowTowerBuyView(towerDataSO);
-        skillInfoView.Hide();
     }
 
     private void HandleTowerBuy(TowerDataSO towerDataSO)
@@ -75,7 +75,7 @@ public class TowerSkillSelectionController : MonoBehaviour
 
     private void HandleSkillSelected(ISkill skill)
     {
-        towerInfoView.Hide();
+        if(towerInfoView.gameObject.activeSelf) towerInfoView.Hide();
         skillInfoView.Show(skill);
     }
 

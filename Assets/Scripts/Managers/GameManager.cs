@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
 
     private WaveManager waveManager;
     private MainTowerController mainTower;
-    private StageUIController stageUI;
+    private StageUIController stageUIController;
+    private StageUIManager stageUIManager;
 
     [Header("Currency")]
     public int stagePoints;      // 스테이지 내에서만 쓰는 포인트
@@ -47,14 +48,14 @@ public class GameManager : MonoBehaviour
         // 씬 안의 의존성 컴포넌트들 찾아오기
         waveManager = FindObjectOfType<WaveManager>();
         mainTower = FindObjectOfType<MainTowerController>();
-        stageUI = FindObjectOfType<StageUIController>();
+        stageUIController = FindObjectOfType<StageUIController>();
+        stageUIManager = FindObjectOfType<StageUIManager>();
 
         // 초기값 세팅
         stagePoints = 300;
-        
 
         // UI 초기화
-        stageUI.Initialize(mainTower, waveManager, stagePoints);
+        stageUIController.Initialize(mainTower, waveManager, stagePoints);
 
         // 이벤트 구독
         mainTower.OnDied += HandleStageFail;
@@ -94,7 +95,7 @@ public class GameManager : MonoBehaviour
         bool[] failCriteria = new bool[3] { false, false, false };
         int reward = Mathf.RoundToInt(stagePoints * 0.3f); // 게임오버시에는 몬스터 처치 보상의 30%만 반올림 적용해 글로벌 포인트 보상
 
-        stageUI.ShowResult(false, failCriteria, reward);
+        stageUIManager.ShowResultView(false, failCriteria, reward);
     }
 
     private void HandleStageClear()
@@ -120,8 +121,8 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
         PlayerPrefs.Save();
 
-        
-        stageUI.ShowResult(true, criteriaMet, reward);
+
+        stageUIManager.ShowResultView(true, criteriaMet, reward);
     }
 
     public void HandleMonsterSpawned(MonsterController mc)
