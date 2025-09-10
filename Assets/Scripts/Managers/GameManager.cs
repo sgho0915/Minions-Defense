@@ -124,6 +124,10 @@ public class GameManager : MonoBehaviour
 
         bool[] failCriteria = new bool[3] { false, false, false };
         int reward = Mathf.RoundToInt(stagePoints * 0.3f); // 게임오버시에는 몬스터 처치 보상의 30%만 반올림 적용해 글로벌 포인트 보상
+        globalPoints += reward;
+        PlayerPrefs.SetInt("GlobalPoints", globalPoints);
+        PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", 0);
+        PlayerPrefs.Save();
 
         stageUIManager.ShowResultView(false, failCriteria, reward);
     }
@@ -150,7 +154,6 @@ public class GameManager : MonoBehaviour
         PlayerPrefs.SetInt("GlobalPoints", globalPoints);
         PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
         PlayerPrefs.Save();
-
 
         stageUIManager.ShowResultView(true, criteriaMet, reward);
     }
