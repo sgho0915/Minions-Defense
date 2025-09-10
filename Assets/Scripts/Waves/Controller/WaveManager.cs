@@ -10,8 +10,8 @@ public class WaveManager : MonoBehaviour
 {
     public static WaveManager Instance { get; private set; }
 
-    public Action<int, int> OnWaveIdxChanged;   // 웨이브 변경 상태 이벤트
-    public Action<int> OnWaveSpawnCompleted;    // 웨이브 스폰 완료 이벤트
+    public event Action<int, int> OnWaveIdxChanged;   // 웨이브 변경 상태 이벤트
+    public event Action<int> OnWaveSpawnCompleted;    // 웨이브 스폰 완료 이벤트
     public event Action<MonsterController> OnMonsterSpawned;    // 몬스터 스폰 알림 이벤트
 
     [Header("웨이브 데이터")]
@@ -37,6 +37,15 @@ public class WaveManager : MonoBehaviour
             return;
         }
         Instance = this;
+    }
+
+    // 스테이지 종료 후 씬 전환 시 WaveManager Instance 참조도 정리
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 
     // StageUIController에서 호출 -> delayAfterWave 무시하고 즉시 다음 웨이브 시작

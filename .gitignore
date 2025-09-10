@@ -89,3 +89,6 @@ crashlytics-build.properties
 
 # Ignore Recovery Data
 /[Aa]ssets/_Recovery
+
+# Imported Asset
+/[Aa]ssets/Le Tai's Asset

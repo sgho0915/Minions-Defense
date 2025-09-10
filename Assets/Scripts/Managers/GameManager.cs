@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
 
     private WaveManager waveManager;
     private MainTowerController mainTower;
-    private StageUIController stageUI;
+    private StageUIController stageUIController;
+    private StageUIManager stageUIManager;
 
     [Header("Currency")]
     public int stagePoints;      // 스테이지 내에서만 쓰는 포인트
@@ -23,12 +24,16 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) Destroy(gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
         //  프레임 제한 해제
-        Application.targetFrameRate = -1;
+        Application.targetFrameRate = 120;
 
         //  절전 모드에서 최대 성능 유지
         QualitySettings.vSyncCount = 0; // VSync 비활성화
@@ -39,33 +44,59 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // "Stage_" 로 시작하는 씬이면만 초기화
-        if (!scene.name.StartsWith("Stage_")) return;
+        if (scene.name.StartsWith("Stage_"))
+            InitializeStageScene(scene);
+    }
 
+    private void InitializeStageScene(Scene scene)
+    {
         // 씬 안의 의존성 컴포넌트들 찾아오기
         waveManager = FindObjectOfType<WaveManager>();
         mainTower = FindObjectOfType<MainTowerController>();
-        stageUI = FindObjectOfType<StageUIController>();
+        stageUIController = FindObjectOfType<StageUIController>();
+        stageUIManager = FindObjectOfType<StageUIManager>();
 
         // 초기값 세팅
         stagePoints = 300;
-        
+        isWaveStarted = false;
 
         // UI 초기화
-        stageUI.Initialize(mainTower, waveManager, stagePoints);
+        stageUIController?.Initialize(mainTower, waveManager, stagePoints);
 
         // 이벤트 구독
         mainTower.OnDied += HandleStageFail;
         waveManager.OnMonsterSpawned += HandleMonsterSpawned;
-        
     }
 
-    private void OnDisable()
+    public void CleanupStageScene()
     {
-        if (waveManager != null)
-            waveManager.OnMonsterSpawned -= HandleMonsterSpawned;
+        // 스테이지를 떠날 때 GameManager에서 실행되는 모든 코루틴 중지
+        StopAllCoroutines();
+
+        // 모든 이벤트 구독 해제
+        mainTower.OnDied -= HandleStageFail;
+        waveManager.OnMonsterSpawned -= HandleMonsterSpawned;
+
+        // 모든 컴포넌트 참조 해제
+        waveManager = null;
+        mainTower = null;
+        stageUIController = null;
+        stageUIManager = null;
+
+        // 스테이지 관련 변수 리셋
+        isWaveStarted = false;
     }
 
     public IEnumerator RunStage()
@@ -92,7 +123,13 @@ public class GameManager : MonoBehaviour
         StopAllCoroutines();
 
         bool[] failCriteria = new bool[3] { false, false, false };
-        stageUI.ShowResult(false, failCriteria);
+        int reward = Mathf.RoundToInt(stagePoints * 0.3f); // 게임오버시에는 몬스터 처치 보상의 30%만 반올림 적용해 글로벌 포인트 보상
+        globalPoints += reward;
+        PlayerPrefs.SetInt("GlobalPoints", globalPoints);
+        PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", 0);
+        PlayerPrefs.Save();
+
+        stageUIManager.ShowResultView(false, failCriteria, reward);
     }
 
     private void HandleStageClear()
@@ -112,14 +149,13 @@ public class GameManager : MonoBehaviour
         };
 
         // 스테이지 포인트를 글로벌 포인트로 전환 (예: stagePoints * stars)
-        int reward = stagePoints * stars;
+        int reward = Mathf.RoundToInt(stagePoints * stars * 0.5f); // 클리어 시 몬스터 처치 보상 * 별 등급의 50% 만큼 보상
         globalPoints += reward;
         PlayerPrefs.SetInt("GlobalPoints", globalPoints);
         PlayerPrefs.SetInt($"Stage_{stageIndex}_Stars", stars);
         PlayerPrefs.Save();
 
-        
-        stageUI.ShowResult(true, criteriaMet);
+        stageUIManager.ShowResultView(true, criteriaMet, reward);
     }
 
     public void HandleMonsterSpawned(MonsterController mc)
@@ -150,4 +186,6 @@ public class GameManager : MonoBehaviour
         OnStagePointsChanged?.Invoke(stagePoints);
         return true;
     }
+
+
 }

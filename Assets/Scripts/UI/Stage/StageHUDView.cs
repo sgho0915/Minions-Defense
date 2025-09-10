@@ -8,7 +8,7 @@ using System;
 /// 스테이지 플레이 중 HUD(View) 요소 관리
 /// - HP 바, 웨이브, 스테이지 포인트 텍스트 업데이트
 /// </summary>
-public class StageHUDView : MonoBehaviour
+public class StageHUDView : UIView
 {
     [Header("HP Display")]
     [SerializeField] private TextMeshProUGUI txtHP;
@@ -18,6 +18,10 @@ public class StageHUDView : MonoBehaviour
 
     [Header("Points Display")]
     [SerializeField] private TextMeshProUGUI txtStagePoints;
+
+    [Header("Pause Button")]
+    [SerializeField] private Button btnPause;
+    public event Action OnPauseClicked;
 
     /// <summary>
     /// HP 바 텍스트 갱신
@@ -43,5 +47,9 @@ public class StageHUDView : MonoBehaviour
         txtStagePoints.text = pts.ToString();
     }
 
-    
+    public void InitStagePause()
+    {
+        btnPause.onClick.RemoveAllListeners();
+        btnPause.onClick.AddListener(() => OnPauseClicked?.Invoke());
+    }
 }

@@ -40,10 +40,4 @@ public class StageListView : UIView
     {
         lobbyUIManager.OnClickLobbyButton();
     }
-
-    public void OnClickPlayStage(int stageIndex)
-    {
-        GameManager.Instance.stageIndex = stageIndex;
-        SceneManager.LoadScene($"Stage_{stageIndex}");
-    }
 }

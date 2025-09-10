@@ -8,7 +8,7 @@ using UnityEngine.UI;
 /// <summary>
 /// 타워 선택 리스트 표시, 선택 시 이벤트 방출 View
 /// </summary>
-public class TowerSkillListView : MonoBehaviour
+public class TowerSkillListView : UIView
 {
     public event Action<TowerDataSO> OnTowerSelected;
     public event Action<ISkill> OnSkillSelected;    
@@ -30,8 +30,10 @@ public class TowerSkillListView : MonoBehaviour
     private Dictionary<ISkill, SkillListItem> _skillItems = new Dictionary<ISkill, SkillListItem>();
 
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         // 클릭이 들어오면 다음 웨이브를 강제로 시작하도록 StageUiController로 이벤트만 날려줌
         btnForceStartWave.onClick.AddListener(() => {
             if (!GameManager.Instance.isWaveStarted)
@@ -46,23 +48,26 @@ public class TowerSkillListView : MonoBehaviour
         });
     }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
     /// <summary>
     /// 에디터에 할당된 TowerDataSo 배열로 리스트를 채움
     /// </summary>
-    /// <param name="towerDataArray"></param>
     public void PopulateTowers(TowerDataSO[] towerDataArray)
     {
         foreach (var data in towerDataArray)
         {
             var item = Instantiate(towerItemPrefab, towerContentParent);
-            item.Setup(data, () => { OnTowerSelected?.Invoke(data); Debug.Log("타워 선택됨"); });
+            item.Setup(data, () => { OnTowerSelected?.Invoke(data); });
         }
     }
 
     /// <summary>
     /// 스킬 목록을 채움
     /// </summary>
-    /// <param name="skills"></param>
     public void PopulateSkills(System.Collections.Generic.List<ISkill> skills)
     {
         foreach (var skill in skills)

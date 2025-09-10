@@ -1,5 +1,7 @@
 ﻿// LobbyUIManager.cs
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -11,14 +13,31 @@ public class LobbyUIManager : MonoBehaviour
     [SerializeField] private UIView lobbyView;      // 메인 로비 Canvas
     [SerializeField] private UIView stageListView;  // 스테이지 목록 Canvas
 
-    
+    private List<UIView> _allViews;
+    private UIView _currentView;
 
-    private IEnumerator Start()
+    private void Awake()
     {
-        // 초기 상태 설정: 로비로 시작
-        yield return null;
-        lobbyView.Show();
-        stageListView.Hide();
+        _allViews = new List<UIView> { lobbyView, stageListView };
+    }
+
+    private void Start()
+    {
+        foreach (var view in _allViews) { view.gameObject.SetActive(false); }
+
+        ShowView(lobbyView);
+    }
+
+    /// <summary>
+    /// 특정 View만 표시하고 나머지는 숨김
+    /// </summary>
+    private void ShowView(UIView viewToShow)
+    {
+        if (_currentView != null && _currentView != viewToShow)
+            _currentView.Hide();
+
+        viewToShow.Show();
+        _currentView = viewToShow;
     }
 
     /// <summary>
@@ -26,13 +45,11 @@ public class LobbyUIManager : MonoBehaviour
     /// </summary>
     public void OnClickStageButton()
     {
-        lobbyView.Hide();
-        stageListView.Show();
+        ShowView(stageListView);
     }
 
     public void OnClickLobbyButton()
     {
-        lobbyView.Show();
-        stageListView.Hide();
+        ShowView(lobbyView);
     }
 }
