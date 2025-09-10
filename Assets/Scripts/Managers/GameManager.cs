@@ -24,7 +24,11 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null) Destroy(gameObject);
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -40,11 +44,24 @@ public class GameManager : MonoBehaviour
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+
+        if (Instance == this)
+        {
+            Instance = null;
+        }
+    }
+
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // "Stage_" 로 시작하는 씬이면만 초기화
-        if (!scene.name.StartsWith("Stage_")) return;
+        if (scene.name.StartsWith("Stage_"))
+            InitializeStageScene(scene);
+    }
 
+    private void InitializeStageScene(Scene scene)
+    {
         // 씬 안의 의존성 컴포넌트들 찾아오기
         waveManager = FindObjectOfType<WaveManager>();
         mainTower = FindObjectOfType<MainTowerController>();
@@ -53,20 +70,33 @@ public class GameManager : MonoBehaviour
 
         // 초기값 세팅
         stagePoints = 300;
+        isWaveStarted = false;
 
         // UI 초기화
-        stageUIController.Initialize(mainTower, waveManager, stagePoints);
+        stageUIController?.Initialize(mainTower, waveManager, stagePoints);
 
         // 이벤트 구독
         mainTower.OnDied += HandleStageFail;
         waveManager.OnMonsterSpawned += HandleMonsterSpawned;
-        
     }
 
-    private void OnDisable()
+    public void CleanupStageScene()
     {
-        if (waveManager != null)
-            waveManager.OnMonsterSpawned -= HandleMonsterSpawned;
+        // 스테이지를 떠날 때 GameManager에서 실행되는 모든 코루틴 중지
+        StopAllCoroutines();
+
+        // 모든 이벤트 구독 해제
+        mainTower.OnDied -= HandleStageFail;
+        waveManager.OnMonsterSpawned -= HandleMonsterSpawned;
+
+        // 모든 컴포넌트 참조 해제
+        waveManager = null;
+        mainTower = null;
+        stageUIController = null;
+        stageUIManager = null;
+
+        // 스테이지 관련 변수 리셋
+        isWaveStarted = false;
     }
 
     public IEnumerator RunStage()
@@ -153,4 +183,6 @@ public class GameManager : MonoBehaviour
         OnStagePointsChanged?.Invoke(stagePoints);
         return true;
     }
+
+
 }

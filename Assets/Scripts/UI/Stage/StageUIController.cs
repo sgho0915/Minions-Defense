@@ -5,6 +5,7 @@ using TMPro;
 using Unity.VisualScripting;
 using System.Collections;
 using System;
+using UnityEngine.SceneManagement;
 
 public class StageUIController : MonoBehaviour
 {

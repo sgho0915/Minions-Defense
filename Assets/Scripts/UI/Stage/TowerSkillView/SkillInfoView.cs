@@ -115,7 +115,6 @@ public class SkillInfoView : UIView
                 _isMaxlevel = true;
             }
         }
-        // else if (data is SpikeLevelData spikeData) { ... }
     }
 
     public void ShowUpgradeView()

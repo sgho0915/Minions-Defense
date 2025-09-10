@@ -48,6 +48,11 @@ public class TowerSkillListView : UIView
         });
     }
 
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+    }
+
     /// <summary>
     /// 에디터에 할당된 TowerDataSo 배열로 리스트를 채움
     /// </summary>

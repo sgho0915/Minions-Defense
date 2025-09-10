@@ -41,9 +41,6 @@ public class TowerSkillSelectionController : MonoBehaviour
             _activeSkills.Add(skillInstance);
         }
         listView.PopulateSkills(_activeSkills);
-
-        //towerInfoView.Hide();
-        //skillInfoView.Hide();
     }
 
     private void OnDestroy()

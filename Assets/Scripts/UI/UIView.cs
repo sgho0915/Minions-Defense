@@ -10,7 +10,6 @@ using DG.Tweening;
 /// 4. abstract 사용 : 자식 클래스에서 반드시 override해서 구현하도록 해야함(이 부분에서 virtual과 차이 있음)
 /// 5. virtual 사용: 자식 클래스에서 선택적으로 Awake, Show, Hide 메서드를 override 해서 확장 가능하도록 하기 위함
 /// 6. UIView를 상속받는 View 클래스들에서 Awake, Show, Hide를 override 해 사용할 때 base.Awake(), base.Show(), base.Hide()가 포함되는 이유는 부모클래스에 정의된 해당 함수를 수행해 부모클래스 초기화 및 수행돼야할 기본 기능을 동작시켜 부모의 핵심기능을 재사용하면서 각 View의 개별 기능을 덧붙이기 위해 사용
-/// 
 /// </summary>
 
 [RequireComponent (typeof(CanvasGroup))]    // canvasGroup이 없으면 자동 추가
