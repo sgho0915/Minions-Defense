@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageUIManager : MonoBehaviour
 {
@@ -24,19 +25,19 @@ public class StageUIManager : MonoBehaviour
         // 이벤트 구독
         hudView.OnPauseClicked += ShowPauseView;    // HUDView에 속한 일시정지 버튼 누르면 PauseView 활성화
         pauseView.OnHideComplete += ShowBackgroundViews;    // 일시정지 -> 게임재개 시 배경 View 활성화
-    }
 
-    //private void OnEnable()
-    //{
-    //    resultView.Hide();
-    //    pauseView.Hide();
-    //}
+        pauseView.OnBackToLobbyClicked += BackToLobby;
+        resultView.OnBackToLobbyClicked += BackToLobby;
+
+    }
 
     private void OnDestroy()
     {
         // 이벤트 구독 해지
         hudView.OnPauseClicked -= ShowPauseView;
         pauseView.OnHideComplete -= ShowBackgroundViews;
+        pauseView.OnBackToLobbyClicked -= BackToLobby;
+        resultView.OnBackToLobbyClicked -= BackToLobby;
     }
 
     public void ShowResultView(bool clear, bool[] criteriaMet, int reward)
@@ -60,4 +61,11 @@ public class StageUIManager : MonoBehaviour
     {
         foreach (var view in _backgroundViews) view.Show();
     }
+
+    private void BackToLobby()
+    {
+        Time.timeScale = 1;
+        GameManager.Instance.CleanupStageScene();
+        SceneManager.LoadScene(0);    }
+
 }

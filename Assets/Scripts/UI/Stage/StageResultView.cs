@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using LeTai.Asset.TranslucentImage;
 using DG.Tweening;
+using System;
 
 /// <summary>
 /// 게임 종료 시 결과 패널 전담 View
@@ -34,6 +35,8 @@ public class StageResultView : UIView
     [SerializeField] private Button btnRetry;  
     [SerializeField] private Button btnBack;
 
+    public event Action OnBackToLobbyClicked;
+
     protected override void Awake()
     {
         base.Awake();
@@ -42,7 +45,7 @@ public class StageResultView : UIView
         btnBack.onClick.RemoveAllListeners();
 
         btnRetry.onClick.AddListener(RestryStage);
-        btnBack.onClick.AddListener(BackToHome);
+        btnBack.onClick.AddListener(() => OnBackToLobbyClicked?.Invoke());
     }
 
     /// <summary>
@@ -88,10 +91,6 @@ public class StageResultView : UIView
         });       
     }
 
-    public void BackToHome()
-    {
-        SceneManager.LoadScene(0); // 로비씬으로 이동
-    }
 
     public void RestryStage()
     {         

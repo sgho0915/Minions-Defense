@@ -4,6 +4,7 @@ using System;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class StagePauseView : UIView
@@ -14,6 +15,7 @@ public class StagePauseView : UIView
     [SerializeField] private Button btnBackToLobby;
 
     public event Action OnHideComplete;
+    public event Action OnBackToLobbyClicked;
 
     protected override void Awake()
     {
@@ -21,6 +23,9 @@ public class StagePauseView : UIView
 
         btnResume.onClick.RemoveAllListeners();
         btnResume.onClick.AddListener(Hide);
+
+        btnBackToLobby.onClick.RemoveAllListeners();
+        btnBackToLobby.onClick.AddListener(() => OnBackToLobbyClicked?.Invoke());
     }
 
     public override void Show()
