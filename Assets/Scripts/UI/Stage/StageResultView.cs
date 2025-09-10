@@ -93,7 +93,8 @@ public class StageResultView : UIView
 
 
     public void RestryStage()
-    {         
+    {
+        Time.timeScale = 1;
         SceneManager.LoadScene($"Stage_{GameManager.Instance.stageIndex}"); // 현재 스테이지를 다시 시작
     }
 }
