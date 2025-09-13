@@ -1,3 +1,4 @@
+
 # 📂 UserSkills 폴더 구조 및 클래스 간략 설명
 
 ### 📌 개요
@@ -9,76 +10,46 @@
 
 ## 📁 폴더 구조 및 역할
 
-### 🔹 **Data**
+### 🔹 **Controllers**
 
-> 레벨별 파라미터만 담는 순수 데이터 모델 클래스
+> 인터페이스를 구현해 실제 스킬 로직을 구현하는 폴더입니다.
 
-* **`CommonSkillLevelData.cs`**  
-  * 모든 스킬이 공유하는 공통 필드(`level`, `upgradeCost`, `modelPrefab`, `cooldown`, `skillIcon`, `skillDesc` 등)  
-* **`MagicPoeLevelData.cs`**  
-  * “마법의 포댕이” 전용 레벨 데이터(`moveSpeed`, `collideRadius`, `baseDamage`, `knockbackForce`, `stunDuration`, `chainRadius`, 이펙트·사운드 등)  
-* **`SpikeLevelData.cs`**  
-  * “스파이크” 전용 레벨 데이터(`trapDuration`, `trapRadius`, `damagePerSecond`, `slowAmount`, `slowDuration`, 이펙트·사운드 등)  
+* **`MagicPoeController.cs`**  
+  * `ISkill`을 상속받아 마법의 포댕이 스킬에 대한 초기화, 시전, 비용, 사용 규칙 등의 조건을 관리하는 컨트롤러 클래스
+* **`MagicPoePatroller.cs`**  
+  * MagicPoeLevelData, WayPoint 정보를 받아 마법의 포댕이 프리팹 인스턴스가 정해진 경로를 따라 이동, 공격, 소멸하는 유닛 자체의 행동을 관리하는 컨트롤러 클래스
 
 ---
 
-### 🔹 **Enums**
+### 🔹 **Data**
 
-> 스킬 시스템 전반에서 재사용되는 열거형 정의
+> 스킬에 대한 공통 정보와 공통 정보를 가진 개별 스킬에 대한 레벨별 데이터와 관리 로직이 담긴 폴더입니다.
 
-* **`SkillEnums.cs`**  
-  * 스킬 종류 구분(`MagicPoe`, `Spike`)  
-
+* **`MagicPoeDataSO.cs`**  
+  * `SkillDataSO` 를 상속받아 마법의 포댕이 스킬 컨트롤러를 생성하고 초기화 하는 ScriptableObject
+* **`MagicPoeLevelData.cs`**  
+  * `SkillLevelData` 를 상속받은 마법의 포댕이 스킬 레벨별 데이터
+* **`SkillDataSO.cs`**  
+  * 모든 스킬 데이터 SO의 기반이 되는 추상클래스로 UI 표시에 필요한 공통 정보, 자신을 제어할 Controller를 생성하는 책임
+* **`SkillLevelData.cs`**  
+  * 모든 스킬 데이터의 기반이 되는 추상클래스로 UI 표시 및 공통 로직에 필요한 최소한의 데이터를 정의
+  
 ---
 
 ### 🔹 **Interface**
 
-> 스킬 컨트롤러가 반드시 구현해야 할 계약(인터페이스)
+> 스킬 컨트롤러가 반드시 구현해야 할 계약(인터페이스)을 정의한 폴더입니다.
 
 * **`ISkill.cs`**  
-  * `Initialize(dataSO, owner)`, `SetLevel(level)`, `CastSkill(targetPos)`, `IsReady()` 등 메서드 시그니처 정의  
+  * `Initialize(dataSO, owner)`, `SetLevel(level)`, `CastSkill(targetPos)`, `IsReady()` 등 스킬 동작에 대한 인터페이스로, 데이터와 주체로 초기화 해 어떤 스킬 데이터 SO든 받을 수 있도록 정의
 
 ---
 
-### 🔹 **Factory**
+### 🔹 **ScriptableObject**
 
-> ScriptableObject → 컨트롤러 인스턴스화 역할
-
-* **`SkillFactory.cs`**  
-  * `MagicPoeDataSO` → `MagicPoeController`  
-  * `SpikeDataSO` → `SpikeController`  
-  * `CreateSkill(dataSO, owner)` 메서드 제공  
-
----
-
-### 🔹 **Controllers**
-
-> 실제 스킬 로직을 구현하는 컴포넌트
-
-* **`BaseSkillController.cs`**  
-  * 제네릭 공통 로직(쿨다운, 레벨 선택, 공통 필드 접근)  
-* **`MagicPoeController.cs`**  
-  * 고양이 투사체 생성·이동·애니메이션·`MagicPoeProjectile` 연결  
-* **`MagicPoeProjectile.cs`**  
-  * 투사체 충돌 시 넉백·스턴·데미지·체인 연쇄 처리  
-* **`SpikeController.cs`**  
-  * 지정 지점에 스파이크 트랩 설치·`SpikeTrap` 연결  
-* **`SpikeTrap.cs`**  
-  * 트랩 영역 진입 몬스터에 초당 데미지·감속 적용·유지시간 후 소멸  
-
----
-
-### 🔹 **ScriptableObjects**
-
-> 에디터에서 `.asset`으로 생성되는 스킬 데이터
+> ScriptableObject의 스 관련 `.asset` 파일들이 모이는 폴더입니다.
 
 * **`MagicPoeDataSO.cs`**  
-  * “마법의 포댕이” 전체 레벨(1~3) 설정 보관  
-* **`SpikeDataSO.cs`**  
-  * “스파이크” 전체 레벨(1~3) 설정 보관  
+  * “마법의 포댕이” 전체 레벨(1~3) 설정 데이터가 담긴 ScriptableObject 에셋.
 
 ---
-
-### 🔹 **Prefabs**
-  * 게임에서 사용되는 레벨별 스킬 프리팹 모음
-  * 각 프리팹에는 대응 컨트롤러(`MagicPoeController`/`SpikeController`)와 이펙트용 컴포넌트가 포함
