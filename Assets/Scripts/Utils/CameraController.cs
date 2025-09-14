@@ -121,7 +121,7 @@ public class CameraController : MonoBehaviour
         var cam = Camera.main;
         if (cam == null) return;
 
-#if UNITY_EDITOR || UNITY_STANDALONE
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_WEBGL
         if (Mouse.current == null) return;
         if (!Mouse.current.leftButton.isPressed) return;
 
