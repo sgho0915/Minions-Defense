@@ -20063,7 +20063,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2169.7446, y: 0}
+  m_SizeDelta: {x: -1946.6252, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1334494269
 MonoBehaviour:
@@ -33839,10 +33839,10 @@ SceneRoots:
   - {fileID: 349068286}
   - {fileID: 1465627382}
   - {fileID: 1453362603}
-  - {fileID: 777107115}
-  - {fileID: 532593178}
-  - {fileID: 309102266}
-  - {fileID: 1622472990}
   - {fileID: 1632746360}
   - {fileID: 285409084}
   - {fileID: 192295731}
+  - {fileID: 1622472990}
+  - {fileID: 777107115}
+  - {fileID: 532593178}
+  - {fileID: 309102266}
