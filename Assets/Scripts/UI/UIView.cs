@@ -18,7 +18,7 @@ public abstract class UIView : MonoBehaviour
     [Header("Fade 옵션")]
     [SerializeField] protected float fadeDuration = 0.25f;
 
-    protected CanvasGroup canvasGroup;
+    public CanvasGroup canvasGroup;
     private Tweener _fadeTween;
 
     protected virtual void Awake()

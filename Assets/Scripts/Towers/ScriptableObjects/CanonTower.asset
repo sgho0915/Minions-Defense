@@ -17,7 +17,6 @@ MonoBehaviour:
   levelData:
   - towerPrefab: {fileID: 2562698006400567263, guid: 623a40ed6942caf47a2b5a33c59c83dd, type: 3}
     level: 1
-    level4Type: 0
     levelIcon: {fileID: 21300000, guid: 4dc02d104e5b70b48bfae79cc46259d7, type: 3}
     description: "50\uC758 \uB370\uBBF8\uC9C0\uB85C 2\uCD08\uB9C8\uB2E4 \uC0AC\uAC70\uB9AC
       5.0 \uB0B4\uC758 \uC801\uC5D0\uAC8C \uB2E8\uC77C \uACE1\uC0AC\uD3EC\uB97C \uBC1C\uC0AC\uD558\uC5EC
@@ -48,17 +47,16 @@ MonoBehaviour:
     upgradeCost: 50
     sellPrice: 35
     attackEffectPrefab: {fileID: 0}
-    attackSoundClip: {fileID: 0}
+    attackSoundClip: {fileID: 8300000, guid: 8d51d2faaca8a8842bee40e00a6f537b, type: 3}
     projectileImpactEffectPrefab: {fileID: 0}
     projectileImpactSoundClip: {fileID: 0}
-    upgradeSoundClip: {fileID: 0}
+    upgradeSoundClip: {fileID: 8300000, guid: 4900f59a6d19d384f8dfe1b884350307, type: 3}
     buildEffect: {fileID: 0}
-    buildSoundClip: {fileID: 0}
+    buildSoundClip: {fileID: 8300000, guid: b496171ae3dd6474a9fb5963c70fce42, type: 3}
     destroyEffect: {fileID: 0}
-    destroySoundClip: {fileID: 0}
+    destroySoundClip: {fileID: 8300000, guid: f7feb0707941fa64eaed0cf0eeea1487, type: 3}
   - towerPrefab: {fileID: 1141391816158693092, guid: e49effa2788570849adda8b0ff295a43, type: 3}
     level: 2
-    level4Type: 0
     levelIcon: {fileID: 21300000, guid: d6617cba384f70c45b3bf0bad63f5496, type: 3}
     description: "\uB370\uBBF8\uC9C0\uAC00 60\uC73C\uB85C \uC99D\uAC00\uD558\uACE0,
       1.8\uCD08\uB9C8\uB2E4 \uC0AC\uAC70\uB9AC 5.2 \uB0B4\uC758 \uC801\uC5D0\uAC8C
@@ -90,17 +88,16 @@ MonoBehaviour:
     upgradeCost: 70
     sellPrice: 40
     attackEffectPrefab: {fileID: 0}
-    attackSoundClip: {fileID: 0}
+    attackSoundClip: {fileID: 8300000, guid: 8d51d2faaca8a8842bee40e00a6f537b, type: 3}
     projectileImpactEffectPrefab: {fileID: 0}
     projectileImpactSoundClip: {fileID: 0}
-    upgradeSoundClip: {fileID: 0}
+    upgradeSoundClip: {fileID: 8300000, guid: 4900f59a6d19d384f8dfe1b884350307, type: 3}
     buildEffect: {fileID: 0}
-    buildSoundClip: {fileID: 0}
+    buildSoundClip: {fileID: 8300000, guid: b496171ae3dd6474a9fb5963c70fce42, type: 3}
     destroyEffect: {fileID: 0}
-    destroySoundClip: {fileID: 0}
+    destroySoundClip: {fileID: 8300000, guid: f7feb0707941fa64eaed0cf0eeea1487, type: 3}
   - towerPrefab: {fileID: 3252233472838395706, guid: 691f1fb3074e59d47bb922a13e984681, type: 3}
     level: 3
-    level4Type: 0
     levelIcon: {fileID: 21300000, guid: 3cf372932085a434ba7fb1e068b769dd, type: 3}
     description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE0\uC704\uB825 \uACE1\uC0AC\uD3EC\uB97C
       1.6\uCD08\uB9C8\uB2E4 \uC0AC\uAC70\uB9AC 5.5 \uB0B4\uC758 \uC801\uC5D0\uAC8C
@@ -132,17 +129,16 @@ MonoBehaviour:
     upgradeCost: 100
     sellPrice: 70
     attackEffectPrefab: {fileID: 0}
-    attackSoundClip: {fileID: 0}
+    attackSoundClip: {fileID: 8300000, guid: 8d51d2faaca8a8842bee40e00a6f537b, type: 3}
     projectileImpactEffectPrefab: {fileID: 0}
     projectileImpactSoundClip: {fileID: 0}
-    upgradeSoundClip: {fileID: 0}
+    upgradeSoundClip: {fileID: 8300000, guid: 4900f59a6d19d384f8dfe1b884350307, type: 3}
     buildEffect: {fileID: 0}
-    buildSoundClip: {fileID: 0}
+    buildSoundClip: {fileID: 8300000, guid: b496171ae3dd6474a9fb5963c70fce42, type: 3}
     destroyEffect: {fileID: 0}
-    destroySoundClip: {fileID: 0}
+    destroySoundClip: {fileID: 8300000, guid: f7feb0707941fa64eaed0cf0eeea1487, type: 3}
   - towerPrefab: {fileID: 2648066166186033522, guid: 4948391a7bf7cf648ab205cc8a47b474, type: 3}
     level: 4
-    level4Type: 0
     levelIcon: {fileID: 21300000, guid: b6dd96bb14937174c8d0871ed4303f4a, type: 3}
     description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE1\uC0AC\uD3EC\uB97C 1.6\uCD08\uB9C8\uB2E4
       \uC0AC\uAC70\uB9AC 5.5\uAE4C\uC9C0 \uBC1C\uC0AC\uD558\uBA70, \uD3ED\uBC1C \uBC18\uACBD\uC774
@@ -174,17 +170,16 @@ MonoBehaviour:
     upgradeCost: 300
     sellPrice: 200
     attackEffectPrefab: {fileID: 0}
-    attackSoundClip: {fileID: 0}
+    attackSoundClip: {fileID: 8300000, guid: 8d51d2faaca8a8842bee40e00a6f537b, type: 3}
     projectileImpactEffectPrefab: {fileID: 0}
     projectileImpactSoundClip: {fileID: 0}
-    upgradeSoundClip: {fileID: 0}
+    upgradeSoundClip: {fileID: 8300000, guid: 4900f59a6d19d384f8dfe1b884350307, type: 3}
     buildEffect: {fileID: 0}
-    buildSoundClip: {fileID: 0}
+    buildSoundClip: {fileID: 8300000, guid: b496171ae3dd6474a9fb5963c70fce42, type: 3}
     destroyEffect: {fileID: 0}
-    destroySoundClip: {fileID: 0}
+    destroySoundClip: {fileID: 8300000, guid: f7feb0707941fa64eaed0cf0eeea1487, type: 3}
   - towerPrefab: {fileID: 4176896184558140998, guid: 09cc95fd2c04d044d8506e723283910c, type: 3}
     level: 5
-    level4Type: 0
     levelIcon: {fileID: 21300000, guid: 8a5245810e209a94b8452984929e8928, type: 3}
     description: "\uB370\uBBF8\uC9C0 75\uC758 \uACE1\uC0AC\uD3EC\uB97C 1.6\uCD08\uB9C8\uB2E4
       \uC0AC\uAC70\uB9AC 5.5\uAE4C\uC9C0 \uBC1C\uC0AC\uD558\uBA70, \uD3ED\uBC1C \uC2DC
@@ -216,11 +211,11 @@ MonoBehaviour:
     upgradeCost: 300
     sellPrice: 200
     attackEffectPrefab: {fileID: 0}
-    attackSoundClip: {fileID: 0}
+    attackSoundClip: {fileID: 8300000, guid: 8d51d2faaca8a8842bee40e00a6f537b, type: 3}
     projectileImpactEffectPrefab: {fileID: 0}
     projectileImpactSoundClip: {fileID: 0}
-    upgradeSoundClip: {fileID: 0}
+    upgradeSoundClip: {fileID: 8300000, guid: 4900f59a6d19d384f8dfe1b884350307, type: 3}
     buildEffect: {fileID: 0}
-    buildSoundClip: {fileID: 0}
+    buildSoundClip: {fileID: 8300000, guid: b496171ae3dd6474a9fb5963c70fce42, type: 3}
     destroyEffect: {fileID: 0}
-    destroySoundClip: {fileID: 0}
+    destroySoundClip: {fileID: 8300000, guid: f7feb0707941fa64eaed0cf0eeea1487, type: 3}

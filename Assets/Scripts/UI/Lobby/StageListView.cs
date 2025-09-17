@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 public class StageListView : UIView
 {
     [SerializeField] private Button btnBackToLobby;
+    [SerializeField] private Button btnSettings;
 
     [Header("Prefab & Container")]
     [SerializeField] private StageItemView stageItemPrefab;
@@ -23,7 +24,9 @@ public class StageListView : UIView
     {
         base.Awake();
         lobbyUIManager = FindObjectOfType<LobbyUIManager>();
+
         btnBackToLobby.onClick.AddListener(OnClickBackToLobby);
+        btnSettings.onClick.AddListener(() => lobbyUIManager.OnClickSettingsButton());
 
         // 각 데이터마다 버튼을 Instantiate + Setup
         foreach (var data in stageDatas)

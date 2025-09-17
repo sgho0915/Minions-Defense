@@ -15,6 +15,7 @@ public class StagePauseView : UIView
     [SerializeField] private Button btnBackToLobby;
 
     public event Action OnHideComplete;
+    public event Action OnShowSettings;
     public event Action OnBackToLobbyClicked;
 
     protected override void Awake()
@@ -23,6 +24,9 @@ public class StagePauseView : UIView
 
         btnResume.onClick.RemoveAllListeners();
         btnResume.onClick.AddListener(Hide);
+
+        btnSettings.onClick.RemoveAllListeners();
+        btnSettings.onClick.AddListener(() => OnShowSettings?.Invoke());
 
         btnBackToLobby.onClick.RemoveAllListeners();
         btnBackToLobby.onClick.AddListener(() => OnBackToLobbyClicked?.Invoke());
