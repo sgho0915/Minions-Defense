@@ -217,6 +217,7 @@ MonoBehaviour:
   - {fileID: 4783676245388229003}
   - {fileID: 6106226602441476641}
   btnPlay: {fileID: 4290724375138323284}
+  stageSelectClip: {fileID: 8300000, guid: d1ed7f691d5ac1b4fbc344e89265ec0b, type: 3}
   activeStarColor: {r: 1, g: 1, b: 1, a: 1}
   inactiveStarColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.8}
 --- !u!1 &1920376678936853311
