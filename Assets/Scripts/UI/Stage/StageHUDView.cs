@@ -50,6 +50,9 @@ public class StageHUDView : UIView
     public void InitStagePause()
     {
         btnPause.onClick.RemoveAllListeners();
-        btnPause.onClick.AddListener(() => OnPauseClicked?.Invoke());
+        btnPause.onClick.AddListener(() => { 
+            SoundManager.Instance.PlayButtonClicked();
+            OnPauseClicked?.Invoke(); 
+        });
     }
 }

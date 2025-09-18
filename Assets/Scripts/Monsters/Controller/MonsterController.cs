@@ -90,10 +90,13 @@ public class MonsterController : MonoBehaviour, IMonster
                 {
                     var projectile = Instantiate(_curLevel.projectilePrefab, attackPos.position, attackPos.rotation);
                     projectile.AddComponent<MonsterProjectile>().Setup(_curLevel, mainTower.transform.position);
+
+                    SoundManager.Instance.PlaySFX(_curLevel.attackSoundClip);
                 }
                 else
                 {
                     mainTower.ApplyDamage(_curLevel.attackPower);
+                    SoundManager.Instance.PlaySFX(_curLevel.attackSoundClip);
                 }
                 yield return new WaitForSeconds(0.1f);
             }

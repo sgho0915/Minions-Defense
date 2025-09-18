@@ -16,6 +16,7 @@ public class MonsterLevelData
     public float attackRange;             // 공격 사정거리
     public GameObject projectilePrefab;   // 원거리 공격 시 발사할 투사체 프리팹    
     public float projectileSpeed;         // 투사체 비행 속도 (유닛 단위/초)
+    public AudioClip attackSoundClip;     // 공격 사운드
 
     [Header("보상")]
     public int rewardPointsMin;           // 고정 보상 포인트(랜덤 미사용 시)

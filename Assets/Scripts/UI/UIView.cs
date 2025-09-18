@@ -60,6 +60,7 @@ public abstract class UIView : MonoBehaviour
     /// <param name="onHideComplete">숨김 애니메이션 완료 후 실행될 콜백</param>
     public virtual void Hide(Action onHideComplete = null)
     {
+        SoundManager.Instance.PlayButtonClicked();
         _fadeTween?.Kill();
 
         _fadeTween = canvasGroup.DOFade(0, fadeDuration)

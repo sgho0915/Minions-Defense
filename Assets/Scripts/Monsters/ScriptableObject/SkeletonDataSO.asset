@@ -24,6 +24,7 @@ MonoBehaviour:
     attackRange: 3
     projectilePrefab: {fileID: 0}
     projectileSpeed: 0
+    attackSoundClip: {fileID: 8300000, guid: 7a19dcdc1255e2e4fa5955d3046969ee, type: 3}
     rewardPointsMin: 10
     rewardPointsMax: 10
   - monsterPrefab: {fileID: 6634875652449548137, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
@@ -35,6 +36,7 @@ MonoBehaviour:
     attackRange: 5
     projectilePrefab: {fileID: 0}
     projectileSpeed: 0
+    attackSoundClip: {fileID: 8300000, guid: c196ff8eec8f39b43858b9ff96925077, type: 3}
     rewardPointsMin: 30
     rewardPointsMax: 30
   - monsterPrefab: {fileID: 2818738929230737498, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
@@ -46,5 +48,6 @@ MonoBehaviour:
     attackRange: 7
     projectilePrefab: {fileID: 132410131150665497, guid: 4d74599aaee493147ad1a157be0cb3d6, type: 3}
     projectileSpeed: 20
+    attackSoundClip: {fileID: 8300000, guid: 7d1b38d7bfd44e64f8022398a1231083, type: 3}
     rewardPointsMin: 70
     rewardPointsMax: 70

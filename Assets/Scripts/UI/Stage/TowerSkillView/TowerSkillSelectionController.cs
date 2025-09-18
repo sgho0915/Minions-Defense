@@ -59,12 +59,14 @@ public class TowerSkillSelectionController : MonoBehaviour
     /// <param name="towerDataSO"></param>
     private void HandleTowerSelected(TowerDataSO towerDataSO)
     {
+        SoundManager.Instance.PlayButtonClicked();
         if(skillInfoView.gameObject.activeSelf) skillInfoView.Hide();
         towerInfoView.ShowTowerBuyView(towerDataSO);
     }
 
     private void HandleTowerBuy(TowerDataSO towerDataSO)
     {
+        SoundManager.Instance.PlayButtonClicked();
         // 레벨1 기준으로 배치 시작
         TowerPlacementController.Instance.BeginPlacement(towerDataSO, towerDataSO.levelData[0]);
         towerInfoView.Hide();
@@ -72,12 +74,14 @@ public class TowerSkillSelectionController : MonoBehaviour
 
     private void HandleSkillSelected(ISkill skill)
     {
-        if(towerInfoView.gameObject.activeSelf) towerInfoView.Hide();
+        SoundManager.Instance.PlayButtonClicked();
+        if (towerInfoView.gameObject.activeSelf) towerInfoView.Hide();
         skillInfoView.Show(skill);
     }
 
     private void HandleSkillExecute(ISkill skill)
     {
+        SoundManager.Instance.PlayButtonClicked();
         int cost = skill.CurrentLevelData.executeCost;
         if (GameManager.Instance.TrySpendStagePoints(cost))
         {
@@ -91,7 +95,8 @@ public class TowerSkillSelectionController : MonoBehaviour
     }
 
     private void HandleSkillUpgrade(ISkill skill)
-    {        
+    {
+        SoundManager.Instance.PlayButtonClicked();
         // 현재 스킬 다음 레벨 데이터 불러오기
         var skillDataSO = skill.CurrentSkillDataSO;
         var skillLevelData = skill.CurrentLevelData;
