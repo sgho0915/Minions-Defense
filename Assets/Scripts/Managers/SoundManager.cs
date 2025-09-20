@@ -10,9 +10,6 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    [Header("Audio Mixer")]
-    [SerializeField] private AudioMixer audioMixer;
-
     [Header("Audio Sources")]
     [SerializeField] private AudioSource bgmSource;
     [SerializeField] private AudioSource sfxSource;
@@ -71,6 +68,7 @@ public class SoundManager : MonoBehaviour
         PlayerPrefs.SetFloat(SFX_VOLUME_PARAM, volume);
         PlayerPrefs.Save();
     }
+
 
     public void PlayBGM(string sceneName)
     {

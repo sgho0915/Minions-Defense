@@ -4912,7 +4912,7 @@ MonoBehaviour:
         value:
           x: 9.718584e-11
           y: 0.9786501
-          z: 7.5778314e-11
+          z: 7.577833e-11
           w: 0.20553358
     - Position:
         x: 4.712845
@@ -31500,7 +31500,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60bf30369df7d734491e38a8f6d2f7f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SoundManager
-  audioMixer: {fileID: 24100000, guid: a16383aff40a20447ba74ffff74b4305, type: 2}
   bgmSource: {fileID: 2073629391}
   sfxSource: {fileID: 531640326}
   lobbyBGM: {fileID: 8300000, guid: 588b6122819619149ab288c77e6fc694, type: 3}
