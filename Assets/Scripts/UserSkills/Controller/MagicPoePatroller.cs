@@ -165,7 +165,8 @@ public class MagicPoePatroller : MonoBehaviour
                     // 스턴 적용
                     monster.Stun(_levelData.stunDuration);
 
-                    // 이펙트, 사운드
+                    // 사운드
+                    SoundManager.Instance.PlaySFX(_levelData.attackSoundClip);
                 }
             }
             
