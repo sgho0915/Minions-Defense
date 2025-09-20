@@ -1,4 +1,5 @@
 
+
 # 📂 UI 폴더 구조 및 클래스 간략 설명
 
 ### 📌 개요
@@ -9,6 +10,13 @@ MVC(Model-View-Controller) 디자인 패턴에 기반해 UI의 시각적 요소�
 ---
 
 ## 📁 폴더 구조 및 역할
+
+* **`UIView.cs`**
+  * 모든 UI를 구성하는 View의 기본 베이스가 되는 추상 클래스 입니다. Fade기반 Awake, Show/Hide 전환에 대한 기본적인 애니메이션 동작 기능을 포함하고, 자식클래스에는 이 기능을 상속받고 override하여 선택적으로 기능을 확장할 수 있도록 합니다.
+* **`QuitView.cs`**
+  * LobbyScene에서 게임을 종료하기 위한 View로, UIView를 상속 받습니다. 종료버튼을 누르면 Application.Quit()을 호출해 게임이 즉시 종료되고, 취소버튼을 누르면 이전 View로 전환됩니다.
+* **`SettingsView.cs`**
+  * BGM, SFX 사운드 볼륨을 설정하기 위한 View로, UIView를 상속 받습니다. 각 볼륨은 Slider를 통해 조절되며 변경값은 SoundManager에 전달되어 PlayerPrefs를 통해 저장됩니다. SettingsView 컴포넌트를 가진 실제 View 오브젝트를 프리팹화하여 Lobby, 각 Stage 씬에서 재사용하는 방식으로 일관된 View 표시를 보장합니다.
 
 ### 🔹 **Lobby**
 
