@@ -38,6 +38,7 @@ public class StageItemView : MonoBehaviour
 
     private void OnClickPlay()
     {
-        SceneManager.LoadScene($"Stage_{_stageIndex}");
+        SoundManager.Instance.StageSelectedClicked();
+        SceneManager.LoadSceneAsync($"Stage_{_stageIndex}");
     }
 }

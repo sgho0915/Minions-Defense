@@ -33,7 +33,7 @@ MonoBehaviour:
     stunDuration: 1
     auraEffectPrefab: {fileID: 8460747081077448648, guid: c40a87dc8c21ba24eb778e0b21bb6758, type: 3}
     attackEffectPrefab: {fileID: 2074539229924275316, guid: 8d4517e80a2322f42aeb686346038376, type: 3}
-    attackSoundClip: {fileID: 0}
+    attackSoundClip: {fileID: 8300000, guid: 2b38f7ac023c6bc4fb9d6dae9fa03958, type: 3}
   - level: 2
     upgradeCost: 300
     executeCost: 200

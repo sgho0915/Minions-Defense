@@ -43,6 +43,7 @@ public class TowerSkillListView : UIView
             }
             else
             {
+                SoundManager.Instance.PlayButtonClicked();
                 OnForceStartWaveButtonClicked?.Invoke();
             }
         });

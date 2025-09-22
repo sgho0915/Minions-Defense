@@ -9,16 +9,17 @@ using UnityEngine;
 /// </summary>
 public class LobbyUIManager : MonoBehaviour
 {
-    [Header("UIView Panels")]
-    [SerializeField] private UIView lobbyView;      // 메인 로비 Canvas
-    [SerializeField] private UIView stageListView;  // 스테이지 목록 Canvas
+    [Header("로비 View 요소")]
+    [SerializeField] private UIView lobbyView;     
+    [SerializeField] private UIView stageListView; 
+    [SerializeField] private UIView quitView; 
 
     private List<UIView> _allViews;
     private UIView _currentView;
 
     private void Awake()
     {
-        _allViews = new List<UIView> { lobbyView, stageListView };
+        _allViews = new List<UIView> { lobbyView, stageListView, quitView };
     }
 
     private void Start()
@@ -45,11 +46,25 @@ public class LobbyUIManager : MonoBehaviour
     /// </summary>
     public void OnClickStageButton()
     {
+        SoundManager.Instance.PlayButtonClicked();
         ShowView(stageListView);
     }
 
     public void OnClickLobbyButton()
     {
+        SoundManager.Instance.PlayButtonClicked();
         ShowView(lobbyView);
+    }
+
+    public void OnClickSettingsButton()
+    {
+        SoundManager.Instance.PlayButtonClicked();
+        GlobalUIManager.Instance.ShowSettingsView();
+    }
+
+    public void OnClickQuitButton()
+    {
+        SoundManager.Instance.PlayButtonClicked();
+        ShowView(quitView);
     }
 }

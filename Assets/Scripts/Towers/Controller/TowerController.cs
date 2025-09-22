@@ -51,7 +51,7 @@ public class TowerController : MonoBehaviour, ITower
         _curLevel = initialLevel;                   // 초기 레벨 설정
 
         if (_curLevel.buildSoundClip != null)
-            _audio.PlayOneShot(_curLevel.buildSoundClip);
+            SoundManager.Instance.PlaySFX(_curLevel.buildSoundClip);
 
         // 공격 루틴 시작
         _attackRoutine = StartCoroutine(AttackLoop());
@@ -68,7 +68,7 @@ public class TowerController : MonoBehaviour, ITower
 
         // 업그레이드 연출 (Lv1 제외)
         if (level > 1 && _curLevel.upgradeSoundClip != null)
-            _audio.PlayOneShot(_curLevel.upgradeSoundClip);
+            SoundManager.Instance.PlaySFX(_curLevel.upgradeSoundClip);
 
         // 공격 루틴 재시작
         if (_attackRoutine != null) StopCoroutine(_attackRoutine);
@@ -123,7 +123,7 @@ public class TowerController : MonoBehaviour, ITower
 
         // 업그레이드 사운드
         if (next.upgradeSoundClip != null)
-            newController.GetComponent<AudioSource>()?.PlayOneShot(next.upgradeSoundClip);
+            SoundManager.Instance.PlaySFX(_curLevel.upgradeSoundClip);
 
         // TowerInfoView에 업그레이드 완료 이벤트 발행
         OnTowerUpgraded?.Invoke(this, newController);
@@ -142,7 +142,7 @@ public class TowerController : MonoBehaviour, ITower
         if (_curLevel.destroyEffect != null)
             Instantiate(_curLevel.destroyEffect, transform.position, Quaternion.identity);
         if (_curLevel.destroySoundClip != null)
-            _audio.PlayOneShot(_curLevel.destroySoundClip);
+            SoundManager.Instance.PlaySFX(_curLevel.destroySoundClip);
 
         Destroy(gameObject);
         return _curLevel.sellPrice;
@@ -153,6 +153,12 @@ public class TowerController : MonoBehaviour, ITower
     #region 몬스터 공격 로직
     private IEnumerator AttackLoop()
     {
+        if (_curLevel == null)
+        {
+            Debug.LogError("현재 레벨 데이터(_curLevel)가 null이므로 AttackLoop를 시작할 수 없습니다!");
+            yield break;
+        }
+
         var wait = new WaitForSeconds(1f / _curLevel.attackSpeed);
 
         while (true)
@@ -184,10 +190,10 @@ public class TowerController : MonoBehaviour, ITower
                     // 즉시 이펙트 + 데미지 처리 (AoE 포함)
                     HandleAoE(transform.position);
                 }
-            }
 
-            if (_curLevel.attackSoundClip != null)
-                _audio.PlayOneShot(_curLevel.attackSoundClip);
+                if (_curLevel.attackSoundClip != null)
+                    SoundManager.Instance.PlaySFX(_curLevel.attackSoundClip);
+            }
 
             yield return wait;
         }

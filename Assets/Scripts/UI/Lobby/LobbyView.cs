@@ -9,6 +9,8 @@ using UnityEngine.UI;
 public class LobbyView : UIView
 {
     [SerializeField] private Button btnStageList;
+    [SerializeField] private Button btnSettings;
+    [SerializeField] private Button btnQuit;
     [SerializeField] private TextMeshProUGUI txtGlobalPoints;
     [SerializeField] private TextMeshProUGUI txtVersion;
 
@@ -19,17 +21,14 @@ public class LobbyView : UIView
         base.Awake();
         lobbyUIManager = FindObjectOfType<LobbyUIManager>();
 
-        btnStageList.onClick.AddListener(OnClickStageList);
+        btnStageList.onClick.AddListener(() => lobbyUIManager.OnClickStageButton());
+        btnSettings.onClick.AddListener(() => lobbyUIManager.OnClickSettingsButton());
+        btnQuit.onClick.AddListener(() => lobbyUIManager.OnClickQuitButton());
         txtVersion.text = $"Ver {Application.version}";
     }
 
     private void OnEnable()
     {
         txtGlobalPoints.text = GameManager.Instance.globalPoints.ToString();
-    }
-
-    private void OnClickStageList()
-    {
-        lobbyUIManager.OnClickStageButton();
     }
 }

@@ -31,6 +31,10 @@ public class StageResultView : UIView
     [SerializeField] private Color inactiveStarColor = Color.gray;
     [SerializeField] private TextMeshProUGUI rewardText;
 
+    [Header("Result AudioClips")]
+    [SerializeField] private AudioClip stageClearClip;
+    [SerializeField] private AudioClip stageLoseClip;
+
     [Header("Buttons")]
     [SerializeField] private Button btnRetry;  
     [SerializeField] private Button btnBack;
@@ -78,6 +82,9 @@ public class StageResultView : UIView
         }
 
         rewardText.text = $"+{reward.ToString()}";
+
+        if (clear) SoundManager.Instance.PlaySFX(stageClearClip);
+        else SoundManager.Instance.PlaySFX(stageLoseClip);
     }
 
     /// <summary>

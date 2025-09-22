@@ -4,7 +4,6 @@ using System.Collections;
 using System.Linq;
 using UnityEngine;
 
-[RequireComponent(typeof(AudioSource))]
 public class MainTowerController : MonoBehaviour
 {
     public event Action<int, int> OnHpChanged;
@@ -30,11 +29,11 @@ public class MainTowerController : MonoBehaviour
     public LayerMask targetLayerMask;   // OverlapShepre에 사용할 레이어 마스크
     public string[] targetTags;
 
-    private AudioSource _audio;
+    [Header("AudioClip")]
+    public AudioClip attackClip;
 
     private void Awake()
     {
-        _audio = GetComponent<AudioSource>();
         Initialize(initialHP);
     }
 
@@ -99,10 +98,9 @@ public class MainTowerController : MonoBehaviour
 
                     // 발사
                     bp.Setup(lvlData, target.position);
+                    SoundManager.Instance.PlaySFX(attackClip);
                 }
             }
-            // (선택) 발사음 재생
-            // _audio.PlayOneShot(attackSoundClip);
 
             yield return wait;
         }

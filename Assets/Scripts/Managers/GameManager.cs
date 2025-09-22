@@ -1,4 +1,5 @@
-﻿using System;
+﻿// GameManager.cs
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -56,6 +57,8 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        SoundManager.Instance.PlayBGM(scene.name);
+
         if (scene.name.StartsWith("Stage_"))
             InitializeStageScene(scene);
     }
