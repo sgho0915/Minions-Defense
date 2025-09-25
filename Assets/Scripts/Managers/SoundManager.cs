@@ -42,8 +42,8 @@ public class SoundManager : MonoBehaviour
 
     private void LoadVolumeSettings()
     {
-        float bgmVolume = PlayerPrefs.GetFloat(BGM_VOLUME_PARAM, 1f);
-        float sfxVolume = PlayerPrefs.GetFloat(SFX_VOLUME_PARAM, 1f);
+        float bgmVolume = PlayerPrefs.GetFloat(BGM_VOLUME_PARAM, 0.5f);
+        float sfxVolume = PlayerPrefs.GetFloat(SFX_VOLUME_PARAM, 0.5f);
 
         SetBGMVolume(bgmVolume);
         SetSFXVolume(sfxVolume);
