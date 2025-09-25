@@ -1,6 +1,7 @@
 using System.Drawing;
-using UnityEngine;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
 
 /// <summary>
 /// 발사 시점의 목표 위치를 향해 포물선 궤도로 날아가고,
@@ -37,31 +38,34 @@ public class BallisticProjectile : MonoBehaviour
 
         // 1) 수평 거리와 높이 차 계산
         Vector3 toTarget = targetPoint - transform.position;
-        float g = Mathf.Abs(Physics.gravity.y); // 9.81
-        float v2 = levelData.projectileSpeed * levelData.projectileSpeed;
-        float xz = new Vector3(toTarget.x, 0, toTarget.z).magnitude;
-        float y = toTarget.y;
+        float g = Mathf.Abs(Physics.gravity.y); // 중력, 9.81
+        float v2 = levelData.projectileSpeed * levelData.projectileSpeed; // 속력 제곱 -> 매번 Mathf.Pow(speed, 2)를 호출하는 것보다 미리 한 번 계산해두고 변수에 저장
+        float xz = new Vector3(toTarget.x, 0, toTarget.z).magnitude; // 수평 거리
+        float y = toTarget.y; // 수직 거리
 
-        // 2) 포물선 공식: v^2 ± sqrt(...) → 두 해 중 하나 선택
+        // 2) 포물선 공식: 판별식을 통해 물리적으로 도달 가능한지 체크
         float underSqrt = v2 * v2 - g * (g * xz * xz + 2 * y * v2);
         if (underSqrt < 0)
         {
-            // 사정거리 벗어남 → 직선 발사
+            // 해가 없는 경우 직선 발사 처리
             _rb.linearVelocity = toTarget.normalized * levelData.projectileSpeed;
             return;
         }
 
-        float root = Mathf.Sqrt(underSqrt);
+        float root = Mathf.Sqrt(underSqrt); // 실제 해 구하기
         // 높은 궤적(High arc)
         float tanHigh = (v2 + root) / (g * xz);
         // 낮은 궤적(Low arc)
         float tanLow = (v2 - root) / (g * xz);
 
-        // 예시: 낮은 궤적을 쓰고 싶으면
+        // 비율(tan값)을 실제 각도로 변환
         float angle = Mathf.Atan(tanLow);
 
         // 3) 초기 속도 벡터 계산
+        // normalized로 순수 방향을 얻고, 여기에 Cos(수평 속도), Sin(수직 속도)을 곱해 최종 속도 벡터를 완성
+        // 순수한 '방향' 벡터를 얻기 위해 정규화(normalize)
         Vector3 flatDir = new Vector3(toTarget.x, 0, toTarget.z).normalized;
+        // 삼각함수(Cos, Sin)를 이용해 각도와 속력을 3D 벡터로 변환
         Vector3 velocity = flatDir * (levelData.projectileSpeed * Mathf.Cos(angle))
                            + Vector3.up * (levelData.projectileSpeed * Mathf.Sin(angle));
         _rb.linearVelocity = velocity;

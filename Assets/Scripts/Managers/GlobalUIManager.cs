@@ -39,13 +39,16 @@ public class GlobalUIManager : MonoBehaviour
     /// </summary>
     public void PushView(UIView view)
     {
-        // 현재 최상단 View가 있다면 비활성화
+        // 스택에 이미 다른 View가 열려있다면
         if(viewStack.Count > 0)
         {
+            // 현재 최상단 View(Peek)를 클릭할 수 없도록 비활성화
             viewStack.Peek().canvasGroup.interactable = false;
         }
 
+        // 새로운 View를 스택의 최상단에 추가(Push)
         viewStack.Push(view);
+        // 새로운 View 활성화해 화면에 표시
         view.Show();
     }
 
@@ -54,14 +57,18 @@ public class GlobalUIManager : MonoBehaviour
     /// </summary>
     public void PopView()
     {
+        // 스택이 비어있지 않은 경우
         if (viewStack.Count > 0)
         {
+            // 스택 최상단 View를 꺼내서(Pop) UIView 변수에 저장
             UIView viewToClose = viewStack.Pop();
+            // 꺼낸 View를 비활성화
             viewToClose.Hide();
 
-            // 닫고 난 후 스택에 다른 뷰가 남아있다면 그 뷰를 다시 보여줌
+            // View를 닫은 후에도 스택에 다른 View가 남아있다면
             if (viewStack.Count > 0)
             {
+                // 새로운 최상단 View(Peek)를 다시 활성화
                 viewStack.Peek().gameObject.SetActive(true);
             }
         }
