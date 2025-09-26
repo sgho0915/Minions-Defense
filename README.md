@@ -37,10 +37,10 @@ ScriptableObject 기반 데이터 설계와 디자인 패턴을 적용해 확장
 ---
 
 ## 🛠 기술 스택
--   **Engine**: ![Unity](https://img.shields.io/badge/Unity-6000.2.2f1-blue)
+-   **Engine**: ![Unity](https://img.shields.io/badge/Unity-6000.2.5f1-red)
 -   **Language**: `C#`
 -   **Version Control**: `GitHub`
--   **Project Management**: `Git-Flow` 브랜칭 전략, 개발 브랜치별 PR 관리
+-   **Project Management**: `Git-Flow` 브랜칭, 개발 브랜치별 PR 관리
 
 ---
 ## 🤝 브랜치 전략
@@ -64,7 +64,7 @@ ScriptableObject 기반 데이터 설계와 디자인 패턴을 적용해 확장
 
 ## 🔩 핵심 시스템 설계 및 구현
 
-### 1. 데이터 기반 설계 (ScriptableObject Architecture)
+### 1. 데이터 기반 설계 (ScriptableObject)
 게임의 핵심 요소인 타워, 몬스터, 스킬, 웨이브 데이터를 모두 ScriptableObject로 관리하여 기획 데이터와 로직을 분리했습니다. 이를 통해 코드 수정 없이 밸런싱 및 콘텐츠 확장이 가능한 유연한 구조를 목표로 했습니다.
 
 ### 2. 확장 가능한 스킬 시스템
