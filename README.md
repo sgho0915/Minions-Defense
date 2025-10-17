@@ -4,9 +4,15 @@ ScriptableObject 기반 데이터 설계와 디자인 패턴을 적용해 확장
 
 ---
 
-![Gameplay Screenshot](https://blog.kakaocdn.net/dna/bCxCsv/btsPsUvIsrB/AAAAAAAAAAAAAAAAAAAAAOtopD-q7JXJLqNog1z22eje02yWnrk8RzuYlHgGotkU/img.gif?credential=yqXZFxpELC7KVnFOS48ylbz2pIh7yKj8&expires=1759244399&allow_ip=&allow_referer=&signature=tALvQQQ9a5J2x5lyy4sRV5%2BPRfk%3D)
- 
-[![데모 영상](https://utfs.io/f/nGnSqDveMsqx869v6NfsgcqER67P9XGtSfe5dyInlUv8us1K)](https://www.youtube.com/watch?v=QpGhH3YrmQY)
+## 📚 게임 플레이 스크린샷
+![Gameplay Screenshot](https://github.com/user-attachments/assets/996a715a-9ae8-4b7b-bd84-d20ab137cc70)
+
+---
+
+ ## 📚 데모 영상 
+[![데모 영상](https://utfs.io/f/nGnSqDveMsqxAyFASoX1nkORdXhc4E0vWDI9uNrjbgp7xoKV)](https://www.youtube.com/watch?v=d9tJlxZBqEY)
+
+---
 
 ## 📚 목차
 1.  [**프로젝트 개요 (Overview)**](#-프로젝트-개요)
@@ -68,7 +74,7 @@ ScriptableObject 기반 데이터 설계와 디자인 패턴을 적용해 확장
 게임의 핵심 요소인 타워, 몬스터, 스킬, 웨이브 데이터를 모두 ScriptableObject로 관리하여 기획 데이터와 로직을 분리했습니다. 이를 통해 코드 수정 없이 밸런싱 및 콘텐츠 확장이 가능한 유연한 구조를 목표로 했습니다.
 
 ### 2. 확장 가능한 스킬 시스템
-`ISkill` 인터페이스를 중심으로 **전략(Strategy)** 및 **팩토리 메서드(Factory Method)** 패턴을 적용하여, 새로운 스킬이 추가되더라도 기존 시스템의 코드를 수정할 필요가 없는 **개방 폐쇄 원칙(OCP)**을 준수하는 구조로 설계했습니다.
+`ISkill` 인터페이스를 중심으로 전략(Strategy) 및 팩토리 메서드(Factory Method) 패턴을 적용하여, 새로운 스킬이 추가되더라도 기존 시스템의 코드를 수정할 필요가 없는 **개방 폐쇄 원칙(OCP)**을 준수하는 구조로 설계했습니다.
 -   **`ISkill`**: 스킬의 실행, 쿨다운 등 공통 규약을 정의한 인터페이스
 -   **`SkillDataSO`**: 팩토리 메서드 `CreateSkill()`을 통해 자신에게 맞는 스킬 컨트롤러를 생성
 -   **`MagicPoeController`**: `ISkill`을 구현한 구체적인 스킬 로직
@@ -77,7 +83,7 @@ ScriptableObject 기반 데이터 설계와 디자인 패턴을 적용해 확장
 **옵저버(Observer)** 패턴을 활용하여 게임 로직과 UI 시스템 간의 의존성을 제거했습니다. 예를 들어, `GameManager`는 몬스터 처치 시 `OnStagePointsChanged` 이벤트를 발행하기만 하면 되고, UI는 이 이벤트를 구독하여 스스로 텍스트를 갱신합니다. 이를 통해 각 시스템이 독립적으로 동작하고 테스트할 수 있도록 구현했습니다.
 
 ### 4. 타워 라이프사이클 관리
-타워의 구매, 배치, 선택, 강화, 판매로 이어지는 전체 흐름을 구현했습니다. 특히, 타워의 선택과 배치를 담당하는 책임을 `TowerPlacementController`와 `TowerWorldSelectionController`로 분리하여 **단일 책임 원칙(SRP)**을 준수하고자 노력했습니다.
+타워의 구매, 배치, 선택, 강화, 판매로 이어지는 전체 흐름을 구현했습니다. 특히, 타워의 선택과 배치를 담당하는 책임을 `TowerPlacementController`와 `TowerWorldSelectionController`로 분리하여 단일 책임 원칙을 준수하고자 노력했습니다.
 
 ---
 
