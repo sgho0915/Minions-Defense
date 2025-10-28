@@ -58,7 +58,7 @@ ScriptableObject 기반 데이터 설계와 디자인 패턴을 적용해 확장
 <a href="https://play.google.com/store/apps/details?id=com.SeongHo.TowerDefensePortfolio"> <img src="https://play.google.com/intl/ko_kr/badges/images/generic/ko_badge_web_generic.png" alt="Google Play에서 다운로드하세요" height="60"/> </a> -->
 
 ### 🔗 GitHub Release (AAB/APK 파일)
-> 직접 테스트를 위해 빌드 파일을 다운로드할 수 있습니다. [**Release 페이지 바로가기**](https://github.com/YourRepo/releases)
+> 직접 테스트를 위해 빌드 파일을 다운로드할 수 있습니다. [**Release 페이지 바로가기**](https://github.com/sgho0915/Minions-Defense/releases)
 
 ---
 
