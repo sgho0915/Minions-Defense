@@ -17,7 +17,7 @@ MonoBehaviour:
   levelData:
   - monsterPrefab: {fileID: 275801391670772396, guid: a079e307036926d4a9c73fe04b6472c7, type: 3}
     size: 0
-    maxHp: 100
+    maxHp: 250
     moveSpeed: 1.5
     attackPower: 5
     isRanged: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     rewardPointsMax: 10
   - monsterPrefab: {fileID: 6634875652449548137, guid: 2ab8179c2cdb9024f83f3064ae02cd99, type: 3}
     size: 1
-    maxHp: 200
+    maxHp: 350
     moveSpeed: 1.03
     attackPower: 10
     isRanged: 0
@@ -41,7 +41,7 @@ MonoBehaviour:
     rewardPointsMax: 30
   - monsterPrefab: {fileID: 2818738929230737498, guid: 7e0fd4732d120e2438e89dfef737b071, type: 3}
     size: 2
-    maxHp: 400
+    maxHp: 550
     moveSpeed: 1.5
     attackPower: 40
     isRanged: 1

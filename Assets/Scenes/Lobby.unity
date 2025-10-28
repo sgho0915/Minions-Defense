@@ -4912,7 +4912,7 @@ MonoBehaviour:
         value:
           x: 9.718584e-11
           y: 0.9786501
-          z: 7.5778314e-11
+          z: 7.577833e-11
           w: 0.20553358
     - Position:
         x: 4.712845
@@ -21507,7 +21507,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LeTai.TranslucentImage::LeTai.Asset.TranslucentImage.TranslucentImageSource
   blurConfig: {fileID: 11400000, guid: 69c0b043f5fbad145968b75eb6b8d463, type: 2}
-  downsample: 0
+  downsample: 3
   blurRegion:
     serializedVersion: 2
     x: 0

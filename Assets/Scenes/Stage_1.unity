@@ -5691,7 +5691,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: LeTai.TranslucentImage::LeTai.Asset.TranslucentImage.TranslucentImageSource
   blurConfig: {fileID: 11400000, guid: 69c0b043f5fbad145968b75eb6b8d463, type: 2}
-  downsample: 0
+  downsample: 3
   blurRegion:
     serializedVersion: 2
     x: 0
